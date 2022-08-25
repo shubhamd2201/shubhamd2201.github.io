@@ -1,7 +1,7 @@
 @media only screen and (max-width: 1000px) and (min-width: 250px){
 
     *{
-        margin: 0px 8px;
+        margin: 0px 0px 8px 0px;
     }
 
     
@@ -99,10 +99,11 @@
 
 .topimg h4{
     font-size: 25px;
+    margin: 0px;
 }
 .headingh2{
     margin-top: 2px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .topimg p{
@@ -160,7 +161,7 @@ h6{
     width: 40%;
 }
 .articleimg{
-    width: 60%;
+    width: 100%;
 }
 .articleimg img{
     width: 100%;
