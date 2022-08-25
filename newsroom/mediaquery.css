@@ -171,11 +171,12 @@ h6{
     margin: 10px 0px;
 }
 .presslink{
-   margin: 30px 10px;
     display: block;
-
-
 }
+ 
+ .presslink ul{
+    margin: 30px 10px;
+   }
 .presslink li{
     font-size: small;
 
