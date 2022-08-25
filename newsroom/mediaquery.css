@@ -1,0 +1,192 @@
+@media only screen and (max-width: 1000px) and (min-width: 250px){
+
+    *{
+        margin: 0px 8px;
+    }
+
+    
+.navbar{
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    width: 100vw;
+}
+
+.logo img{
+    text-align: center;
+}
+/* .logo img::before{
+    content: "";
+    background: url(images/menubar.webp) ;
+    text-align: end;
+    color: black;
+} */
+
+.logo ul{
+    display: none;
+}
+.shop{
+    display: none;
+}
+.mainbody{
+    width: 90vw;
+}
+
+.heading h1{
+    font-size: 2rem;
+}
+
+.heading h3{
+    font-size: 1rem;
+}
+.topimg{
+    width: 90vw;
+
+}
+.shopinner{
+    width: 90vw;
+}
+
+.metaquest{
+    width: 90vw;
+}
+
+.bottomnews{
+    width: 90vw;
+}
+
+.presslink{
+    width: 90vw;
+}
+.lastfooter{
+    width: 90vw;
+}
+
+.article{
+    width: 90vw;
+}
+
+.colomrev{
+    width: 90vw;
+}
+
+.rightarticle{
+    width: 90vw;
+}
+
+.articleimg img{
+    width: 90vw;
+}
+.bottomnews{
+    width: 90vw;
+}
+
+.bottomcenter{
+    width: 80%;
+}
+.metabottom{
+    width: 90vw;
+}
+
+
+.leftcolom{
+    display: none;
+}
+
+.innerbottom1 li{
+   
+}
+
+.topimg h4{
+    font-size: 1rem;
+}
+.headingh2{
+    margin-top: 2px;
+    font-size: 1rem;
+}
+
+.topimg p{
+    display: none;
+}
+
+.colomrev{
+    flex-direction:column-reverse;
+}
+
+.headingunderline{
+    font-size: 1rem;
+}
+.headingh3{
+    font-size: 1rem;
+}
+.para{
+    display: none;
+}
+
+.headingh3{
+   
+}
+
+.rightarticle{
+    margin-bottom: 10px;
+}
+
+h6{
+    font-size: 0.5rem;
+}
+
+.metaquest{
+    flex-direction: column;
+    height: fit-content;
+}
+
+.leftmeta {
+    width: 100vw;
+    margin: 10px;
+}
+.rightmeta{
+    width: 90vw;
+    overflow: visible;
+}
+.rightmeta img{
+    width: 90vw;
+}
+
+.metabottom2{
+    display: none;
+}
+
+.bottomcentdis{
+    width: 90vw;
+}
+
+.centercont{
+    width: 47%;
+}
+.articleimg{
+    width: 90%;
+}
+.articleimg img{
+    width: 100%;
+}
+.seemorenews{
+    margin: 10px 0px;
+}
+.presslink{
+    display: block;
+
+
+}
+.presslink li{
+    font-size: small;
+
+    display: block;
+    margin: 10px 0px;
+}
+
+.metabottom1{
+    width: 100vw;
+}
+
+
+}
