@@ -37,7 +37,7 @@
 }
 
 .heading h3{
-    font-size: 1rem;
+    font-size: 16px;
 }
 .topimg{
     width: 90vw;
@@ -48,7 +48,7 @@
 }
 
 .metaquest{
-    width: 90vw;
+    width: 100%;
 }
 
 .bottomnews{
@@ -98,11 +98,11 @@
 }
 
 .topimg h4{
-    font-size: 1rem;
+    font-size: 25px;
 }
 .headingh2{
     margin-top: 2px;
-    font-size: 1rem;
+    font-size: 25px;
 }
 
 .topimg p{
@@ -114,17 +114,13 @@
 }
 
 .headingunderline{
-    font-size: 1rem;
+    font-size: 17px;
 }
 .headingh3{
-    font-size: 1rem;
+    font-size: 20px;
 }
 .para{
     display: none;
-}
-
-.headingh3{
-   
 }
 
 .rightarticle{
@@ -132,7 +128,7 @@
 }
 
 h6{
-    font-size: 0.5rem;
+    font-size: 15px;
 }
 
 .metaquest{
@@ -141,11 +137,11 @@ h6{
 }
 
 .leftmeta {
-    width: 100vw;
-    margin: 10px;
+    width: 78vw;
+    margin:10px 0px;
 }
 .rightmeta{
-    width: 90vw;
+    width: 80%;
     overflow: visible;
 }
 .rightmeta img{
@@ -161,10 +157,10 @@ h6{
 }
 
 .centercont{
-    width: 47%;
+    width: 40%;
 }
 .articleimg{
-    width: 90%;
+    width: 60%;
 }
 .articleimg img{
     width: 100%;
@@ -185,8 +181,9 @@ h6{
 }
 
 .metabottom1{
-    width: 100vw;
-   text-align:center;
+    
+    text-align: center;
+    width: 90vw;
 }
 
 
