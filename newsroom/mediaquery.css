@@ -142,7 +142,8 @@ h6{
     margin:10px 0px;
 }
 .rightmeta{
-    width: 80%;
+    width: 90%;
+   margin-left:10px
     overflow: visible;
 }
 .rightmeta img{
