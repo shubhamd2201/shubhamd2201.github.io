@@ -1,7 +1,6 @@
 *{
     margin: 0px;
     padding: 0px;
-    /* font-family: 'Optimistic Text',sans-serif;; */
     font-family: 'Calibri';
 }
 
@@ -26,7 +25,9 @@
     width: 88px;
     height: 15px;
     margin: 0px 30px;
-
+}
+.navbar span{
+    display: none;
 }
 
 .logo li{
@@ -291,6 +292,7 @@ h6{
 }
 
 .recent li{
+    font-size: small;
     padding: 5px;
 }
 
@@ -401,11 +403,20 @@ h6{
     color: var(--fontcolor);
 }
 
-.lastfooter{
-    margin: 50px 20px 0px 50px;
+.metabottomformob{
+    display: none;
 }
 
-.lastfooter span{
-    margin-left:30px;
-    font-size: small;
+.lastfooter{
+    margin: 50px  10px 10px 50px;
+}
+
+.lastfooter ul{
+    
+}
+.lastfooter li{
+    padding: 0px 20px;
+    display: inline-block;
+    font-size: smaller;
+    border-right: 1px solid var(--fontcolor);
 }
