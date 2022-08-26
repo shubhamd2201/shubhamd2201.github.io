@@ -1,4 +1,4 @@
-@media only screen and (max-width: 800px) and (min-width: 250px){
+@media only screen and (max-width: 1000px) and (min-width: 250px){
 
     *{
         margin: 0px 0px 8px 0px;
@@ -10,18 +10,19 @@
     justify-content: center;
     height: 50px;
     width: 100vw;
+    position: relative;
 }
 
 .logo img{
     text-align: center;
 }
-/* .logo img::before{
-    content: "";
-    background: url(images/menubar.webp) ;
-    text-align: end;
-    color: black;
-} */
-
+.navbar span{
+    position: absolute;
+    right: 10px;
+    font-size: 25px;
+    display: block;
+    text-align: right;
+}
 .logo ul{
     display: none;
 }
@@ -48,7 +49,7 @@
 }
 
 .metaquest{
-    width: 100%;
+    width: 90%;
 }
 
 .bottomnews{
@@ -56,9 +57,6 @@
 }
 
 .presslink{
-    width: 90vw;
-}
-.lastfooter{
     width: 90vw;
 }
 
@@ -74,9 +72,6 @@
     width: 90vw;
 }
 
-.articleimg img{
-    width: 90vw;
-}
 .bottomnews{
     width: 90vw;
 }
@@ -102,7 +97,8 @@
     margin: 0px;
 }
 .headingh2{
-    margin-top: 2px;
+    line-height: 16px;
+    margin-top: 5px;
     font-size: 20px;
 }
 
@@ -118,7 +114,7 @@
     font-size: 17px;
 }
 .headingh3{
-    font-size: 20px;
+    font-size: 17px;
 }
 .para{
     display: none;
@@ -144,7 +140,8 @@ h6{
 .rightmeta{
     text-align: center;
     width: 100%;
-    overflow: visible;
+    overflow: hidden;
+    
 }
 .rightmeta img{
     width: 90vw;
@@ -171,16 +168,13 @@ h6{
     margin: 10px 0px;
 }
 .presslink{
-   padding: 30px 20px;
+    padding: 30px 20px;
     display: block;
 }
- 
- .presslink ul{
-    margin: 30px 10px;
-   }
+
 .presslink li{
     font-size: small;
-
+    
     display: block;
     margin: 10px 0px;
 }
@@ -191,5 +185,34 @@ h6{
     width: 90vw;
 }
 
+.metabottomformob{
+    display: block;
+    margin: 5%;
+    font-size: 25px;
+    width: 90%;
+    
+    
+    
+}
+.metabottomformob ul{
+    text-transform:capitalize;
+    list-style-type: none;
+}
+
+.metabottomformob li{
+    font-weight: 300;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgb(220, 218, 218);
+}
+
+.imgofbottomarti{
+    width: 55%;
+    overflow: hidden;
+}
+
+.lastfooter{
+    width: 90vw;
+    margin: 20px;
+}
 
 }
