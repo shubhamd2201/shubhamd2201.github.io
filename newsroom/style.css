@@ -1,7 +1,7 @@
 *{
     margin: 0px;
     padding: 0px;
-    font-family: 'Calibri';
+    font-family: 'calibri';
 }
 
 :root{
@@ -33,6 +33,13 @@
 .logo li{
     display: inline-block;
     margin: 0px 20px;
+    border-bottom: 2px solid #fff;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.logo li:hover{
+    border-bottom: 2px solid #4267B2;
 }
 
 .shop{
@@ -47,19 +54,12 @@
 .shop>ul>li{
     display: inline-block;
     margin-right: 35px;
+    cursor: pointer;
     
 }
 
 .shop :nth-child(4){
     margin: 5px;
-}
-
-.shop span{
-    padding-left: 5px;
-    color: var(--fontcolor);
-    font-size: 9px;
-    font-weight: 100;
-
 }
 
 .shop img{
@@ -69,14 +69,15 @@
 .shophov{
     display: flex;
     justify-content: space-around;
+    padding:10px;
 }
 .shopinner{
     position: absolute;
-    top: 100%;
+    top: 95%;
     right: 0px;
     width: 1400px;
     height: 500px;
-    background-color:white;
+    background-color: white;
     z-index: 2;
     display: flex;
     justify-content: space-around;
@@ -98,8 +99,9 @@
 }
 
 .shopinner h5{
-    color: black;
     font-size: large;
+    font-weight: 400;
+    color: black;
 }
 
 .shopinner li{
@@ -117,7 +119,9 @@
     margin-top: 1rem;
     
 }
-
+.heading{
+    font-family: 'Optimistic Text',sans-serif;
+}
 .heading h1{
     font-size: 2.8rem;
     color: var(--fontcolor);
@@ -219,6 +223,7 @@ h6{
     font-weight: 500;
     letter-spacing: 1px;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .headingh3:hover{
@@ -322,7 +327,7 @@ h6{
 }
 
 .seemorenews{
-    margin: 10px 0px 100px 100px;
+    /* margin: 10px 0px 100px 100px; */
     padding: 20px;
     margin-bottom: 30px;
     border-top: 1px solid var(--fontcolor);
@@ -335,7 +340,7 @@ h6{
 .presslink{
     width: 100%;
     height: 120px;
-    background-color: rgba(239, 237, 237, 0.967);
+    background-color: rgb(239, 241, 244);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -343,6 +348,7 @@ h6{
 }
 
 .presslink li{
+    font-size: small;
     margin: 0px 100px;
     display: inline-block;
 }
@@ -377,6 +383,7 @@ h6{
 .metabottom2{
     width: 77%;
     display: flex;
+    justify-content: flex-end;
     flex-wrap: wrap;
 }
 
@@ -391,12 +398,14 @@ h6{
 
 .innerbottom1 ul li{
     padding: 5px;
-    font-size: smaller;
+    font-size: 14px;
 }
 
 .innerbottom1 ul li h5{
     margin-top: 50px;
     font-size: 1.2rem;
+    text-transform: capitalize;
+    font-weight: 500;
 }
 
 .innerbottom1 ul li:hover{
