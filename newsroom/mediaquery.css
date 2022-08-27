@@ -115,6 +115,7 @@
 }
 .headingh3{
     font-size: 17px;
+    font-weight: 300;
 }
 .para{
     display: none;
@@ -125,7 +126,7 @@
 }
 
 h6{
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .metaquest{
@@ -207,7 +208,7 @@ h6{
 }
 
 .imgofbottomarti{
-    width: 55%;
+    width: 45%;
     overflow: hidden;
 }
 
