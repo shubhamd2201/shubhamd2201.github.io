@@ -1,0 +1,215 @@
+@media only screen and (max-width: 1000px) and (min-width: 250px){
+
+    *{
+        margin: 0px 0px 8px 0px;
+    }
+
+    
+.navbar{
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    width: 100vw;
+    position: relative;
+}
+
+.logo img{
+    text-align: center;
+}
+.navbar span{
+    position: absolute;
+    right: 10px;
+    font-size: 25px;
+    display: block;
+    text-align: right;
+}
+.logo ul{
+    display: none;
+}
+.shop{
+    display: none;
+}
+.mainbody{
+    width: 90vw;
+}
+
+.heading h1{
+    font-size: 2rem;
+}
+
+.heading h3{
+    font-size: 16px;
+}
+.topimg{
+    width: 90vw;
+}
+
+.shopinner{
+    width: 90vw;
+}
+
+.metaquest{
+    width: 90%;
+}
+
+.bottomnews{
+    margin: 5%;
+    width: 90%;
+}
+
+.presslink{
+    width: 90vw;
+}
+
+.article{
+    width: 90vw;
+}
+
+.colomrev{
+    width: 90vw;
+}
+
+.rightarticle{
+    width: 90vw;
+}
+
+.bottomcenter{
+    width: 80%;
+}
+.metabottom{
+    width: 90vw;
+}
+
+
+.leftcolom{
+    display: none;
+}
+
+.innerbottom1 li{
+   
+}
+
+.topimg h4{
+    font-size: 25px;
+    margin: 0px;
+}
+.headingh2{
+    line-height: 20px;
+    margin-top: 8px;
+    font-size: 20px;
+}
+
+.topimg p{
+    display: none;
+}
+
+.colomrev{
+    flex-direction:column-reverse;
+}
+
+.headingunderline{
+    font-size: 17px;
+}
+.headingh3{
+    font-size: 17px;
+    font-weight: 300;
+}
+.para{
+    display: none;
+}
+
+.rightarticle{
+    margin-bottom: 10px;
+}
+
+h6{
+    font-size: 12px;
+}
+
+.metaquest{
+    flex-direction: column;
+    height: fit-content;
+}
+
+.leftmeta {
+    width: 78vw;
+    margin:10px 0px;
+}
+.rightmeta{
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    
+}
+.rightmeta img{
+    width: 90vw;
+}
+
+.metabottom2{
+    display: none;
+}
+
+.bottomcentdis{
+    margin-bottom: 15px;
+    width: 90vw;
+}
+
+.centercont{
+    width: 50%;
+}
+.articleimg{
+    width: 100%;
+}
+.articleimg img{
+    width: 100%;
+}
+.seemorenews{
+    width: 100%;
+}
+.presslink{
+    padding: 30px 20px;
+    display: block;
+}
+
+.presslink li{
+    font-size: small;
+    
+    display: block;
+    margin: 10px 0px;
+}
+
+.metabottom1{
+    
+    text-align: center;
+    width: 90vw;
+}
+
+.metabottomformob{
+    display: block;
+    margin: 5%;
+    font-size: 25px;
+    width: 90%;
+    
+}
+.metabottomformob ul{
+    text-transform:capitalize;
+    list-style-type: none;
+}
+
+.metabottomformob li{
+    font-weight: 300;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgb(220, 218, 218);
+}
+
+.imgofbottomarti{
+    width: 45%;
+    overflow: hidden;
+}
+
+.lastfooter{
+    width: 90vw;
+    margin: 60px 20px 20px 20px;
+}
+
+}
