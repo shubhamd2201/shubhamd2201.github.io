@@ -1,7 +1,7 @@
-@media only screen and (max-width: 1000px) and (min-width: 250px){
+@media only screen and (min-width: 200px) and (max-width: 1000px) {
 
     *{
-        margin: 0px 0px 8px 0px;
+        margin: 0% 1%;
     }
 
     
@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     height: 60px;
-    width: 100vw;
+    width: 98%;
     position: relative;
 }
 
@@ -30,7 +30,7 @@
     display: none;
 }
 .mainbody{
-    width: 90vw;
+    width: 98%;
 }
 
 .heading h1{
@@ -41,43 +41,43 @@
     font-size: 16px;
 }
 .topimg{
-    width: 90vw;
+    width: 100%;
 }
 
 .shopinner{
-    width: 90vw;
+    width: 100%;
 }
 
 .metaquest{
-    width: 90%;
+    width: 98%;
 }
 
 .bottomnews{
-    margin: 5%;
-    width: 90%;
+    /* margin: 5%; */
+    width: 98%;
 }
 
 .presslink{
-    width: 90vw;
+    width: 98%;
 }
 
 .article{
-    width: 90vw;
+    width: 100%;
 }
 
 .colomrev{
-    width: 90vw;
+    width: 100%;
 }
 
 .rightarticle{
-    width: 90vw;
+    width: 100%;
 }
 
 .bottomcenter{
-    width: 80%;
+    width: 100%;
 }
 .metabottom{
-    width: 90vw;
+    width: 98%;
 }
 
 
@@ -132,7 +132,7 @@ h6{
 }
 
 .leftmeta {
-    width: 78vw;
+    width: 78%;
     margin:10px 0px;
 }
 .rightmeta{
@@ -142,7 +142,7 @@ h6{
     
 }
 .rightmeta img{
-    width: 90vw;
+    width: 90%;
 }
 
 .metabottom2{
@@ -151,7 +151,7 @@ h6{
 
 .bottomcentdis{
     margin-bottom: 15px;
-    width: 90vw;
+    width: 100%;
 }
 
 .centercont{
@@ -179,16 +179,16 @@ h6{
 }
 
 .metabottom1{
-    
     text-align: center;
-    width: 90vw;
+    width: 100%;
 }
 
 .metabottomformob{
+    width: 98%;
     display: block;
-    margin: 5%;
+    /* margin: 5%; */
     font-size: 25px;
-    width: 90%;
+    
     
 }
 .metabottomformob ul{
@@ -208,8 +208,9 @@ h6{
 }
 
 .lastfooter{
-    width: 90vw;
-    margin: 60px 20px 20px 20px;
+    width: 98%;
+    /* margin: 60px 20px 20px 20px; */
+    margin: 40px 0px;
 }
 
 }
