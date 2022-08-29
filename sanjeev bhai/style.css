@@ -1,0 +1,217 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.top{
+    margin: auto;
+    background-color: #fff;
+    width: 1170px;
+    height: 90px;
+}
+
+.top img{
+    width: 230px;
+    align-self: center;
+}
+
+.banner{
+    width: 100%;
+    height: 90vh;
+    background: url(images/bn3.jpg) center;
+    background-size: cover;
+    display: flex;
+}
+
+.middlebanner{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.middlebanner h4{
+    text-transform: uppercase;
+    color: white;
+    font-size: 3rem;
+    align-self: center;
+}
+
+.cardcont{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.maincard{
+    width: 46%;
+    margin: 2%;
+    transition: 1s;
+}
+
+.maincard:hover{
+    box-shadow: -0px 10px 20px 2px #666;
+}
+
+.cardimg{
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.cardimg img{
+    transition: 1s;
+}
+
+.cardimg img:hover{
+    transform: scale(1.1, 1.1);
+}
+
+.cardimg h5{
+    position: absolute;
+    right: 0px;
+    bottom: -5px;
+    padding: 8px 10px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}
+
+.cardinfo{
+    padding: 15px;
+    
+}
+
+.cardinfo h5{
+    font-size: 1.5rm;
+    font-weight: bold;
+}
+
+.cardinfo h6{
+    padding: 10px 0px;
+    font-size:small;
+    font-weight: 600;
+}
+
+.cardinfo p{
+    font-size: 14px;
+}
+
+.cardinfo span{
+    font-size: 1rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #fb7d1d 0%, #cb1f1e 110%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.but{
+    text-align: right;
+}
+
+.but button{
+    padding: 8px 12px;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+}
+section{
+    width: 100%;
+    /* height: 600px; */
+    background-color: rgb(248, 242, 230);
+}
+
+.whyus {
+    width: 1170px;
+    margin: auto;
+    
+}
+
+.whyus1{
+    padding: 9% 0%;
+}
+
+.whyus1 h3{
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: bolder;
+    background: linear-gradient(to right, #fb7d1d 0%, #cb1f1e 20%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+.whyus1 h4{
+    text-transform: uppercase;
+    color: white;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.whyus2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.whyus2 h4{
+    text-transform:capitalize;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.whyus2 p{
+    font-size: small;
+    font-weight: 500;
+}
+
+.whyus3{
+    padding: 8% 0%;
+}
+.bottombannerPC{
+    display: block;
+}
+
+.bottombannermob{
+    display: none;
+}
+
+footer{
+    width: 100%;
+    background-color: #091628;
+    
+}
+.footerwrite{
+    color: #fff;
+    width: 45%;
+    margin: 15px 0px;
+}
+
+.footerwrite h4{
+    text-transform: uppercase;
+}
+
+.whyus button{
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background-color:red;
+}
+
+.wtsappandcallbutton{
+    position: fixed;
+    right: 23px;
+    bottom: 90px;
+
+}
+
+.wtsappandcallbutton img{
+    width: 55px;
+}
