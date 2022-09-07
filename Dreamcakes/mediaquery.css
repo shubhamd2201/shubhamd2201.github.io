@@ -1,0 +1,63 @@
+@media only screen and (min-width:250px) and (max-width:1170px) {
+    
+.top{
+    margin: 4% 0%;
+    width: 92%;
+    display: flex;
+    justify-content: center;
+}
+
+.middlebanner h4{
+    font-size: 25px;
+}
+.cardcont{
+    width: 100%;
+}
+.maincard{
+    width: 96%;
+}
+
+.cardimg h5{
+    padding: 5px;
+    font-size: medium;
+    border-radius: 5px;
+}
+
+.but button{
+    padding: 5px 8px;
+    font-size: medium;
+
+}
+.whyus{
+    width: 100%;
+    padding: 0% 10%;
+}
+
+.whyus2{
+    flex-wrap: wrap;
+}
+
+.bottombannerPC{
+    display: none;
+}
+
+.bottombannermob{
+    display: block;
+}
+
+.footerwrite{
+    width: 96%;
+    flex-wrap: wrap;
+}
+
+.whyus button{
+    padding: 3px 6px;
+    font-size: small;
+    border-radius: 5px;
+}
+
+
+
+
+
+}
