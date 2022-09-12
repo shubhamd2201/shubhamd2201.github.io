@@ -1404,9 +1404,32 @@ header .navbar,
   background-image: url('../images/image_lefft.jpg');
 }
 .noo-image {
-  background: url('../imagesmain/Dream_cakes (50).jpeg') center;
+  background: url('../imagesmain/homemiddle-banner.jpeg') center;
   height:500px;
 }
+.callbutton{
+  position: fixed;
+  right: 23px;
+  bottom: 90px;
+  z-index: 100;
+
+}
+
+.callbutton img{
+  width: 55px;
+}
+.wtsappbutton{
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  z-index: 100;
+
+}
+
+.wtsappbutton img{
+  width: 60px;
+}
+
 .our-menu {
   padding-top:100px;
   padding-bottom:120px;
@@ -1504,6 +1527,9 @@ header .navbar,
 .noo-images-grid .grid-4 {
   background-image: url('../images/grid_4.jpg');
 }
+.m-top-25{
+  margin-top: 25px !important;
+}
 .flickr_badge_image {
   margin: 0 10px 10px 0;
   width: 72px;
@@ -1512,6 +1538,7 @@ header .navbar,
   background: 0 0;
   padding: 0;
 }
+
 @media (max-width: 767px) {
 	.masonry-container .masonry-item {
 		width: 100%;
@@ -1526,6 +1553,8 @@ header .navbar,
   }
   .mobile-logo{
     width: 40px;
+
+
   }
 	.interact-banner {
 		background-size: 100% 100%;
