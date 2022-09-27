@@ -48,15 +48,21 @@
         margin: 10px;
     }
     .inp{
-        padding: 10px;
+        padding: 5px 0px;
         border-radius: 10px;
-        border: 2px dotted red;
+        border: 2px dashed red;
         text-align: center;
+        font-size: 25px;
+        font-weight: bolder;
+        color: red;
         
     }
     .inp:focus{
+        font-size: 25px;
+        font-weight: bolder;
         border: none;
-        outline: 2px dotted red;
+        outline: 2px dashed red;
+        color: red;
     }
     </style>
 </head>
@@ -78,7 +84,7 @@
     </form>
 
     <button class="output" onclick="output()">Get</button>
-    <input type="text" value="" id="out" class="inp">
+    <input type="text" value="" id="out" class="inp" maxlength="2">
     
 </body>
 <script>
