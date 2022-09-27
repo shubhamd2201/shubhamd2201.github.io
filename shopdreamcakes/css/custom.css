@@ -1552,9 +1552,11 @@ header .navbar,
     width: 94%;
   }
   .mobile-logo{
-    width: 40px;
+    max-height: none !important;
+  }
 
-
+  .mobile-banner{
+    margin-top: 20px;
   }
 	.interact-banner {
 		background-size: 100% 100%;

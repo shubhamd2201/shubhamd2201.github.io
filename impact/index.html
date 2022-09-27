@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find your urgency</title>
+    <style>
+       body{
+        margin: 100px;
+        background-color: rgb(255, 248, 239);
+       }
+       h1{
+        color: rgb(68, 68, 199);
+       }
+     input label{
+        align-items: center;
+        display: inline;
+        font-weight: bolder;
+     }
+     .output{
+        margin-top: 30px;
+     }
+    .low{
+        color: rgb(92, 217, 92);
+        font-weight: bolder;
+        font-size: 25px;
+    }
+    .medium{
+        color: green;
+        font-weight: bolder;
+        font-size: 25px;
+    }
+    .high{
+        color: red;
+        font-weight: bolder;
+        font-size: 25px;
+    }
+    button{
+        background-color: rgb(3, 105, 194);
+        color: #fff;
+        padding: 5px 20px;
+        outline: none;
+        border: 1px dotted red;
+        border-radius: 10px;
+        font-weight: bolder;
+        font-size: 25px;
+        margin: 10px;
+    }
+    .inp{
+        padding: 10px;
+        border-radius: 10px;
+        border: 2px dotted red;
+        text-align: center;
+        
+    }
+    .inp:focus{
+        border: none;
+        outline: 2px dotted red;
+    }
+    </style>
+</head>
+<body>
+    <h1>Realtionship Matrix</h1>
+    <form action="">
+       <div>
+        <h2>Impact</h2>
+        <div><input type="radio" id="Lowi" name="Impact" value="1"><label for="Lowi" class="low">Low</label></div>
+        <div><input type="radio" id="Mediumi" name="Impact" value="2"><label for="Mediumi" class="medium">Medium</label></div>
+        <div><input type="radio" id="Highi" name="Impact" value="3"><label for="Highi" class="high">High</label></div>
+       </div>
+       <div>
+        <h2>Urgency</h2>
+        <div><input type="radio" name="Urgency" id="Lowu" value="10"><label for="Lowu" class="low">Low</label></div>
+        <div><input type="radio" name="Urgency" id="Mediumu" value="20"><label for="Mediumu" class="medium">Medium</label></div>
+        <div><input type="radio" name="Urgency" id="Highu" value="30"><label for="Highu" class="high">High</label></div>
+       </div>
+    </form>
+
+    <button class="output" onclick="output()">Get</button>
+    <input type="text" value="" id="out" class="inp">
+    
+</body>
+<script>
+     
+
+    function output(){
+        var a =parseInt(document.querySelector("input[name='Impact']:checked").value);
+        var d =parseInt(document.querySelector("input[name='Urgency']:checked").value);
+
+        if(a+d==11){
+            document.getElementById('out').value= 'P5';
+        }
+
+        else if(a+d==21 || a+d==12){
+            document.getElementById('out').value = 'P4'
+        }
+
+        else if(a+d==31 || a+d==22 || a+d==13){
+            document.getElementById('out').value = 'P3 '
+        }
+
+        else if( a+d==32 || a+d==23){
+            document.getElementById('out').value = 'P2'
+        }
+
+        else if(a+d==33){
+            document.getElementById('out').value = 'P1'
+        }
+
+        else{
+            document.getElementById('out').value = 'Please select value '
+        }
+    };
+</script>
+
+</html>
