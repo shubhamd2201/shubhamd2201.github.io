@@ -50,10 +50,10 @@
                 <ul class="w-100 d-grid list-unstyled bg-light align-items-center">
                     <li></li>
                     <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li ></li>
+                    <li ></li>
+                    <li ></li>
+                    <li ></li>
                     <li></li>
                     <li></li>
                     <li></li>
@@ -71,18 +71,26 @@
     </main>
     
     <script>
-         let index_num_arr = [];
+         
 
         document.querySelectorAll('.selelct_boxes ul li').forEach(e=>{
             e.addEventListener('click' , function(){
-                this.classList.add('selected');
-                var list = document.querySelector('.selelct_boxes ul')
-                var this_index = Array.from(list.children).indexOf(this);
-                index_num_arr.push(this_index);
+                this.classList.toggle('selected');
+               
                 
             });
         });
         document.querySelector('button').addEventListener('click', function(){
+            let index_num_arr = [];
+            var list = document.querySelector('.selelct_boxes ul');
+            list.querySelectorAll('li.selected').forEach(a =>{
+                var this_index = Array.from(list.children).indexOf(a);
+                index_num_arr.push(this_index);
+            });
+
+            document.querySelectorAll('.layer_2_box li').forEach(e=>{
+                e.classList.remove('i_am_selected');
+            });
             
             for(let i = 0; i < index_num_arr.length; i++){
                 document.querySelectorAll('.layer_2_box li')[index_num_arr[i]].classList.add('i_am_selected');
