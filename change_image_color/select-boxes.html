@@ -68,6 +68,9 @@
             </div>
         </div>
         <button class="btn btn-success px-5 mt-4 text-uppercase fw-medium ">select</button>
+        <div class="window_quantity mt-3 text-capitalize d-flex flex-wrap align-items-center">
+            <h5 class="pe-3">selected window quantity is :</h5> <h4 class="text-danger"></h4>
+        </div>
     </main>
     
     <script>
@@ -95,6 +98,7 @@
             for(let i = 0; i < index_num_arr.length; i++){
                 document.querySelectorAll('.layer_2_box li')[index_num_arr[i]].classList.add('i_am_selected');
             }
+            document.querySelector('.window_quantity h4').innerText = index_num_arr.length;
         })
     </script>
 </body>
