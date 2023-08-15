@@ -7,17 +7,17 @@
     <title>change image color</title>
 </head>
 <body>
-        <img id="myImage" src="images/Door_white.png" alt="Image">
+        <img id="myImage" src="images/grey-bg.png" alt="Image">
         <canvas id="myCanvas"></canvas>
         <input type="color" id="colorPicker" value="">
         <button >Apply Color Overlay</button>
 
         <script>
             var canvas = document.getElementById('myCanvas');
-var ctx = canvas.getContext('2d');
-var image = document.getElementById('myImage');
-var colorPicker = document.getElementById('colorPicker');
-var overlayColor = null 
+    var ctx = canvas.getContext('2d');
+    var image = document.getElementById('myImage');
+    var colorPicker = document.getElementById('colorPicker');
+    var overlayColor = null 
 
 canvas.width = image.width;
 canvas.height = image.height;
