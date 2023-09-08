@@ -7,17 +7,15 @@
     <title>Change Image Color Overlay</title>
     <style>
         *{margin: 0px; padding: 0px;}
-        .container{max-width: 1400px; margin: auto; padding:0px 10px;}
+        .container{max-width: 1400px; margin: auto; padding:0px 50px;}
         .meter { margin-top: 30px; }
         #opacityPicker{width: 300px;}
         #colorPicker{width: 100px; height: 50px;}
         .show_img{position: relative;}
-        img{max-width: 100%;}
         /* #myCanvas{position: absolute; z-index: 10; left: 0; top: 0;} */
 
         .color_button{margin-top: 30px;}
-        .color_button ul{display: flex; flex-wrap: wrap; gap: 10px;}
-        .color_button ul li{ width: 80px; aspect-ratio: 1; border: 1px solid #d1d1d1; list-style: none; }
+        .color_button ul li{display: inline-block; width: 80px; height: 50px; border: 1px solid #d1d1d1; list-style: none; margin-right: 10px; vertical-align: middle;}
     </style>
 </head>
 <body>
@@ -85,7 +83,7 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.globalCompositeOperation = 'source-over';
 
-            // showOpacity.textContent = selectedOpacity.toFixed(2);
+            showOpacity.textContent = selectedOpacity.toFixed(2);
         }
 
         colorPicker.addEventListener("input", function(){

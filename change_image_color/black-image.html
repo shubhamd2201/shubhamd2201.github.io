@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>change image color</title>
+</head>
+<body>
+        <img id="myImage" src="images/8x7-timeless-raised_panel-short_panel-black.png" alt="Image">
+        <canvas id="myCanvas"></canvas>
+        <input type="color" id="colorPicker" value="">
+        <input type="range" id="opacity_picker">
+
+        <button >Apply Color Overlay</button>
+
+        <script>
+            var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
+    var image = document.getElementById('myImage');
+    var colorPicker = document.getElementById('colorPicker');
+    var overlayColor = null 
+    
+
+canvas.width = image.width;
+canvas.height = image.height;
+
+function applyColorOverlay() {
+    overlayColor = hexToRgb(colorPicker.value);
+    var opacity_value = document.getElementById('opacity_picker').value/100;
+    drawImageWithOverlay(opacity_value);
+}
+
+function drawImageWithOverlay(opacity_value) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw the original image
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+    // Apply color overlay
+    ctx.globalCompositeOperation = 'color';
+    ctx.fillStyle = `rgba(${overlayColor[0]}, ${overlayColor[1]}, ${overlayColor[2]}, ${opacity_value})`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.globalCompositeOperation = 'source-over';
+}
+
+function hexToRgb(hex) {
+    hex = hex.replace('#', '');
+    return [
+        parseInt(hex.substring(0, 2), 16),
+        parseInt(hex.substring(2, 4), 16),
+        parseInt(hex.substring(4, 6), 16)
+    ];
+}
+
+image.onload = drawImageWithOverlay;
+
+document.querySelector('button').addEventListener('click',applyColorOverlay);
+
+        </script>
+</body>
+</html>
