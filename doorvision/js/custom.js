@@ -256,7 +256,7 @@ function grid_append(grid_length){
         
         
         for(let i = 0; i < index_num_arr.length; i++){
-            document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].insertAdjacentHTML('beforeend' , '<img class=window_frame"/><canvas class="myCanvas"></canvas><span></span>');
+            document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].insertAdjacentHTML('beforeend' , `<img class='window_frame'/><canvas class="myCanvas"></canvas><span></span`);
             document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].classList.add('i_am_selected');
 
             document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].querySelector('img').src = `./images/${window_type}.png`;
