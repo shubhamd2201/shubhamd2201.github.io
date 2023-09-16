@@ -12,7 +12,7 @@
         #opacityPicker{width: 300px;}
         #colorPicker{width: 100px; height: 50px;}
         .show_img{position: relative;}
-        img{max-width: 100%;}
+        img{max-width: 600px;}
         /* #myCanvas{position: absolute; z-index: 10; left: 0; top: 0;} */
 
         .color_button{margin-top: 30px;}
@@ -23,13 +23,13 @@
 <body>
     <div class="container">
         <div class="show_img">
-            <img id="myImage" src="images/Door_white.png" alt="Image">
+            <img id="myImage" src="images/door_white_texture.jpeg" alt="Image">
             <canvas id="myCanvas"></canvas>
         </div>
         <div class="meter">
             <input type="color" id="colorPicker" value="#ebeeee">
-            <!-- <input type="range" id="opacityPicker" min="0" max="1" step="0.01" value="0.9">
-            <span id="showOpacity">0.9</span> -->
+            <input type="range" id="opacityPicker" min="0" max="1" step="0.01" value="0.9">
+            <span id="showOpacity">0.9</span>
         </div>
         <div class="color_button">
             <ul>
@@ -43,6 +43,7 @@
                 <li data-color="#cdc5b0"></li>
                 <li data-color="#231f20"></li>
                 <li data-color="#3d4045"></li>
+                <li data-color="#3c231c"></li>
     
             </ul>
         </div>
@@ -76,8 +77,8 @@
             // var selectedColor = colorPicker.value;
             var selectedColor = my_color;
 
-            // var selectedOpacity = parseFloat(opacityPicker.value);
-            var selectedOpacity = 0.92;
+            var selectedOpacity = parseFloat(opacityPicker.value);
+            // var selectedOpacity = 0.92;
 
 
             ctx.globalCompositeOperation = 'multiply';
