@@ -262,8 +262,6 @@ function grid_append(grid_length){
             document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].querySelector('img').src = `./images/${window_type}.png`;
 
             $('.image_grid_parent.append_grid ul li.i_am_selected').find('span').css('background' , 'url(./images/glass/'+glass_type+'.jpg)');
-
-
         }
         console.log(`${window_type}`)
 
