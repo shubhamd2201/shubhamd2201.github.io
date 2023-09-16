@@ -259,7 +259,7 @@ function grid_append(grid_length){
             document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].insertAdjacentHTML('beforeend' , '<img class=window_frame"/><canvas class="myCanvas"></canvas><span></span>');
             document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].classList.add('i_am_selected');
 
-            document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].querySelector('img').src = `./images/window/${window_type}.png`;
+            document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].querySelector('img').src = `./images/${window_type}.png`;
 
             $('.image_grid_parent.append_grid ul li.i_am_selected').find('span').css('background' , 'url(./images/glass/'+glass_type+'.jpg)');
 
