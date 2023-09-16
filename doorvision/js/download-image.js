@@ -54,10 +54,6 @@ function applyColorOverlay(my_color) {
   
   function applyColorOverlay_multiple(my_color) {
 
-    // document.querySelectorAll('.myCanvas').forEach(e=>{
-    // var ctx = e.getContext('2d');
-    var image = document.querySelector('.image_grid_parent.append_grid ul li.i_am_selected img.window_frame');
-
   document.querySelectorAll('.myCanvas').forEach(e=>{
   var ctx = canvas.getContext('2d');
   var image = document.querySelector('.image_grid_parent.append_grid ul li.i_am_selected img.window_frame');
