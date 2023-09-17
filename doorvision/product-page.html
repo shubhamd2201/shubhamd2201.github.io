@@ -20,7 +20,7 @@
     </header>
     <main class="mx-auto px-3">
         <div class="product_main">
-            <div class="left_section_col  py-3 px-1 shadow-lg bg-white m-3">
+            <div class="left_section_col shadow-lg bg-white my-3 mx-2">
                 <div class="left_section_inr  p-3  scroll-css ">
                     <div class="favorite">
                         <ul class="ps-0 ">
@@ -28,12 +28,12 @@
                             <li class="d-inline-block me-4 text-uppercase "><span class="text-primary">delete</span> <i class="bi bi-question-circle-fill"></i></li>
                         </ul>
                     </div>
-                    <div class="heading mb-5 mt-4">
+                    <div class="heading mb-4 mt-3">
                         <h2 class="text-primary">Door Summary</h2>
                     </div>
                     <div class="user_detail d-flex flex-wrap justify-content-between mb-2">
                         <p class=" mb-0">created by user name</p>
-                        <div><button class=" btn btn-primary text-uppercase px-4 me-2 rounded-1"  type="button" data-toggle="tooltip" data-placement="bottom" title="Add to cart"><i class="bi bi-plus " ></i> add to cart</button><i class="bi bi-question-circle-fill"></i></div>
+                        <div><button class=" btn btn-primary text-uppercase px-4 me-2 rounder-theme-1"  type="button" data-toggle="tooltip" data-placement="bottom" title="Add to cart"><i class="bi bi-plus " ></i> add to cart</button><i class="bi bi-question-circle-fill"></i></div>
                     </div>
                     <div>
                         <h6 class="py-2 text-capitalize ">customer details</h6>
@@ -43,7 +43,7 @@
                         <div class="image_div " id="image_download_section" crossorigin="anonymous">
                             <div class="image_div_inr image_first_layer position-relative my-3">
                                 
-                                <div class="your_door_design  w-75 mx-auto mt-5 p-3 text-primary rounded text-capitalize">
+                                <div class="your_door_design mx-auto mt-5 p-3 text-primary rounder-theme text-capitalize">
                                     <p class="mb-0">Your door design a few clicks away !</p>
                                 </div>
 
@@ -52,11 +52,9 @@
                                     <canvas id="myCanvas"></canvas>
                                 </div>
                                 <div class="image_grid_parent append_grid">
-                                    <div>
-                                        <ul class=" ">
+                                    <ul class=" ">
 
-                                        </ul>
-                                    </div>
+                                    </ul>
                                 </div>
                             </div>
                             
@@ -68,13 +66,16 @@
                     <div class="note my-3">
                         <p> <span><i class="bi bi-info-circle-fill"></i></span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat voluptatem autem blanditiis dolorum nobis quae ratione rem iusto. Voluptatum explicabo dolorum magni facilis.</p>
                     </div>
-                    <div class="price_details mb-2">
-                        <p class="text-capitalize text-primary"><i class="bi bi-card-list"></i> price details</p>
+                    <div class="mb-2">
+                        <div class="price_details mb-2 d-flex justify-content-between align-items-center">
+                            <p class="text-capitalize text-primary"><i class="bi bi-card-list"></i> price details</p>
+                            <h3><sup class="text-danger fs-6 pe-1">$</sup>999</h3>
+                        </div>
                         <div class="input_box_row row mb-4">
                             <div class="input_box_col w-50 col-lg-6 col-sm-12">
                                 <label for="job_name" class="mb-2">PO/ Job Name</label>
                                 <div class="input_div">
-                                    <input type="text" id="job_name" class="rounded-2 border-1 px-3 py-2 w-100" value="DV00001">
+                                    <input type="text" id="job_name" class="rounder-theme-2 border-1 px-3 py-2 w-100" value="DV00001">
                                 </div>
                             </div>
                         </div>
@@ -96,16 +97,33 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <h6>Model</h6>
-                                    <p id="model_for_quatation"></p>
+                                    <span id="collection_for_quatation"></span>
+                                    <span id="family_for_quatation"></span>
+                                    <span id="panel_type_for_quatation"></span>
+                                    <span id="model_number_for_quatation"></span>
+                                    <span id="color_for_quatation"></span>
+
                                 </div>
                             </div>
                         </div>
                         <div class="border-bottom py-2 mb-2">
                             <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="col-lg-12">
+                                        <h6>window details</h6>
+                                        <span id="window_quantity_for_quatation"></span>
+                                        <span id="window_glass_type_for_quatation"></span>
+                                        <span id="window_type_for_quatation"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-bottom py-2 mb-2">
+                            <div class="row gy-3">
                                 <div class="col-lg-6 col-sm-12">
                                     <div >
                                         <h6>Width</h6>
-                                        <p id="width_for_quatation"></p>
+                                        <span id="width_for_quatation_ft"></span><span id="width_for_quatation_inch"></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
@@ -126,18 +144,45 @@
                                         <p id="cyclage_for_quatation"></p>
                                     </div>
                                 </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Seals</h6>
+                                    <p id="seal_type_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Lock</h6>
+                                    <p id="lock_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Strut</h6>
+                                    <p id="strut_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Track</h6>
+                                    <p id="track_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Jamb Mount</h6>
+                                    <p id="jamb_mount_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Jamb Material</h6>
+                                    <p id="jamb_material_for_quatation"></p>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="heading mb-4 mt-3">
+                        <h2 class="text-primary">Order Summary</h2>
                     </div>
 
                 </div>
             </div>
-            <div class="right_section_col py-3 ps-4 pe-3 shadow-lg bg-white my-3">
+            <div class="right_section_col shadow-lg bg-white my-3">
                 <div class="right_section_inr scroll-css">
                     <div class="d-flex flex-wrap gap-3">
                         <p class="py-2 text-uppercase text-primary">prefrences</p>
                         <p class="py-2 text-uppercase text-primary">add customization</p>
-                        <div><button class=" btn btn-primary text-uppercase px-4 me-2 rounded-1"  type="button" data-toggle="tooltip" data-placement="bottom" title="Add to cart"><i class="bi bi-plus " ></i> add to cart</button><i class="bi bi-question-circle-fill"></i></div>
+                        <div><button class=" btn btn-primary text-uppercase px-4 me-2 rounder-theme-1"  type="button" data-toggle="tooltip" data-placement="bottom" title="Add to cart"><i class="bi bi-plus " ></i> add to cart</button><i class="bi bi-question-circle-fill"></i></div>
                     </div>
                     <div class="heading mb-5 mt-4 border-bottom pb-3">
                         <h2 class="text-primary text-capitalize">Door designer</h2>
@@ -172,7 +217,7 @@
                         <p><span class="fs-2">Or</span>, Configure your exact garage door with door designer</p>
                     </div>
                     <div class="collection_section border mb-4">
-                        <h5 class="text-capitalize p-3 bg-light  mb-1">door size</h5>
+                        <h5 class="main_heading">door size</h5>
                         <div class="px-2">
                             <p class="mb-3"> Select a Standard garage door size <span class="fs-3">Or,</span> enter your exact garage door size</p>
                             
@@ -184,7 +229,7 @@
                         </div>
                     </div>
                     <div class="collection_section border mb-4">
-                        <h5 class="text-capitalize p-3 bg-light  mb-1">Collection & Family</h5>
+                        <h5 class="main_heading">Collection & Family</h5>
                         <div class="px-3 py-2">
                             <div class="tabbing mb-3 border-bottom" id="collection_and_family_btn">
                                 <button class=" px-3 py-2 fs-6 me-3 " data-tab="timeless">Timeless</button>
@@ -198,7 +243,7 @@
                                 <div id="timeless" class="time_less_data">
                                     <div class="row">
                                         <div class="col-lg-4 col-md-6 col-sm-12  " >
-                                            <div class="raised_type px-3 py-2 bg-light rounded h-100" data-tab="raised_panel">
+                                            <div class="raised_type px-3 py-2 bg-light rounder-theme h-100" data-tab="raised_panel">
                                                 <div class="img d-table mx-auto mb-2">
                                                     <img src="./images/timeless/raised_panel.jpeg" alt="Raised Panel">
                                                 </div>
@@ -206,7 +251,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-sm-12 "  > 
-                                            <div class="raised_type px-3 py-2 bg-light rounded h-100" data-tab="stamped_carrige_house">
+                                            <div class="raised_type px-3 py-2 bg-light rounder-theme h-100" data-tab="stamped_carrige_house">
                                                 <div class="img d-table mx-auto mb-2">
                                                     <img src="./images/timeless/stamped_carrige_house.jpeg" alt="">
                                                 </div>
@@ -219,7 +264,7 @@
                                 <div id="contemporary" class="time_less_data">
                                     <div class="row">
                                         <div class="col-lg-4 col-md-6 col-sm-12 "  > 
-                                            <div class="raised_type px-3 py-2 bg-light rounded h-100" data-tab="skyline_flush">
+                                            <div class="raised_type px-3 py-2 bg-light rounder-theme h-100" data-tab="skyline_flush">
                                                 <div class="img d-table mx-auto mb-2">
                                                     <img src="./images/timeless/skyline_flush.jpeg" alt="">
                                                 </div>
@@ -234,14 +279,14 @@
                     </div>
 
                     <div class="panel_style_model_number border mb-4">
-                        <h5 class="text-capitalize p-3  bg-light  mb-1">panel style and model number</h5>
+                        <h5 class="main_heading">panel style and model number</h5>
                         <div class="px-3 py-2">
                             
 
                             <div id="raised_panel" class="mb-3 long_short_type">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-sm-12 ">
-                                        <div class="panel_type grey_border px-3 py-2 bg-light rounded cursor-pointer text-center" data-tab="short_panel" window="2" model-tab="raised_short_model">
+                                        <div class="panel_type grey_border px-3 py-2 bg-light rounder-theme cursor-pointer text-center" data-tab="short_panel" window="2" model-tab="raised_short_model">
                                             <div class="img">
                                                 <img src="./images/Raised_Panel_Short.jpg" alt="">
                                             </div>
@@ -249,7 +294,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-6 col-sm-12 ">
-                                        <div class="panel_type grey_border px-3 py-2 bg-light rounded cursor-pointer text-center" data-tab="long_panel" window="1"  model-tab="raised_long_model">
+                                        <div class="panel_type grey_border px-3 py-2 bg-light rounder-theme cursor-pointer text-center" data-tab="long_panel" window="1"  model-tab="raised_long_model">
                                             <div class="img">
                                                 <img src="./images/Raised_Panel_Long.jpg" alt="">
                                             </div>
@@ -262,7 +307,7 @@
                             <div id="stamped_carrige_house" class="mb-3 long_short_type">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-sm-12 ">
-                                        <div class="panel_type grey_border px-3 py-2 bg-light rounded cursor-pointer text-center" data-tab="stamped_carrige_short_panel" window="1" model-tab="stampped_short_model">
+                                        <div class="panel_type grey_border px-3 py-2 bg-light rounder-theme cursor-pointer text-center" data-tab="stamped_carrige_short_panel" window="1" model-tab="stampped_short_model">
                                             <div class="img">
                                                 <img src="./images/Stamped_Carriage_Short.jpg" alt="">
                                             </div>
@@ -270,7 +315,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-6 col-sm-12 ">
-                                        <div class="panel_type grey_border px-3 py-2 bg-light rounded cursor-pointer text-center" data-tab="stamped_carrige_long_panel" window="1"  model-tab="stampped_long_model">
+                                        <div class="panel_type grey_border px-3 py-2 bg-light rounder-theme cursor-pointer text-center" data-tab="stamped_carrige_long_panel" window="1"  model-tab="stampped_long_model">
                                             <div class="img">
                                                 <img src="./images/Stamped_Carriage_Long.jpg" alt="">
                                             </div>
@@ -282,7 +327,7 @@
                             <div id="skyline_flush" class="mb-3 long_short_type">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-sm-12 ">
-                                        <div class="panel_type grey_border px-3 py-2 bg-light rounded cursor-pointer text-center" data-tab="no_or_short_window" window="2" model-tab="skyline_short_model">
+                                        <div class="panel_type grey_border px-3 py-2 bg-light rounder-theme cursor-pointer text-center" data-tab="no_or_short_window" window="2" model-tab="skyline_short_model">
                                             <div class="img">
                                                 <img src="./images/Skyline_Flush_Short_No_Windows.jpg" alt="">
                                             </div>
@@ -300,7 +345,7 @@
                                             <div class=" d-flex flex-wrap gap_10"  >
                                                 <div class="model_number_col p-2 bg-light" data-tab="Insulated">
                                                     <div class="model_number_col_inr text-center h-100 d-flex">
-                                                        <p class="mb-1 fs-6">2216</p>
+                                                        <p class="mb-1 fs-6 model_num">2216</p>
                                                         <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
                                                         <p class="mb-1 fs-6"> R-17-19</p>
                                                         <ul class="model_number_quality_bar d-flex ps-0 mb-0 gap_10 best">
@@ -317,7 +362,7 @@
                                             <div class="d-flex flex-wrap gap_10" >
                                                 <div class="model_number_col p-2 bg-light" data-tab="Insulated">
                                                     <div class="model_number_col_inr text-center h-100 d-flex">
-                                                        <p class="mb-1 fs-6">4216</p>
+                                                        <p class="mb-1 fs-6 model_num">4216</p>
                                                         <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
                                                         <p class="mb-1 fs-6"> R-17-19</p>
                                                         <ul class="model_number_quality_bar d-flex ps-0 mb-0 gap_10 best">
@@ -334,7 +379,7 @@
                                             <div class="d-flex flex-wrap gap_10" >
                                                 <div class="model_number_col p-2 bg-light" data-tab="Insulated">
                                                     <div class="model_number_col_inr text-center h-100 d-flex">
-                                                        <p class="mb-1 fs-6">5216</p>
+                                                        <p class="mb-1 fs-6 model_num">5216</p>
                                                         <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
                                                         <p class="mb-1 fs-6"> R-16-55</p>
                                                         <ul class="model_number_quality_bar d-flex ps-0 mb-0 gap_10 best">
@@ -351,7 +396,7 @@
                                             <div class="d-flex flex-wrap gap_10" >
                                                 <div class="model_number_col p-2 bg-light" data-tab="Insulated">
                                                     <div class="model_number_col_inr text-center h-100 d-flex">
-                                                        <p class="mb-1 fs-6">5916</p>
+                                                        <p class="mb-1 fs-6 model_num">5916</p>
                                                         <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
                                                         <p class="mb-1 fs-6"> R-16-55</p>
                                                         <ul class="model_number_quality_bar d-flex ps-0 mb-0 gap_10 best">
@@ -368,7 +413,7 @@
                                             <div class="d-flex flex-wrap gap_10" >
                                                 <div class="model_number_col p-2 bg-light" data-tab="Insulated">
                                                     <div class="model_number_col_inr text-center h-100 d-flex">
-                                                        <p class="mb-1 fs-6">2126</p>
+                                                        <p class="mb-1 fs-6 model_num">2126</p>
                                                         <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
                                                         <p class="mb-1 fs-6"> R-17-54</p>
                                                         <ul class="model_number_quality_bar d-flex ps-0 mb-0 gap_10 best">
@@ -401,7 +446,7 @@
                     </div>
 
                     <div class=" border mb-4">
-                        <h5 class="text-capitalize p-3  bg-light  mb-1">color</h5>
+                        <h5 class="main_heading">color</h5>
                         <div class="px-3 py-2">
                             <div id="select_color" class="select_color small_list">
                                 <ul>
@@ -445,25 +490,37 @@
                                         <span></span>
                                         <p>Graphite</p>
                                     </li>
-                                    <li data-color="#3c231c">
+                                    <!-- <li data-color="#3c231c">
                                         <span></span>
                                         <p>Graphite</p>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
                     </div>
 
                     <div class="collection_section border mb-4" id="grid_submit">
-                        <h5 class="text-capitalize p-3  bg-light  mb-1">Windows</h5>
+                        <h5 class="main_heading">Windows</h5>
                         <div class="px-3 py-2">
                             <p class="text-primary">IMPORTANT: Window placements should be entered inside looking out</p>
 
                             <!-- grid layout will append here  -->
-                            <div class="select_boxes w-75 append_grid">
-                                <ul class="">
+                            <div class="d-flex align-items-center justify-content-center grid_main_row">
+                                <div class="for_all_grid grid_buttons">
+                                    <ul>
 
-                                </ul>
+                                    </ul>
+                                </div>
+                                <div class="select_boxes append_grid">
+                                    <ul class="">
+    
+                                    </ul>
+                                </div>
+                                <div class="for_grid_height grid_buttons">
+                                    <ul>
+
+                                    </ul>
+                                </div>
                             </div>
                             
                             <div class="window_quantity mt-3 text-capitalize d-flex flex-wrap align-items-center">
@@ -474,7 +531,7 @@
 
                     
                     <div class=" border mb-4">
-                        <h5 class="text-capitalize p-3  bg-light  mb-1">window glass</h5>
+                        <h5 class="main_heading">window glass</h5>
                         <div class="px-3 py-2">
                             <div class="window_glass_tabbing button_type_li mb-5">
                                 <ul class="p-0">
@@ -538,7 +595,7 @@
                     </div>
 
                     <div class=" border mb-4">
-                        <h5 class="text-capitalize p-3  bg-light  mb-1">window type</h5>
+                        <h5 class="main_heading">window type</h5>
                         <div class="px-3 py-2">
                             <div id="window_type" class="window_type small_list">
                                 <ul class="short_panel_window" id="short_panel">
@@ -685,13 +742,13 @@
                     </div>
 
                     <div class=" border mb-4">
-                        <h5 class="text-capitalize p-3  bg-light  mb-1">Spring</h5>
+                        <h5 class="main_heading">Spring</h5>
                         <div class="px-3 py-2">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <p>spring</p>
                                     
-                                    <div class="button_type_li click_function">
+                                    <div class="button_type_li click_function for_spring_quatation">
                                         <ul class="ps-0 mb-1">
                                             <li>Torsion</li>
                                             <li>Extension</li>
@@ -699,8 +756,8 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <p>Cyclange</p>
-                                    <select name="" id="" class="border py-2 px-3 w-100">
+                                    <p>Cyclage</p>
+                                    <select name="" id="" class="border py-2 px-3 w-100 Cyclage">
                                         <option value="">Minimun 10000 cycle</option>
                                         <option value="">Minimun 15000 cycle</option>
                                         <option value="">Minimun 20000 cycle</option>
@@ -711,9 +768,9 @@
                         </div>
                     </div>
                     <div class=" border mb-4">
-                        <h5 class="text-capitalize p-3  bg-light  mb-1">Seals</h5>
+                        <h5 class="main_heading">Seals</h5>
                         <div class="px-3 py-2">
-                            <div class="button_type_li  click_function ">
+                            <div class="button_type_li  click_function seals_quataion">
                                 <ul class="ps-0 mb-1">
                                     <li>Top seal</li>
                                     <li>Nail on seal</li>
@@ -723,7 +780,7 @@
                     </div>
 
                     <div class=" border mb-4">
-                        <h5 class="text-capitalize p-3  bg-light  mb-1">door lock</h5>
+                        <h5 class="main_heading">door lock</h5>
                         <div class="px-3 py-2">
                             <div class="button_type_li  click_function lock_bar">
                                 <ul class="ps-0 mb-1">
@@ -769,10 +826,61 @@
                         </div>
                     </div>
                     <div class=" border mb-4">
-                        <h5 class="text-capitalize p-3  bg-light  mb-1">Strut</h5>
+                        <h5 class="main_heading">door operator</h5>
+                        <div class="px-3 py-2">
+                            <div class="door_operator">
+                                <!-- <div class="custom_row">
+                                    <div class="col_2">
+
+                                    </div>
+                                </div> -->
+
+                                <div class="row g-3">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 border">
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-3 col-md-6"> <img src="./images/life_master_logo.jpeg" alt=""></div>
+                                            <div class="col-lg-3 col-md-6"><img src="./images/lifemaster-door-operator2.jpeg" alt=""></div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <select name="" id="life_mater_door_operator">
+                                                    <option value="">life master 1</option>
+                                                    <option value="">life master 2</option><option value="">life master 3</option><option value="">life master 4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 border">
+                                        <div class="row align-items-center ">
+                                            <div class="col-lg-3 col-md-6"> <img src="./images/genie_logo.jpeg" alt=""></div>
+                                            <div class="col-lg-3 col-md-6"><img src="./images/geniedoor-operator2.jpeg" alt=""></div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <select name="" id="genie_door_operator">
+                                                    <option value="">genie 1</option>
+                                                    <option value="">genie 2</option><option value="">genie 3</option><option value="">genie 4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 border">
+                                        <div class="row align-items-center" >
+                                            <div class="col-lg-3 col-md-6"> <img src="./images/marantech_logo.jpeg" alt=""></div>
+                                            <div class="col-lg-3 col-md-6"><img src="./images/marantechdoor-operator2.jpeg" alt=""></div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <select name="" id="marantech_door_operator">
+                                                    <option value="">Marantech 1</option>
+                                                    <option value="">Marantech 2</option><option value="">Marantech 3</option><option value="">Marantech 4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" border mb-4">
+                        <h5 class="main_heading">Strut</h5>
                         <div class="px-3 py-2">
                             <div class="d-flex flex-wrap gap_10">
-                                <div class="button_type_li  click_function ">
+                                <div class="button_type_li  click_function strut_type">
                                     <p>Strut Type</p>
                                     <ul class="ps-0 mb-1">
                                         <li>Top seal</li>
@@ -782,7 +890,7 @@
                                 <div class=" click_function ">
                                     <p>Extra Strut Quantity</p>
                                     <div>
-                                        <input type="number" class="w-100 py-2 px-3 rounded">
+                                        <input type="number" class="w-100 py-2 px-3 rounder-theme">
                                     </div>
                                 </div>
                             </div>
@@ -790,13 +898,13 @@
                     </div>
 
                     <div class=" border mb-4">
-                        <h5 class="text-capitalize p-3  bg-light  mb-1">Track</h5>
+                        <h5 class="main_heading">Track</h5>
                         <div class="px-3 py-2">
-                            <div class="row g-2">
+                            <div class="row g-2 track_row">
                                 <div class="col-lg-6">
                                     <p>Normal Headroom</p>
 
-                                    <div class="button_type_li  click_function">
+                                    <div class="button_type_li  track_sibilings">
                                         <ul class="ps-0 mb-1">
                                             <li>10 IN</li>
                                             <li>12 IN</li>
@@ -809,7 +917,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <p>Additional Selections</p>
-                                    <div class="button_type_li  click_function">
+                                    <div class="button_type_li  track_sibilings">
                                         <ul class="ps-0 mb-1">
                                             <li>Riveted Tract</li>
                                             <li>Bolted Tract</li>
@@ -818,10 +926,12 @@
                                         </ul>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row g-2 track_row">
                                 <div class="col-lg-4">
                                     <p>Low Headroom</p>
 
-                                    <div class="button_type_li  click_function">
+                                    <div class="button_type_li ">
                                         <ul class="ps-0 mb-1">
                                             <li>12 LHR</li>
                                             <li>15 LHR</li>
@@ -830,7 +940,7 @@
                                 </div>
                                 <div class="col-lg-8">
                                     <p>Additional Selections</p>
-                                    <div class="button_type_li  click_function">
+                                    <div class="button_type_li ">
                                         <ul class="ps-0 mb-1">
                                             <li>Front Mount</li>
                                             <li>rear Mount</li>
@@ -839,6 +949,8 @@
                                         </ul>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row g-2">
                                 <div class="col-lg-12">
                                     <div class="row g-2">
                                         <div class="col-lg-4">
@@ -886,7 +998,7 @@
                                         </div>
                                         <div class="col-lg-8">
                                             <p>Jamb Mount</p>
-                                            <div class="button_type_li  click_function ">
+                                            <div class="button_type_li  click_function jamb_mount">
                                                 <ul class="ps-0 mb-1">
                                                     <li>cling angle</li>
                                                     <li>full angle</li>
@@ -908,7 +1020,7 @@
                                             </div>
 
                                             <p>Jamb Material</p>
-                                            <div class="button_type_li  click_function ">
+                                            <div class="button_type_li  click_function jamb_material">
                                                 <ul class="ps-0 mb-1">
                                                     <li>Wood</li>
                                                     <li>Steel</li>
