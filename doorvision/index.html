@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>visualization</title>
+</head>
+<body>
+    <div id="loader">
+        <div id="loader_img">
+            <img src="./images/favicon.png" alt="">
+        </div>
+    </div>
+    <header class="shadow">
+        <div class="header_logo">
+            <a href="index.html">
+                <img src="./images/DoorMaster-Logo-CMYK.png" alt="">
+            </a>
+        </div>
+    </header>
+    <main class="mx-auto px-1">
+        <div class="product_main">
+            <div class="left_section_col shadow-lg bg-white mx-2">
+                <div class="left_section_inr  p-3  scroll-css ">
+                    <div class="favorite">
+                        <ul class="ps-0 ">
+                            <li class="d-inline-block me-4 text-uppercase"><i class="bi bi-heart"></i> <span>favorite</span></li>
+                            <li class="d-inline-block me-4 text-uppercase "><span class="text-primary">delete</span> <i class="bi bi-question-circle-fill"></i></li>
+                        </ul>
+                    </div>
+                    <div class="heading mb-4 mt-3">
+                        <h2 class="text-primary">Door Summary</h2>
+                    </div>
+                    <div class="user_detail d-flex flex-wrap justify-content-between mb-2">
+                        <p class=" mb-0">created by user name</p>
+                        <div><button class=" btn btn-primary text-uppercase px-4 me-2 rounder-theme-1"  type="button" data-toggle="tooltip" data-placement="bottom" title="Add to cart"><i class="bi bi-plus " ></i> add to cart</button><i class="bi bi-question-circle-fill"></i></div>
+                    </div>
+                    <div>
+                        <h6 class="py-2 text-capitalize ">customer details</h6>
+                        <p class="py-2 text-uppercase text-primary">select customer</p>
+                   </div>
+                    <div class="image_append_section">
+                        <div class="image_div " id="image_download_section" crossorigin="anonymous">
+                            <div class="image_div_inr image_first_layer position-relative my-3">
+                                
+                                <div class="your_door_design mx-auto mt-5 p-3 text-primary rounder-theme text-capitalize">
+                                    <p class="mb-0">Your door design a few clicks away !</p>
+                                </div>
+
+                                <div class="position-relative">
+                                    <img id="final_door_image" src="" alt="">
+                                    <canvas id="myCanvas"></canvas>
+                                </div>
+                                <div class="image_grid_parent append_grid">
+                                    <ul class=" ">
+
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="image_download my-3" id="downloadButton">
+                        <button class="btn btn-primary py-2 px-4"  > Download</button>
+                    </div>
+                    <div class="note my-3">
+                        <p> <span><i class="bi bi-info-circle-fill"></i></span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat voluptatem autem blanditiis dolorum nobis quae ratione rem iusto. Voluptatum explicabo dolorum magni facilis.</p>
+                    </div>
+                    <div class="mb-2">
+                        <div class="price_details mb-2 d-flex justify-content-between align-items-center">
+                            <p class="text-capitalize text-primary"><i class="bi bi-card-list"></i> price details</p>
+                            <h3><sup class="text-danger pe-1">$</sup>999</h3>
+                        </div>
+                        <div class="input_box_row row mb-4">
+                            <div class="input_box_col w-50 col-lg-6 col-sm-12">
+                                <label for="job_name" class="mb-2">PO/ Job Name</label>
+                                <div class="input_div">
+                                    <input type="text" id="job_name" class="rounder-theme-2 border-1 px-3 py-2 w-100" value="DV00001">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="shipping_detail row pb-3 border-bottom">
+                            <div class="col-8">
+                                <h6 class="text-capitalize mb-2">shipping address</h6>
+                            <p class="text-uppercase">500 libnar Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, facere.</p>
+                            </div>
+                            <div class="edit_adress  col-4">
+                                <span class="fs-4 d-inline-block cursor-pointer"><i class="bi bi-pencil-square"></i></span>
+                            </div>
+                        </div>
+                       
+
+                        
+                    </div>
+                    <div class="info_for_quatation">
+                        <div class="border-bottom py-2 mb-2">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h6>Type of door and company</h6>
+                                    <span id="type_of_door_quatation"></span>
+                                    <span id="door_company_quatation"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-bottom py-2 mb-2">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h6>Model</h6>
+                                    <span id="collection_for_quatation"></span>
+                                    <span id="family_for_quatation"></span>
+                                    <span id="panel_type_for_quatation"></span>
+                                    <span id="model_number_for_quatation"></span>
+                                    <span id="color_for_quatation"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-bottom py-2 mb-2">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="col-lg-12">
+                                        <h6>window details</h6>
+                                        <span id="window_quantity_for_quatation"></span>
+                                        <span id="window_glass_type_for_quatation"></span>
+                                        <span id="window_type_for_quatation"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-bottom py-2 mb-2">
+                            <div class="row gy-3">
+                                <div class="col-lg-6 col-sm-12">
+                                    <div >
+                                        <h6>Width</h6>
+                                        <span id="width_for_quatation_ft"></span><span id="width_for_quatation_inch"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <div >
+                                        <h6>height</h6>
+                                        <p id="height_for_quatation"></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <div >
+                                        <h6>Spring</h6>
+                                        <p id="Spring_for_quatation"></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <div >
+                                        <h6>cyclage</h6>
+                                        <p id="cyclage_for_quatation"></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Seals</h6>
+                                    <p id="seal_type_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Lock</h6>
+                                    <p id="lock_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Door Operator</h6>
+                                    <p id="operator_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Strut</h6>
+                                    <p id="strut_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Track</h6>
+                                    <p id="track_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Jamb Mount</h6>
+                                    <p id="jamb_mount_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <h6>Jamb Material</h6>
+                                    <p id="jamb_material_for_quatation"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heading mb-4 mt-3">
+                        <h2 class="text-primary">Order Summary</h2>
+                    </div>
+
+                </div>
+            </div>
+            <div class="right_section_col shadow-lg bg-white">
+                <div class="right_section_inr scroll-css">
+                    <div class="d-flex flex-wrap gap-3">
+                        <p class="py-2 text-uppercase text-primary">prefrences</p>
+                        <p class="py-2 text-uppercase text-primary">add customization</p>
+                        <div><button class=" btn btn-primary text-uppercase px-4 me-2 rounder-theme-1"  type="button" data-toggle="tooltip" data-placement="bottom" title="Add to cart"><i class="bi bi-plus " ></i> add to cart</button><i class="bi bi-question-circle-fill"></i></div>
+                    </div>
+                    <div class="heading mb-5 mt-4 border-bottom pb-3">
+                        <h2 class="text-primary text-capitalize">Door designer</h2>
+                    </div>
+                    <div class="type_of_doors d-flex flex-wrap mb-3">
+                        <div class="select_box">
+                            <p class="text-capitalize mb-2">types of doors</p>
+                            <select name="type_of_doors" id="type_of_doors" class="border py-2 px-3">
+                                <option >Select Type of Doors</option>
+                                <!-- <option value="residential">Residential</option>
+                                <option value="comercial">Comercial</option> -->
+                            </select>
+                        </div>
+                        <div>
+                            <p class="text-capitalize mb-2">quantity <i class="bi bi-question-circle-fill"></i></p>
+                            <input type="number" class="border py-2 px-3 d-block" value="1" min="1" max="20">
+                        </div>
+                    </div>
+                    <div class="door_company d-flex flex-wrap mb-3">
+                        <div class="select_box">
+                            <p class="text-capitalize mb-2">Door Company</p>
+                            <select name="door_company" id="door_company" class="border py-2 px-3">
+                                <option >Select Door Company</option>
+                                <!-- <option value="CHI">CHI</option>
+                                <option value="safeway">safeway</option> -->
+    
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <p><span class="fs-2">Or</span>, Configure your exact garage door with door designer</p>
+                    </div>
+                    <div class="collection_section border mb-4">
+                        <h5 class="main_heading">door size</h5>
+                        <div class="px-2">
+                            <p class="mb-3"> Select a Standard garage door size <span class="fs-3">Or,</span> enter your exact garage door size</p>
+                            
+                            <div class="select_size_btn buttons mb-3 d-flex flex-wrap gap_10" id="size_button">
+                                <button class=" px-3 py-2 fs-5" width_from_btn="8" height_from_btn="7" data-tab="8x7" window="8">8' &times; 7'</button>
+                                <button class=" px-3 py-2 fs-5" width_from_btn="16" height_from_btn="7" data-tab="16x7" window="16">16' &times; 7'</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collection_section border mb-4">
+                        <h5 class="main_heading">Collection & Family</h5>
+                        <div class="px-3 py-2">
+                            <div class="tabbing collection_btn mb-3 border-bottom" id="collection_and_family_btn">
+                                <!-- door collection  -->
+                            </div>
+
+                            <div class="family">
+                                <div class="time_less_data">
+                                    <div class="row g-3" id="door_collection_family">
+                                       <!-- door family  -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="panel_style_model_number border mb-4">
+                        <h5 class="main_heading">panel style and model number</h5>
+                        <div class="px-3 py-2">
+                            
+
+                            <div class="mb-3 long_short_type">
+                                <div class="row" id="panel_type">
+                                    <!-- panel type wil append here  -->
+                                </div>
+                            </div>
+                            <div id="model_number">
+                                <p class="text-capitalize">model number</p>
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-12">
+                                        <div id="model_number_row" class="model_num_row d-flex flex-wrap gap_10">
+                                            <!-- model number will append here  -->
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="model_number_img_col_inr p-3 ">
+                                            <p class="mb-1">2", 1-Sided Steel</p>
+                                            <p class="mb-1">Standard</p>
+                                            <p class="mb-1">No-Insulation, 25ga</p>
+                                            <div id="model_number_img" class="model_number_img p-2 bg-white">
+                                                <img src="" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mx-auto mb-3 text-center" id="raised_submit">
+                            <button  class="btn py-2 px-4 bg-success text-white text-capitalize">click to show</button>
+                        </div>
+                    </div>
+
+                    <div class=" border mb-4">
+                        <h5 class="main_heading">color</h5>
+                        <div class="px-3 py-2">
+                            <div id="select_color" class="select_color small_list">
+                                <ul>
+                                    <li data-color="#ebeeee">
+                                        <span></span>
+                                        <p>white</p>
+                                    </li>
+                                    <li data-color="#d6cdbe">
+                                        <span></span>
+                                        <p>Almond</p>
+                                    </li>
+                                    <li data-color="#a09387">
+                                        <span></span>
+                                        <p>Sandstone</p>
+                                    </li>
+                                    <li data-color="#4b3933">
+                                        <span></span>
+                                        <p>Brown</p>
+                                    </li>
+                                    <li data-color="#004932">
+                                        <span></span>
+                                        <p>Evergreen</p>
+                                    </li>
+                                    <li data-color="#706d69">
+                                        <span></span>
+                                        <p>bronze</p>
+                                    </li>
+                                    <li data-color="#9e9fa3">
+                                        <span ></span>
+                                        <p>gray</p>
+                                    </li>
+                                    <li data-color="#cdc5b0">
+                                        <span></span>
+                                        <p>desert tan</p>
+                                    </li>
+                                    <li data-color="#231f20">
+                                        <span></span>
+                                        <p>black</p>
+                                    </li>
+                                    <li data-color="#3d4045">
+                                        <span></span>
+                                        <p>Graphite</p>
+                                    </li>
+                                    <!-- <li data-color="#3c231c">
+                                        <span></span>
+                                        <p>Graphite</p>
+                                    </li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collection_section border mb-4" id="grid_submit">
+                        <h5 class="main_heading">Windows</h5>
+                        <div class="px-3 py-2">
+                            <p class="text-primary">IMPORTANT: Window placements should be entered inside looking out</p>
+
+                            <!-- grid layout will append here  -->
+                            <div class="d-flex align-items-center justify-content-center grid_main_row">
+                                <div class="for_all_grid grid_buttons">
+                                    <ul>
+
+                                    </ul>
+                                </div>
+                                <div class="select_boxes append_grid">
+                                    <ul class="">
+    
+                                    </ul>
+                                </div>
+                                <div class="for_grid_height grid_buttons">
+                                    <ul>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="window_quantity mt-3 text-capitalize d-flex flex-wrap align-items-center">
+                                <h5 class="pe-3">selected window quantity is :</h5> <h4 class="text-primary">0</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class=" border mb-4">
+                        <h5 class="main_heading">window glass</h5>
+                        <div class="px-3 py-2">
+                            <div class="window_glass_tabbing button_type_li mb-5">
+                                <ul class="p-0">
+                                    <li data-tab="tempered_glass">Tempered</li>
+                                    <li data-tab="insulated_glass">Insulated</li>
+                                </ul>
+                            </div>
+
+                            <div id="window_glass" class="window_glass small_list">
+                                <ul id="tempered_glass">
+                                    <li data-glass="plain_glass">
+                                        <div><img src="images/glass/plain_glass.jpg" alt=""></div>
+                                        <p>Plain SP</p>
+                                    </li>
+                                    <li data-glass="obscure_glass">
+                                        <div><img src="images/glass/obscure_glass.jpg" alt=""></div>
+                                        <p>Obscure SP</p>
+                                    </li>
+                                    <li data-glass="tinted_glass">
+                                        <div><img src="images/glass/tinted_glass.jpg" alt=""></div>
+                                        <p>Tinted SP</p>
+                                    </li>
+                                    <li data-glass="glue_chip_glass">
+                                        <div><img src="images/glass/glue_chip_glass.jpg" alt=""></div>
+                                        <p>Gluechip SP</p>
+                                    </li>
+                                    <li data-glass="plain_polycarbonate">
+                                        <div><img src="images/glass/plain_polycarbonate.jpg" alt=""></div>
+                                        <p>Polycarbonet SP</p>
+                                    </li>
+                                    <li data-glass="frosted_glass">
+                                        <div><img src="images/glass/frosted_glass.jpg" alt=""></div>
+                                        <p>Frosted SP</p>
+                                    </li>
+                                </ul>
+
+                                <ul id="insulated_glass">
+                                    <li data-glass="plain_glass_insulated">
+                                        <div><img src="images/glass/plain_glass_insulated.jpg" alt=""></div>
+                                        <p>Plain SP</p>
+                                    </li>
+                                    <li data-glass="obscure_glass_insulated">
+                                        <div><img src="images/glass/obscure_glass_insulated.jpg" alt=""></div>
+                                        <p>Obscure SP</p>
+                                    </li>
+                                    <li data-glass="tinted_glass_insulated">
+                                        <div><img src="images/glass/tinted_glass_insulated.jpg" alt=""></div>
+                                        <p>Tinted SP</p>
+                                    </li>
+                                    <li data-glass="glue_chip_glass_insulated">
+                                        <div><img src="images/glass/glue_chip_glass_insulated.jpg" alt=""></div>
+                                        <p>Gluechip SP</p>
+                                    </li>
+                                    <li data-glass="frosted_glass_insulated">
+                                        <div><img src="images/glass/frosted_glass_insulated.jpg" alt=""></div>
+                                        <p>Frosted SP</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" border mb-4">
+                        <h5 class="main_heading">window insert</h5>
+                        <div class="px-3 py-2">
+                            <div id="window_type" class="window_type small_list">
+                                <ul class="short_panel_window" id="short_panel">
+                                    <li data-window="plain">
+                                        <div><img src="images/glass/plain_no_insert.jpg" alt=""></div>
+                                        <p>Plain</p>
+                                    </li>
+                                    <li data-window="pairire">
+                                        <div><img src="images/glass/prairie_insert.jpg" alt=""></div>
+                                        <p>Prairie</p>
+                                    </li>
+                                    <li data-window="stockton">
+                                        <div><img src="images/glass/stockton_insert.jpg" alt=""></div>
+                                        <p>Stockton</p>
+                                    </li>
+                                    <li data-window="waterton">
+                                        <div><img src="images/glass/waterton_insert.jpg" alt=""></div>
+                                        <p>Waterton</p>
+                                    </li>
+                                    <li data-window="casecade">
+                                        <div><img src="images/glass/cascade_insert.jpg" alt=""></div>
+                                        <p>Cascade</p>
+                                    </li>
+                                    <li data-window="cathedral">
+                                        <div><img src="images/glass/cathedral_insert.jpg" alt=""></div>
+                                        <p>Cathedral</p>
+                                    </li>
+                                </ul>
+
+                                <ul class="long_panel_window" id="long_panel">
+                                    <li data-window="plain">
+                                        <div><img src="images/glass/plain_no_insert.jpg" alt=""></div>
+                                        <p>Plain</p>
+                                    </li>
+                                    <li data-window="madison">
+                                        <div><img src="images/glass/madison_insert_long.jpg" alt=""></div>
+                                        <p>madison</p>
+                                    </li>
+                                    <li data-window="prairie">
+                                        <div><img src="images/glass/prairie_insert_long.jpg" alt=""></div>
+                                        <p>prairie</p>
+                                    </li>
+                                    <li data-window="sherwood">
+                                        <div><img src="images/glass/sherwood_insert_long.jpg" alt=""></div>
+                                        <p>sherwood</p>
+                                    </li>
+                                    <li data-window="stockton">
+                                        <div><img src="images/glass/stockton_insert_long.jpg" alt=""></div>
+                                        <p>stockton</p>
+                                    </li>
+                                    <li data-window="waterton">
+                                        <div><img src="images/glass/waterton_insert_long.jpg" alt=""></div>
+                                        <p>waterton</p>
+                                    </li>
+                                    <!-- <li data-window="Sunburst">
+                                        <div><img src="images/glass/2piece_Sunburst_LP.jpg" alt=""></div>
+                                        <p>Sunburst</p>
+                                    </li>
+                                    <li data-window="arched_stockton">
+                                        <div><img src="images/glass/2piece_arched_stockton_LP.jpg" alt=""></div>
+                                        <p>arched stockton</p>
+                                    </li>
+                                    <li data-window="arched_madison">
+                                        <div><img src="images/glass/arched_madison_insert_long.jpg" alt=""></div>
+                                        <p>arched madison</p>
+                                    </li>
+                                    <li data-window="cascade">
+                                        <div><img src="images/glass/cascade_insert_long.jpg" alt=""></div>
+                                        <p>cascade</p>
+                                    </li> -->
+                                </ul>
+
+                                <ul class="long_panel_window" id="stamped_carrige_short_panel">
+                                    <li data-window="plain">
+                                        <div><img src="images/glass/plain_no_insert.jpg" alt=""></div>
+                                        <p>Plain</p>
+                                    </li>
+                                    <li data-window="casecade">
+                                        <div><img src="images/glass/cascade_insert.jpg" alt=""></div>
+                                        <p>casecade</p>
+                                    </li>
+                                    <li data-window="stockton">
+                                        <div><img src="images/glass/stockton_insert.jpg" alt=""></div>
+                                        <p>stockton</p>
+                                    </li>
+                                   
+                                    <li data-window="madison">
+                                        <div><img src="images/glass/stockton_insert_long.jpg" alt=""></div>
+                                        <p>Madison</p>
+                                    </li>
+                                </ul>
+
+                                <ul class="long_panel_window" id="stamped_carrige_long_panel">
+                                    <li data-window="plain">
+                                        <div><img src="images/glass/plain_no_insert.jpg" alt=""></div>
+                                        <p>Plain</p>
+                                    </li>
+                                    <li data-window="casecade">
+                                        <div><img src="images/glass/cascade_insert.jpg" alt=""></div>
+                                        <p>casecade</p>
+                                    </li>
+                                    <li data-window="stockton">
+                                        <div><img src="images/glass/stockton_insert.jpg" alt=""></div>
+                                        <p>stockton</p>
+                                    </li>
+                                   
+                                    <li data-window="madison">
+                                        <div><img src="images/glass/stockton_insert_long.jpg" alt=""></div>
+                                        <p>Madison</p>
+                                    </li>
+                                </ul>
+
+                                <ul class="short_panel_window" id="no_or_short_window">
+                                    <li data-window="plain">
+                                        <div><img src="images/glass/plain_no_insert.jpg" alt=""></div>
+                                        <p>Plain</p>
+                                    </li>
+                                    <li data-window="pairire">
+                                        <div><img src="images/glass/prairie_insert.jpg" alt=""></div>
+                                        <p>Prairie</p>
+                                    </li>
+                                    <li data-window="stockton">
+                                        <div><img src="images/glass/stockton_insert.jpg" alt=""></div>
+                                        <p>Stockton</p>
+                                    </li>
+                                    <li data-window="waterton">
+                                        <div><img src="images/glass/waterton_insert.jpg" alt=""></div>
+                                        <p>Waterton</p>
+                                    </li>
+                                    <li data-window="casecade">
+                                        <div><img src="images/glass/cascade_insert.jpg" alt=""></div>
+                                        <p>Cascade</p>
+                                    </li>
+                                    <li data-window="cathedral">
+                                        <div><img src="images/glass/cathedral_insert.jpg" alt=""></div>
+                                        <p>Cathedral</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="grid_submit_btn">
+                                <button class="btn btn-success px-5 mt-4 text-uppercase fw-medium ">select</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" border mb-4">
+                        <h5 class="main_heading">Spring</h5>
+                        <div class="px-3 py-2">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <p>spring</p>
+                                    
+                                    <div class="button_type_li click_function for_spring_quatation">
+                                        <ul class="ps-0 mb-1">
+                                            <li>Torsion</li>
+                                            <li>Extension</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <p>Cyclage</p>
+                                    <select name="" id="" class="border py-2 px-3 w-100 Cyclage">
+                                        <option value="">Minimun 10000 cycle</option>
+                                        <option value="">Minimun 15000 cycle</option>
+                                        <option value="">Minimun 20000 cycle</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" border mb-4">
+                        <h5 class="main_heading">Seals</h5>
+                        <div class="px-3 py-2">
+                            <div class="button_type_li  click_function seals_quataion">
+                                <ul class="ps-0 mb-1">
+                                    <li>Top seal</li>
+                                    <li>Nail on seal</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" border mb-4">
+                        <h5 class="main_heading">door lock</h5>
+                        <div class="px-3 py-2">
+                            <div id="door_lock" class="button_type_li lock_bar">
+                                <ul>
+                                    <li>
+                                        <div>
+                                            <div><img src="./images/no-lock.jpeg" alt=""></div>
+                                            <p>Omit Lock</p>
+                                        </div>
+                                    </li>
+                                    <!-- <li>
+                                        <div>
+                                            <div><img src="./images/Inside-Slide-Lock.png" alt=""></div>
+                                            <p>Inside Side Lock</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <div><img src="./images/2_Inside_Slide_Lock.png" alt=""></div>
+                                            <p>2 Inside Side Lock</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <div><img src="./images/Outside-Center-Lock.png" alt=""></div>
+                                            <p>Outside Center Lock</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <div><img src="./images/Double-Lock-Bar.png" alt=""></div>
+                                            <p>Double Lock Bar</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                       <div>
+                                            <div><img src="./images/Double-side-lock-bars with-Holes-Punched.png" alt=""></div>
+                                            <p>Double Lock Bar With Holes Punch</p>
+                                       </div>
+                                    </li> -->
+                                    <!-- <li class="bg-transparent h-auto">key alike</li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" border mb-4">
+                        <h5 class="main_heading">door operator</h5>
+                        <div class="px-3 py-2">
+                            <div class="door_operator">
+                                <div class="row g-2">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 ">
+                                        <div class="door_operator_col_inr border_2px">
+                                            <div class="door_operator_logo"> <img src="./images/life_master_logo.jpeg" alt=""></div>
+                                            <div class="door_operator_machine"><img src="./images/lifemaster-door-operator2.jpeg" alt=""></div>
+                                            <div class="door_operator_select_box">
+                                                <select name="" id="life_mater_door_operator">
+                                                    <option value="life master 1">life master 1</option>
+                                                    <option value="life master 2">life master 2</option><option value="life master 3">life master 3</option><option value="life master 4">life master 4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 ">
+                                        <div class="door_operator_col_inr border_2px">
+                                            <div class="door_operator_logo"> <img src="./images/genie_logo.jpeg" alt=""></div>
+                                            <div class="door_operator_machine"><img src="./images/geniedoor-operator2.jpeg" alt=""></div>
+                                            <div class="door_operator_select_box">
+                                                <select name="" id="genie_door_operator">
+                                                    <option value="genie 1">genie 1</option>
+                                                    <option value="genie 2">genie 2</option><option value="genie 3">genie 3</option><option value="genie 4">genie 4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="door_operator_col_inr border_2px" >
+                                            <div class="door_operator_logo"> <img src="./images/marantech_logo.jpeg" alt=""></div>
+                                            <div class="door_operator_machine"><img src="./images/marantechdoor-operator2.jpeg" alt=""></div>
+                                            <div class="door_operator_select_box">
+                                                <select name="" id="marantech_door_operator">
+                                                    <option value="Marantech 1">Marantech 1</option>
+                                                    <option value="Marantech 2">Marantech 2</option><option value="Marantech 3">Marantech 3</option><option value="Marantech 4">Marantech 4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" border mb-4">
+                        <h5 class="main_heading">Strut</h5>
+                        <div class="px-3 py-2">
+                            <div class="d-flex flex-wrap gap_10">
+                                <div class="button_type_li  click_function strut_type">
+                                    <p class="mb-3">Default Strut Type (Height/Ga/KSI): None</p>
+
+                                    <p>Extra Strut Type</p>
+                                    <div class="button_type_label">
+                                        <label for='2"/22/33'>
+                                            <input type="radio" name='strut' id='2"/22/33'>
+                                            <span>2"/22/33</span>
+                                        </label>
+                                        <label for='3"/20/33'>
+                                            <input type="radio" name='strut' id='3"/20/33'>
+                                            <span>3"/20/33</span>
+                                        </label>
+                                        <label for='2"/20/33'>
+                                            <input type="radio" name='strut' id='2"/20/33'>
+                                            <span>2"/20/33</span>
+                                        </label>
+                                        <label for='3"/17/50'>
+                                            <input type="radio" name='strut' id='3"/17/50'>
+                                            <span>3"/17/50</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class=" click_function ">
+                                    <p>Extra Strut Quantity</p>
+                                    <div>
+                                        <input type="number" class="w-100 py-2 px-3 rounder-theme">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" border mb-4">
+                        <h5 class="main_heading">Track</h5>
+                        <div class="px-3 py-2">
+                            <div class="row g-2 track_row">
+                                <div class="col-lg-6">
+                                    <p>Normal Headroom</p>
+
+                                    <div class="button_type_li  track_sibilings">
+                                        <ul class="ps-0 mb-1">
+                                            <li>10 IN</li>
+                                            <li>12 IN</li>
+                                            <li>15 IN</li>
+                                            <li>20 IN</li>
+                                            <li>32 IN</li>
+                                            <li>VERTICAL FIT</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <p>Additional Selections</p>
+                                    <div class="button_type_li  track_sibilings">
+                                        <ul class="ps-0 mb-1">
+                                            <li>Riveted Tract</li>
+                                            <li>Bolted Tract</li>
+                                            <li>3 in Tract</li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-2 track_row">
+                                <div class="col-lg-4">
+                                    <p>Low Headroom</p>
+
+                                    <div class="button_type_li ">
+                                        <ul class="ps-0 mb-1">
+                                            <li>12 LHR</li>
+                                            <li>15 LHR</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <p>Additional Selections</p>
+                                    <div class="button_type_li ">
+                                        <ul class="ps-0 mb-1">
+                                            <li>Front Mount</li>
+                                            <li>rear Mount</li>
+                                            <li>inside hookup</li>
+                                            <li>Foutside hookup</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-lg-12">
+                                    <div class="row g-2">
+                                        <div class="col-lg-4">
+                                            <p>High Lift Amount</p>
+                                            <select name="" id="" class="border py-2 px-3 w-100">
+                                                <option value="">0</option>
+                                                <option value="">5</option>
+                                                <option value="">10</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>Extend vertical</p>
+                                            <select name="" id="" class="border py-2 px-3 w-100">
+                                                <option value="">Select Extend vertical0</option>
+                                                <option value="">Select Extend vertical05</option>
+                                                <option value="">Select Extend vertical010</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>Inline Track (roof pitch )</p>
+                                            <select name="" id="" class="border py-2 px-3 w-100">
+                                                <option value="">Select Inline Track</option>
+                                                <option value="">Select Inline Track5</option>
+                                                <option value="">Select Inline Track10</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>AIn one peice Vertical</p>
+                                            <div class="button_type_li  click_function">
+                                                <ul class="ps-0 mb-1">
+                                                    <li>Yes</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>Drum</p>
+                                            <div class="button_type_li  click_function">
+                                                <ul class="ps-0 mb-1">
+                                                    <li>400 - 54</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p>Jamb Mount</p>
+                                            <div class="button_type_li  click_function jamb_mount">
+                                                <ul class="ps-0 mb-1">
+                                                    <li>cling angle</li>
+                                                    <li>full angle</li>
+                                                    <li>reverse clip angle</li>
+                                                    <li>reverse full angle</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <p>Track Appearance Upgrade</p>
+                                            <select name="" id="" class="border py-2 px-3 w-100 ">
+                                                <option value="">choose</option>
+                                                <option value="">choose</option>
+                                                <option value="">choose</option>
+                                                <option value="">choose</option>
+
+                                            </select>
+                                            </div>
+
+                                            <p>Jamb Material</p>
+                                            <div class="button_type_li  click_function jamb_material">
+                                                <ul class="ps-0 mb-1">
+                                                    <li>Wood</li>
+                                                    <li>Steel</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js" integrity="sha512-fHY2UiQlipUq0dEabSM4s+phmn+bcxSYzXP4vAXItBvBHU7zAM/mkhCZjtBEIJexhOMzZbgFlPLuErlJF2b+0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    
+    <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+    <script src="js/api.js" type="text/javascript"></script>
+    <script src="js/custom.js" type="text/javascript"></script>
+    <script src="js/API-static-data.js" type="text/javascript"></script>
+    <script src="js/download-image.js" type="text/javascript"></script>
+</body>
+</html>

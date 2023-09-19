@@ -1,15 +1,21 @@
 
 *{box-sizing: border-box; padding: 0px; margin: 0px;}
 img{max-width: 100%; max-height: 100%;}
+
+#loader{position: absolute; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); top: 0; left: 0; display: none; z-index: 1000;}
+#loader_img{display: flex; width: 100%; height: 100%; justify-content: center; align-items: center;}
+#loader_img img{max-width: 50px;}
+
+
 main{max-width: 2100px;}
 input{height: 45px;}
 p{margin-bottom: 5px !important; font-size: 16px;}
 
-header{padding: 10px 50px; margin-bottom: 10px;}
+header{padding: 10px 50px; margin-bottom: 20px;}
 .header_logo{max-width: 130px;}
 
 .left_section_col{width: 500px; display: inline-block; vertical-align: top; position: sticky; top:20px; padding: 10px 1px 10px 10px;}
-.scroll-css{height: calc(100vh - 180px); overflow: auto;}
+.scroll-css{height: calc(100vh - 150px); overflow: auto;}
 .right_section_col{width: calc(100% - 525px); display: inline-block; vertical-align: top; padding: 10px 1px 10px 20px;}
 .cursor-pointer{cursor: pointer;}
 
@@ -27,24 +33,26 @@ header{padding: 10px 50px; margin-bottom: 10px;}
 .buttons button:hover{border-color: #aaa; background-color: #e9e9e9;}
 .buttons button.selected{border-color: #0d6efd; background-color: #e9e9e9;}
 
-.tabbing button{color: rgb(13,110,253); background-color: #fff;  border: none; border-radius: 2px; position: relative; border:solid 2px transparent;}
-.tabbing button.selected, .tabbing button:hover{color: #212529; border-color: #0d6efd; border-bottom: none; }
-.tabbing button::after {content: ''; position: absolute; left: 0px; right: 0px; bottom: -3px; width: calc(100% - 2px); height: 5px; }
-.tabbing button:hover::after, .tabbing button.selected::after{background-color: #fff;}
+.collection_btn button{color: rgb(13,110,253); background-color: #fff;  border: none; border-radius: 2px; position: relative; border:solid 2px transparent; padding: 10px 20px; font-size: 16px;}
+.collection_btn button.selected, .collection_btn button:hover{color: #212529; border-color: #0d6efd; border-bottom: none; }
+.collection_btn button::after {content: ''; position: absolute; left: 0px; right: 0px; bottom: -3px; width: calc(100% - 2px); height: 5px; }
+.collection_btn button:hover::after, .collection_btn button.selected::after{background-color: #fff;}
 .gap_10{gap: 10px;}
 
-.family .raised_type{border: 2px solid #d1d1d1; text-align: center;}
-.family .raised_type.selected{border-color: #0d6efd;}
+.door_family{border: 2px solid #d1d1d1; text-align: center; background-color: rgb(248, 249, 250); border-radius: 6px;}
+.label_big_btn{display: block; position: relative;}
+.label_big_btn > div{border: 2px solid #d1d1d1; text-align: center; background-color: rgb(248, 249, 250); border-radius: 6px;}
+.label_big_btn input{width: 100%; height: 100%; position: absolute; opacity: 0.001;top: 0; left: 0; right: 0; bottom: 0;}
+.label_big_btn input:checked + div{border-color: #0d6efd;} 
 
-#panel_type .panel_type{border: 2px solid #d1d1d1; text-align: center;}
-#panel_type .panel_type.selected{border-color: #0d6efd;}
+#panel_type .door_catogary{border: 2px solid #d1d1d1; text-align: center; padding: 10px 15px;}
+/* #panel_type .door_catogary.selected{border-color: #0d6efd;} */
 
 .model_number_col{border: 2px solid #d1d1d1; width: 150px; aspect-ratio: 1;}
 .model_number_col_inr{display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;}
 .model_number_col.selected{border-color: #0d6efd;}
 .model_number_quality_bar li{list-style: none;}
 #downloadButton{display: none;}
-.model_num_row {display: none;}
 .model_number_img_col_inr{background-color: rgb(234, 250, 255); aspect-ratio: 1;}
 #model_number_img{display: none; width: fit-content;}
 
@@ -138,7 +146,7 @@ header{padding: 10px 50px; margin-bottom: 10px;}
 .image_grid_parent .stamped_carrige_short_panel-8x7{ grid-template-columns:auto auto; gap: 25px;  padding:15px 20px;}
 
 
-.time_less_data{display: none; text-align: center;}
+.time_less_data{ text-align: center;}
 /* #timeless.time_less_data{display: block;} */
 .small_list ul{padding: 0px !important; margin: 0px !important;}
 .small_list ul li{list-style: none; padding: 8px; border:2px solid #d1d1d1; text-align: center; width: calc(16.66% - 20px); cursor: pointer; display: inline-block; margin:0 15px 18px 0; vertical-align: middle;}
@@ -152,10 +160,12 @@ header{padding: 10px 50px; margin-bottom: 10px;}
 
 
 .button_type_li ul{list-style-type: none;}
-.button_type_li ul li{background-color: rgb(248, 249, 250); border: 2px solid #ddd; transition: 0.3s; padding:10px 15px; cursor: pointer; display: inline-block; vertical-align: middle; margin-right:5px; text-transform: capitalize; margin-bottom: 10px;}
-.button_type_li ul li:hover{border-color: #0d6efd; background-color: #e9e9e9;}
-.button_type_li ul li.selected{border-color: #0d6efd; background-color: #e9e9e9;}
+.button_type_li ul li, .button_type_label label span{background-color: rgb(248, 249, 250); border: 2px solid #ddd; transition: 0.3s; padding:10px; cursor: pointer; display: inline-block; vertical-align: middle; margin-right:10px; text-transform: capitalize; margin-bottom: 10px;}
+.button_type_li ul li:hover, .button_type_label label span:hover{border-color: #0d6efd; background-color: #e9e9e9;}
+.button_type_li ul li.selected , .button_type_label label input:checked + span{border-color: #0d6efd; background-color: #e9e9e9;}
 .window_type ul{display: none;}
+.button_type_label label{position: relative;}
+.button_type_label label input{position: absolute; width: 100%; height: 100%;opacity: 0.001;top: 0; }
 
 
 .white{background-color: #ebeeee;}
@@ -186,7 +196,6 @@ img{max-width: 100%;}
 .row_gap_20{row-gap: 20px;}
 
 
-.long_short_type{display: none;}
 .selected{border: 2px solid #0d6efd; border-color: #0d6efd !important;}
 .grey_border{border: 2px solid #d1d1d1;}
 #grid_submit{display: none;}
@@ -195,9 +204,8 @@ img{max-width: 100%;}
 
 #myCanvas{position: absolute; left: 0px; top: 0; width: 100%; height: 100%;}
 
-.door_operator{list-style-type: none;}
-.door_operator select{width: 80%; height: 40px; padding: 0px 15px;}
-.door_operator img{max-width: 80px; margin: auto;}
+.door_operator{list-style-type: none; text-align: center;}
+.door_operator select{width: 100%; height: 40px; padding: 0px 15px;}
 .main_heading {color: #fff; padding: 0.4rem 1rem; background-color: #0d6efd; text-transform: capitalize;}
 
 dl, ol, ul{margin-bottom: 0px;}
@@ -208,3 +216,12 @@ ol, ul{padding-left: 0px;}
 .grid_buttons ul li{height: 65px; display: flex; flex-direction: column; align-items: center; justify-content: center; list-style-type: none; }
 .grid_buttons ul li span{height: 50px; border: 2px solid #d1d1d1; border-radius: 2px; display: flex; align-items: center; width: 100%; justify-content: center; transition: 0.3s; cursor: pointer;}
 .for_all_grid ul li span:hover{background-color: #f0f0f0;}
+.border_2px{border: 2px solid #d1d1d1;}
+.door_operator_col_inr{height: 100%; display: flex; gap: 10%; padding: 10px; align-items: center;}
+.door_operator_col_inr.selected{background-color: #f0f0f0;}
+.door_operator_logo{width: 30%;}
+.door_operator_machine{width: 25%;}
+.price_details sup{font-size: 1.2rem;}
+#info_for_quatation >* {text-transform: capitalize;}
+.door_catogary_btn{cursor: pointer; padding:10px 15px;}
+.selected{border-color: #0d6efd;}
