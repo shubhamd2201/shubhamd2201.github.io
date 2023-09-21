@@ -1,5 +1,5 @@
 
-var collection_and_family_btn = $('#collection_and_family_btn button');
+var collection_and_family_btn = $('#door_collection_btn button');
 var size_button = $('#size_button button');
 var collection_and_family_type_btn = $('.family .raised_type');
 var panel_type_btn = $('.long_short_type .panel_type');
@@ -21,86 +21,120 @@ let image_div = document.querySelector('.image_div_inr');
 
 var path_of_img = null;
 
+let width_arr = [8,9,9,10,16,16,18];
+let height_arr = [7,7,8,8,7,8,7];
+let selected_width_ft = null;
+let selected_height_ft = null;
+let selected_width_in = 0;
+let selected_height_in = 0;
 
+$('.custom_size input').on('input', function(){
+    if(isNaN($(this).val())){
+        let this_val = $(this).val().split('');
+        let this_final_val = this_val.pop();
+        $(this).val(this_val.join());
+    }
+    else{
+    ($(this).attr('id') == "custom_width_ft")? selected_width_ft = $(this).val(): '';
+    ($(this).attr('id') == "custom_width_inch")? selected_width_in = $(this).val(): '';
+    ($(this).attr('id') == "custom_height_ft")? selected_height_ft = $(this).val(): '';
+    ($(this).attr('id') == "custom_height_inch")? selected_height_in = $(this).val(): '';
+    }
+});
 size_button.click(function(){
     size_button.removeClass('selected');
     $(this).addClass('selected');
-     door_size = $(this).attr('data-tab');
-    //  $('#width_for_quatation_ft').text(null); 
-    // $('#height_for_quatation').text(null);
-    $('#width_for_quatation_ft').text($(this).attr('width_from_btn')+ "ft 0inch");
-    $('#height_for_quatation').text($(this).attr('height_from_btn') + "ft 0inch"); 
-
-
-});
-$('#width_ft').on('input', function(){
-    width_size_button = $(this).val();
-});
-
-collection_and_family_btn.click(function(){
-    var this_tab = $(this).attr('data-tab');
-    $('.time_less_data').hide();
-    $('#'+this_tab+".time_less_data").show();
-
-    collection_and_family_btn.removeClass('selected');
-    $(this).addClass('selected');
-    collection_and_family_value = $(this).attr('data-tab'); 
     
-    $('.model_num_row').hide();
-    $('.long_short_type').hide();
+    var this_index = $(this).attr('tab-index');
+    selected_width_ft = width_arr[this_index];
+    selected_height_ft = height_arr[this_index];
 
-    // $('#collection_for_quatation').text(null);
-    $('#collection_for_quatation').text($(this).text() + " collection");
+    $('#width_for_quatation_ft').text(selected_width_ft+"'ft");
+    $('#height_for_quatation').text(selected_height_ft+"'ft");
 
+    $('#custom_width_ft').val(selected_width_ft);
+    $('#custom_width_inch').val(selected_width_in);
+    $('#custom_height_ft').val(selected_height_ft);
+    $('#custom_height_inch').val(selected_height_in);
+
+});
+let doorSize = {};
+function forDoorSize(){
+    if(selected_width_ft != null && selected_width_in != null && selected_height_ft != null && selected_height_in != null){
+        door_size.doorWidth = selected_width_ft.selected_width_in;
+        door_size.doorHeight = selected_height_ft.selected_height_in;
+        console.log(door_size);
+    }
+}
+
+
+// page accordian 
+
+$('.according_heading').click(function(){
+    $(this).siblings('.accordian_data').slideToggle(500);
+    $(this).toggleClass('closed');
+})
+// collection_and_family_btn.click(function(){
+//     var this_tab = $(this).attr('data-tab');
+//     $('.time_less_data').hide();
+//     $('#'+this_tab+".time_less_data").show();
+
+//     collection_and_family_btn.removeClass('selected');
+//     $(this).addClass('selected');
+//     collection_and_family_value = $(this).attr('data-tab'); 
+    
+//     $('.model_num_row').hide();
+//     $('.long_short_type').hide();
+
+//     // $('#collection_for_quatation').text(null);
+//     $('#collection_for_quatation').text($(this).text() + " collection"); 
+// });
+
+
+// $('.raised_type').click(function(){
+//     $('.raised_type').removeClass('selected');
+//     $('.model_num_row').hide();
+//     $('.long_short_type').hide();
+//     $(this).addClass('selected');
+//     collection_and_family_type = $(this).attr('data-tab');
+//     $('#'+collection_and_family_type).show();
+
+//     // $('#family_for_quatation').text(null);
+//     $('#family_for_quatation').text(" ," +$(this).text() + " family");
+
+// });
+
+
+
+// panel_type_btn.click(function(){
+//     panel_type_btn.removeClass('selected');
+//     $(this).addClass('selected');
+//     panel_type_value = $(this).attr('data-tab'); 
+
+//     $(".window_type ul").hide();
+//     $('.model_num_row').hide();
+//     $('.window_type ul#'+panel_type_value).show();
+
+//     $('.model_num_row#'+$(this).attr('model-tab')).show();
+
+//     window_panel_type = $(this).attr('window');
+
+//     // $('#panel_type_for_quatation').text(null);
+//     $('#panel_type_for_quatation').text(" ," +$(this).text());
+
+
+// });
+
+// model_number.click(function(){
+//     model_number.removeClass('selected');
+//     $(this).addClass('selected');
+//     model_number_value = $(this).attr('data-tab'); 
+//     $('#model_number_img img').attr('src',"./images/"+model_number_value+'.png');
+//     $('#model_number_img').show();
 
     
-});
 
-
-$('.raised_type').click(function(){
-    $('.raised_type').removeClass('selected');
-    $('.model_num_row').hide();
-    $('.long_short_type').hide();
-    $(this).addClass('selected');
-    collection_and_family_type = $(this).attr('data-tab');
-    $('#'+collection_and_family_type).show();
-
-    // $('#family_for_quatation').text(null);
-    $('#family_for_quatation').text(" ," +$(this).text() + " family");
-
-});
-
-
-
-panel_type_btn.click(function(){
-    panel_type_btn.removeClass('selected');
-    $(this).addClass('selected');
-    panel_type_value = $(this).attr('data-tab'); 
-
-    $(".window_type ul").hide();
-    $('.model_num_row').hide();
-    $('.window_type ul#'+panel_type_value).show();
-
-    $('.model_num_row#'+$(this).attr('model-tab')).show();
-
-    window_panel_type = $(this).attr('window');
-
-    // $('#panel_type_for_quatation').text(null);
-    $('#panel_type_for_quatation').text(" ," +$(this).text());
-
-
-});
-
-model_number.click(function(){
-    model_number.removeClass('selected');
-    $(this).addClass('selected');
-    model_number_value = $(this).attr('data-tab'); 
-    $('#model_number_img img').attr('src',"./images/"+model_number_value+'.png');
-    $('#model_number_img').show();
-
-    $('#model_number_for_quatation').text(null);
-    $('#model_number_for_quatation').text(" ," + $(this).find('.model_num').text());
-});
+// });
 
 $('#select_color ul li').click(function(){
     $('#select_color ul li').removeClass('selected');

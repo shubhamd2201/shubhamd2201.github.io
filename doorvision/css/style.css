@@ -5,11 +5,20 @@ img{max-width: 100%; max-height: 100%;}
 #loader{position: absolute; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); top: 0; left: 0; display: none; z-index: 1000;}
 #loader_img{display: flex; width: 100%; height: 100%; justify-content: center; align-items: center;}
 #loader_img img{max-width: 50px;}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 main{max-width: 2100px;}
-input{height: 45px;}
+input:not(input[type="radio"], input[type="radio"]){height: 45px; border: 1px solid #ccc; border-radius: 2px; width: 100%; padding: 0px 20px;}
 p{margin-bottom: 5px !important; font-size: 16px;}
+input:focus{outline: none; box-shadow: none; border-color: #0d6efd;}
 
 header{padding: 10px 50px; margin-bottom: 20px;}
 .header_logo{max-width: 130px;}
@@ -22,7 +31,7 @@ header{padding: 10px 50px; margin-bottom: 20px;}
 
 .image_div{width: 100%;}
 .your_door_design{background-color: rgb(234, 250, 255);  border: 1px solid rgb(18, 183, 185); max-width: 370px; text-align: center;}
-
+.select_size_btn button{padding: 10px 20px; font-size: 18px;}
 .scroll-css::-webkit-scrollbar { width: 0.3em;}
 .scroll-css::-webkit-scrollbar-track {background-color: #eee;}
 .scroll-css::-webkit-scrollbar-thumb {background-color: #0d6efd; border-radius: 30px;}
@@ -207,6 +216,10 @@ img{max-width: 100%;}
 .door_operator{list-style-type: none; text-align: center;}
 .door_operator select{width: 100%; height: 40px; padding: 0px 15px;}
 .main_heading {color: #fff; padding: 0.4rem 1rem; background-color: #0d6efd; text-transform: capitalize;}
+.according_heading{cursor: pointer; position: relative;}
+.according_heading::after{content: ""; position: absolute; top: 50%; transform: translateY(-50%); right: 20px; width: 0px; aspect-ratio: 1;border-style: solid;
+border-width: 10px 6.5px 0 6.5px;border-color: #fff transparent transparent transparent; transition: 0.4s;}
+.according_heading.closed::after{transform: translateY(-50%) rotate(-180deg);}
 
 dl, ol, ul{margin-bottom: 0px;}
 ol, ul{padding-left: 0px;}
@@ -225,3 +238,6 @@ ol, ul{padding-left: 0px;}
 #info_for_quatation >* {text-transform: capitalize;}
 .door_catogary_btn{cursor: pointer; padding:10px 15px;}
 .selected{border-color: #0d6efd;}
+
+.custom_size{padding:15px 0px;}
+.custom_size input[type="text"]{width: calc(100% - 50px); margin-right: 10px; display: inline-block;}

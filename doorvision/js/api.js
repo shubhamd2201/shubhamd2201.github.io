@@ -2,9 +2,11 @@
     var page_loader = $('#loader');
     let token = "";
 
+ 
+
+
     var doorTypeId = null;
     var doorCompanyId = null;
-
 
         var settings = {
             "url": path_of_site+"Account/Authenticate",
@@ -38,6 +40,8 @@
                            data.payload.forEach(e=>{
                             document.querySelector('#type_of_doors').insertAdjacentHTML('beforeend', `<option doorTypeId = "${e.doorTypeId}" value = "${e.doorTypeId}" doorType="${e.doorTypeName}"> ${e.doorTypeName} </option>`);
                            });
+
+                            $('#type_of_door_quatation').text(data.payload[0].doorTypeName);
                             page_loader.hide();
     
                       },
@@ -46,65 +50,174 @@
                           page_loader.hide();
                       }
                   });
+
+
+                  $.ajax({
+                    url: path_of_site+"DoorCompany/DoorCompany",
+                    type: 'GET',
+                    headers: {
+                        'Authorization':'Bearer ' + token,
+                    },
+                    success: function(data) {
+                
+                         JSON.stringify(data);
+                         document.querySelector('#door_company').innerHTML = null;
+                         
+                         data.payload.forEach(e=>{
+                          document.querySelector('#door_company').insertAdjacentHTML('beforeend', `<option doorCompanyId = "${e.doorCompanyId}" doorComapanyName="${e.doorCompanyName}" value = "${e.doorCompanyId}" > ${e.doorCompanyName} </option>`);
+                         });
+                         
+                         $('#door_company_quatation').text(data.payload[0].doorCompanyName);
+        
+                          page_loader.hide();
+                    },
+                    error: function(xhr, status, error) {
+                        document.querySelector('.door_company .select_box').innerHTML = null;
+                        document.querySelector('.door_company .select_box').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+        
+                        page_loader.hide();
+        
+        
+                    }
+                });
+        
+
+                  $.ajax({
+                      url: `${path_of_site}DoorCollection/DoorCollectionByTypeCompanyId?DoorTypeId=1&DoorCompanyId=11`,
+                      type: 'GET',
+                      headers: {
+                          'Authorization':'Bearer ' + token,
+                      },
+                      success: function(data) {
+                           JSON.stringify(data);
+                           document.querySelector('#door_collection_btn').innerHTML = null;
+                           
+                           data.payload.forEach(e=>{
+                            document.querySelector('#door_collection_btn').insertAdjacentHTML('beforeend', `<button doorCollectionId = "${e.doorCollectionId}" > ${e.doorCollectionName} </button>`);
+                           });
+      
+                            $('#collection_for_quatation').text(data.payload[0].doorCollectionName+' collection')
+                          
+                            $('#door_collection_btn button:first').addClass('selected')
+                            page_loader.hide();
+                      },
+                      error: function(xhr, status, error) {
+                          document.querySelector('#door_collection_btn').innerHTML = null;
+                          document.querySelector('#door_collection_btn').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+                          page_loader.hide();
+                      }
+                  });
+      
+        
               }
-          });
-    
-        //   this is for diffrent company name 
-     $('#type_of_doors').on('change', function(){
 
-            doorTypeId = $(this).val();
 
-            page_loader.show();
-            $.ajax({
-                url: path_of_site+"DoorCompany/DoorCompany",
+              $.ajax({
+                url: `${path_of_site}DoorSubCollection/GetDoorCollectionListById?DoorCollectionId=1`,
                 type: 'GET',
                 headers: {
                     'Authorization':'Bearer ' + token,
                 },
                 success: function(data) {
-            
+   
                      JSON.stringify(data);
-                     document.querySelector('#door_company').innerHTML = null;
-                     
-                     document.querySelector('#door_company').insertAdjacentHTML('beforeend', `<option  > Select Door Company </option>`);
+                     document.querySelector("#door_collection_family").innerHTML = null;
 
                      data.payload.forEach(e=>{
-                      document.querySelector('#door_company').insertAdjacentHTML('beforeend', `<option doorCompanyId = "${e.doorCompanyId}" doorComapanyName="${e.doorCompanyName}" value = "${e.doorCompanyId}" > ${e.doorCompanyName} </option>`);
+                       document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="col-lg-3 col-md-6 col-sm-12 label_big_btn">
+                       <div class="door_family " doorCollectionId="${e.doorCollectionId}"f>
+                           <div class="img d-table mx-auto mb-2">
+                               <img src="${path_of_site+e.filePath}" alt="${e.doorSubCollectionName}">
+                           </div>
+                           <p class="mb-0 ">${e.doorSubCollectionName}</p>
+                       </div>
+                   </div>`);
                      });
+
+                     $('#family_for_quatation').text(data.payload[0].doorSubCollectionName+' Family');
                      
-
-                      page_loader.hide();
-                forStaticData();
-
+                     append_door_sub_collection();
+                     DoorCategory_event();
+                   page_loader.hide();
                 },
                 error: function(xhr, status, error) {
-                    document.querySelector('.door_company .select_box').innerHTML = null;
-                    document.querySelector('.door_company .select_box').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+                   document.querySelector('#door_collection_family').innerHTML = null;
 
-                    page_loader.hide();
-    
-    
+                    document.querySelector('#door_collection_family').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+           
+                   page_loader.hide();
+   
                 }
+                
+
             });
+            
 
-            $('#type_of_door_quatation').text($('option:selected', this).attr('doorType'));
+          });
 
 
+
+
+
+
+
+
+    
+      //   this is for diffrent company name 
+     $('#type_of_doors').on('change', forDoorCompany);
+     function forDoorCompany(){
+        doorTypeId = $(this).val();
+        
+        page_loader.show();
+        $.ajax({
+            url: path_of_site+"DoorCompany/DoorCompany",
+            type: 'GET',
+            headers: {
+                'Authorization':'Bearer ' + token,
+            },
+            success: function(data) {
+        
+                 JSON.stringify(data);
+                 document.querySelector('#door_company').innerHTML = null;
+                 
+                 document.querySelector('#door_company').insertAdjacentHTML('beforeend', `<option  > Select Door Company </option>`);
+
+                 data.payload.forEach(e=>{
+                  document.querySelector('#door_company').insertAdjacentHTML('beforeend', `<option doorCompanyId = "${e.doorCompanyId}" doorComapanyName="${e.doorCompanyName}" value = "${e.doorCompanyId}" > ${e.doorCompanyName} </option>`);
+                 });
+                 
+
+                  page_loader.hide();
+                 forDoorLock();
+
+            },
+            error: function(xhr, status, error) {
+                document.querySelector('.door_company .select_box').innerHTML = null;
+                document.querySelector('.door_company .select_box').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+
+                page_loader.hide();
+
+
+            }
         });
 
-  
+        $('#type_of_door_quatation').text($('option:selected', this).attr('doorType'));
+
+
+    }
     
 
 
     
      // this is for DoorCollection append timeless
-           $('#door_company').on('change', function(){
+           $('#door_company').on('change',forDoorCollection) 
+    
+           function forDoorCollection(){
 
             doorCompanyId = $(this).val();
            
             page_loader.show();
             $.ajax({
-                // path_of_site+"DoorCollection/DoorCollectionByTypeCompanyId?DoorTypeId="+doorTypeId+"&DoorCompanyId="+doorCompanyId
                 url: `${path_of_site}DoorCollection/DoorCollectionByTypeCompanyId?DoorTypeId=1&DoorCompanyId=${doorCompanyId}`,
                 type: 'GET',
                 headers: {
@@ -112,10 +225,10 @@
                 },
                 success: function(data) {
                      JSON.stringify(data);
-                     document.querySelector('#collection_and_family_btn').innerHTML = null;
+                     document.querySelector('#door_collection_btn').innerHTML = null;
                      
                      data.payload.forEach(e=>{
-                      document.querySelector('#collection_and_family_btn').insertAdjacentHTML('beforeend', `<button doorCollectionId = "${e.doorCollectionId}" > ${e.doorCollectionName} </button>`);
+                      document.querySelector('#door_collection_btn').insertAdjacentHTML('beforeend', `<button doorCollectionId = "${e.doorCollectionId}" > ${e.doorCollectionName} </button>`);
                      });
 
                     
@@ -123,8 +236,8 @@
                       page_loader.hide();
                 },
                 error: function(xhr, status, error) {
-                    document.querySelector('#collection_and_family_btn').innerHTML = null;
-                    document.querySelector('#collection_and_family_btn').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+                    document.querySelector('#door_collection_btn').innerHTML = null;
+                    document.querySelector('#door_collection_btn').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
                     page_loader.hide();
                 }
             });
@@ -132,25 +245,13 @@
             $('#door_company_quatation').text(", "+$('option:selected', this).attr('doorComapanyName'));
             
 
-        } );
-    
-    
+        } ;
  
 
 
-
-
-
-
-
-
-
-
-    
-    
     // this is for DoorSubCollection append raised panel and click on timeless
     function append_door_sub_collection(){
-            $('#collection_and_family_btn button').click(function(){
+            $('#door_collection_btn button').click(function(){
                 page_loader.show();
         
                 $(this).siblings().removeClass('selected');
@@ -169,18 +270,16 @@
                       JSON.stringify(data);
                       document.querySelector("#door_collection_family").innerHTML = null;
                       data.payload.forEach(e=>{
-                        document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<label class="col-lg-3 col-md-6 col-sm-12 label_big_btn" or="for_family${e.doorCollectionId}">
-                        <input type="radio" name="for_family" id="for_family${e.doorCollectionId}">
-                        <div class="door_family " doorCollectionId="${e.doorCollectionId}"f>
-                        
-                            <div class="img d-table mx-auto mb-2">
+                        document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="col-lg-3 col-md-6 col-sm-12 ">
+                        <div class="door_family " doorCollectionId="${e.doorCollectionId}">
+                        <div class="img d-table mx-auto mb-2">
                                 <img src="${path_of_site+e.filePath}" alt="${e.doorSubCollectionName}">
                             </div>
                             <p class="mb-0 ">${e.doorSubCollectionName}</p>
                         </div>
-                    </label>`);
+                    </div>`);
                       });
-                    DoorCategory_event()
+                    DoorCategory_event();
                     page_loader.hide();
                  },
                  error: function(xhr, status, error) {
@@ -206,7 +305,7 @@
         $('#door_collection_family .door_family').click(function(){
             page_loader.show();
         
-            $(this).siblings().removeClass('selected');
+            $('#door_collection_family .door_family').removeClass('selected');
             $(this).addClass('selected');
             const DoorCategory = $(this).attr('doorcollectionid');
 
@@ -279,12 +378,6 @@ function to_append_model_number(){
                        <p class="mb-1 fs-6 model_num">${data.payload.doorModelName}</p>
                        <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
                        <p class="mb-1 fs-6"> R-17-19</p>
-                       <ul class="model_number_quality_bar d-flex ps-0 mb-0 gap_10 best">
-                           <li><i class="bi bi-star-fill text-primary"></i></li>
-                           <li><i class="bi bi-star-fill text-primary"></i></li>
-                           <li><i class="bi bi-star-fill text-primary"></i></li>
-                           <li><i class="bi bi-star-fill text-primary"></i></li>
-                       </ul>
                    </div>
                </div>`);
                 //  });
@@ -303,8 +396,74 @@ function to_append_model_number(){
 
 
 
-    })
+    });
 }
+
+// this is click on model number and call the image
+// function toGetAPI(){
+
+//     $("#model_number_row .model_number_col ").click(function(){
+//         page_loader.show();
+        
+//         $(this).siblings().removeClass('selected');
+//         $(this).addClass('selected');
+//         const Door_panel = $(this).attr('doorcategoryid');
+
+//         $.ajax({
+//             url: `${path_of_site}DoorModel/${Door_panel}`,
+//             type: 'GET',
+//             headers: {
+//                 'Authorization':'Bearer ' + token,
+//             },
+//             success: function(data) {
+
+//                  JSON.stringify(data);
+//                  document.querySelector("#model_number_row").innerHTML = null;
+
+//                 //  data.forEach(e=>{
+//                    document.querySelector("#model_number_row").insertAdjacentHTML('beforeend', 
+//                    `<div class="model_number_col p-2 bg-light" data-tab="Insulated">
+//                    <div class="model_number_col_inr text-center h-100 d-flex" doorModelId="${data.payload.doorModelId}">
+//                        <p class="mb-1 fs-6 model_num">${data.payload.doorModelName}</p>
+//                        <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
+//                        <p class="mb-1 fs-6"> R-17-19</p>
+//                        <ul class="model_number_quality_bar d-flex ps-0 mb-0 gap_10 best">
+//                            <li><i class="bi bi-star-fill text-primary"></i></li>
+//                            <li><i class="bi bi-star-fill text-primary"></i></li>
+//                            <li><i class="bi bi-star-fill text-primary"></i></li>
+//                            <li><i class="bi bi-star-fill text-primary"></i></li>
+//                        </ul>
+//                    </div>
+//                </div>`);
+//                 //  });
+//                page_loader.hide();
+
+                 
+//             },
+//             error: function(xhr, status, error) {
+//                 document.querySelector('#model_number_row').innerHTML = null;
+//                 document.querySelector('#model_number_row').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+
+//                page_loader.hide();
+
+//             }
+//         });
+
+
+
+//     })
+
+
+
+
+
+// }
+
+
+
+
+
+
 
 
 
@@ -313,38 +472,41 @@ function to_append_model_number(){
 
 
     // for testing of API
-        // $('#type_of_doors').change(function(){
-        //     page_loader.show();
+    setTimeout(for_test, 5000);
+       function  for_test(){
+            page_loader.show();
         
-        //     // door color 
-        //     // http://doorportal-001-site1.etempurl.com/v1/DoorColor/1
+            // door color 
+            // http://doorportal-001-site1.etempurl.com/v1/DoorColor
 
-        //     $.ajax({
-        //         url: "http://doorportal-001-site1.etempurl.com/v1/InsulatedGlassMaster/2",
-        //         type: 'GET',
-        //         headers: {
-        //             'Authorization':'Bearer ' + token,
-        //         },
-        //         success: function(data) {
+            // http://doorportal-001-site1.etempurl.com/v1/SpringCategory/2
+
+            $.ajax({
+                url: `http://doorportal-001-site1.etempurl.com/v1/DoorSealType/DoorSealType`,
+                type: 'GET',
+                headers: {
+                    'Authorization':'Bearer ' + token,
+                },
+                success: function(data) {
    
-        //              JSON.stringify(data);
-        //             //  document.querySelector("#panel_type").innerHTML = null;
-        //             //  data.payload.forEach(e=>{
+                     JSON.stringify(data);
+                    //  document.querySelector("#panel_type").innerHTML = null;
+                    //  data.payload.forEach(e=>{
                       
-        //             //  });
-        //              console.log(data.payload)
-        //            page_loader.hide();
+                    //  });
+                    console.log(data.payload)
+                   page_loader.hide();
    
                      
-        //         },
-        //         error: function(xhr, status, error) {
-        //             document.querySelector('#panel_type').innerHTML = null;
-        //             document.querySelector('#panel_type').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+                },
+                error: function(xhr, status, error) {
+                    document.querySelector('#panel_type').innerHTML = null;
+                    document.querySelector('#panel_type').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
 
-        //            page_loader.hide();
+                   page_loader.hide();
    
-        //         }
-        //     });
-        // });
+                }
+            });
+        };
 
     
