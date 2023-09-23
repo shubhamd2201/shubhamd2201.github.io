@@ -144,7 +144,9 @@
                                 <div class="col-lg-6 col-sm-12">
                                     <div >
                                         <h6>height</h6>
-                                        <p id="height_for_quatation"></p>
+                                        <span id="height_for_quatation_ft"></span>
+                                        <span id="height_for_quatation_inch"></span>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
@@ -212,6 +214,7 @@
                             <select name="type_of_doors" id="type_of_doors" class="border py-2 px-3">
                                 <!-- door type option  -->
                             </select>
+                            <span class="error"></span>
                         </div>
                         <div>
                             <p class="text-capitalize mb-2">quantity <i class="bi bi-question-circle-fill"></i></p>
@@ -224,13 +227,14 @@
                             <select name="door_company" id="door_company" class="border py-2 px-3">
                                 <!-- door company option  -->
                             </select>
+                            <span class="error"></span>
                         </div>
                     </div>
                     <div class="mb-2">
                         <p><b class="fs-3 fw-semibold"> Or </b>, Configure your exact garage door with door designer</p>
                     </div>
                     <div class="collection_section border mb-4">
-                        <h5 class="main_heading according_heading">door size</h5>
+                        <h5 class="main_heading accordian_heading">door size</h5>
                         <div class="px-3 py-2 accordian_data">
                             <p class="mb-3"> Select a Standard garage door size <b class="fs-5 fw-semibold"> Or </b> enter your exact garage door size</p>
                             
@@ -243,30 +247,30 @@
                                 <button tab-index="5" >16'x8'</button>
                                 <button tab-index="6" >18'x7'</button>
                             </div>
-                            <div class="custom_size">
+                            <div id="customSize" class="custom_size">
                                 <p>Select Door Width</p>
                                 <div class="row mb-2">
                                     <div class="col-lg-4 col-md-6">
-                                        <input maxlength="2" type="text" id="custom_width_ft" min="1" max="99"  ><span>ft</span>
+                                        <input required maxlength="2" type="text" id="custom_width_ft" min="1" max="99"  ><span>ft</span>
                                     </div>
                                     <div class="col-lg-4 col-md-6">
-                                        <input type="text" id="custom_width_inch" min="0" max="11"  maxlength="2"><span>in</span>
+                                        <input required type="text" id="custom_width_inch" min="0" max="11"  maxlength="2" value="0"><span>in</span>
                                     </div>
                                 </div>
                                 <p>Select Door Height</p>
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6">
-                                        <input type="text" id="custom_height_ft" min="1" max="99"  maxlength="2"><span>ft</span>
+                                        <input required type="text" id="custom_height_ft" min="1" max="99"  maxlength="2"><span>ft</span>
                                     </div>
                                     <div class="col-lg-4 col-md-6">
-                                        <input type="text" id="custom_height_inch" min="0" max="11" maxlength="2"><span>in</span>
+                                        <input required type="text" id="custom_height_inch" min="0" max="11" maxlength="2" value="0"><span>in</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="collection_section border mb-4">
-                        <h5 class="main_heading according_heading">Collection & Family</h5>
+                        <h5 class="main_heading accordian_heading">Collection & Family</h5>
                         <div class="px-3 py-2 accordian_data">
                             <div class="tabbing collection_btn mb-3 border-bottom" id="door_collection_btn">
                                 <!-- door collection  -->
@@ -284,7 +288,7 @@
                     </div>
 
                     <div class="panel_style_model_number border mb-4">
-                        <h5 class="main_heading according_heading">panel style and model number</h5>
+                        <h5 class="main_heading accordian_heading">panel style and model number</h5>
                         <div class="px-3 py-2 accordian_data">
                             
 
@@ -300,12 +304,11 @@
                                         <div id="model_number_row" class="model_num_row d-flex flex-wrap gap_10">
                                             <!-- model number will append here  -->
                                         </div>
+                                        <span class="error"></span>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
                                         <div class="model_number_img_col_inr p-3 ">
-                                            <p class="mb-1">2", 1-Sided Steel</p>
-                                            <p class="mb-1">Standard</p>
-                                            <p class="mb-1">No-Insulation, 25ga</p>
+                                            <span class="modelDesc"></span>
                                             <div id="model_number_img" class="model_number_img p-2 bg-white">
                                                 <img src="" alt="">
                                             </div>
@@ -320,61 +323,18 @@
                     </div>
 
                     <div class=" border mb-4">
-                        <h5 class="main_heading according_heading">color</h5>
-                        <div class="px-3 py-2 according_data">
+                        <h5 class="main_heading accordian_heading">color</h5>
+                        <div class="px-3 py-2 accordian_data">
                             <div id="select_color" class="select_color small_list">
                                 <ul>
-                                    <li data-color="#ebeeee">
-                                        <span></span>
-                                        <p>white</p>
-                                    </li>
-                                    <li data-color="#d6cdbe">
-                                        <span></span>
-                                        <p>Almond</p>
-                                    </li>
-                                    <li data-color="#a09387">
-                                        <span></span>
-                                        <p>Sandstone</p>
-                                    </li>
-                                    <li data-color="#4b3933">
-                                        <span></span>
-                                        <p>Brown</p>
-                                    </li>
-                                    <li data-color="#004932">
-                                        <span></span>
-                                        <p>Evergreen</p>
-                                    </li>
-                                    <li data-color="#706d69">
-                                        <span></span>
-                                        <p>bronze</p>
-                                    </li>
-                                    <li data-color="#9e9fa3">
-                                        <span ></span>
-                                        <p>gray</p>
-                                    </li>
-                                    <li data-color="#cdc5b0">
-                                        <span></span>
-                                        <p>desert tan</p>
-                                    </li>
-                                    <li data-color="#231f20">
-                                        <span></span>
-                                        <p>black</p>
-                                    </li>
-                                    <li data-color="#3d4045">
-                                        <span></span>
-                                        <p>Graphite</p>
-                                    </li>
-                                    <!-- <li data-color="#3c231c">
-                                        <span></span>
-                                        <p>Graphite</p>
-                                    </li> -->
+                                    <!-- color box will append here  -->
                                 </ul>
                             </div>
                         </div>
                     </div>
 
                     <div class="collection_section border mb-4" id="grid_submit">
-                        <h5 class="main_heading according_heading">Windows</h5>
+                        <h5 class="main_heading accordian_heading">Windows</h5>
                         <div class="px-3 py-2 accordian_data">
                             <p class="text-primary">IMPORTANT: Window placements should be entered inside looking out</p>
 
@@ -405,7 +365,7 @@
 
                     
                     <div class=" border mb-4">
-                        <h5 class="main_heading according_heading">window glass</h5>
+                        <h5 class="main_heading accordian_heading">window glass</h5>
                         <div class="px-3 py-2 accordian_data">
                             <div id="window_glass_type" class="window_glass_tabbing button_type_li mb-5">
                                 <ul class="p-0">
@@ -469,7 +429,7 @@
                     </div>
 
                     <div class=" border mb-4">
-                        <h5 class="main_heading according_heading">window insert</h5>
+                        <h5 class="main_heading accordian_heading">window insert</h5>
                         <div class="px-3 py-2 accordian_data">
                             <div id="window_type" class="window_type small_list">
                                 <ul class="short_panel_window" id="short_panel">
@@ -616,11 +576,11 @@
                     </div>
 
                     <div class=" border mb-4">
-                        <h5 class="main_heading according_heading">Spring</h5>
+                        <h5 class="main_heading accordian_heading">Spring</h5>
                         <div class="px-3 py-2 accordian_data">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <p>spring</p>
+                                    <h6>spring</h6>
                                     
                                     <div id="spring_data" class="button_type_li click_function for_spring_quatation">
                                         <ul class="ps-0 mb-1">
@@ -629,16 +589,17 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <p>Cyclage</p>
+                                    <h6>Cyclage</h6>
                                     <select name="" id="spriingCyclage" class="border py-2 px-3 w-100 Cyclage">
                                         <!-- spring type child will append here  -->
                                     </select>
+                                    <span class="error"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class=" border mb-4">
-                        <h5 class="main_heading according_heading">Seals</h5>
+                        <h5 class="main_heading accordian_heading">Seals</h5>
                         <div class="px-3 py-2 accordian_data">
                             <div id="sealData" class="button_type_li  click_function seals_quataion">
                                 <ul class="ps-0 mb-1">
@@ -649,7 +610,7 @@
                     </div>
 
                     <div class=" border mb-4">
-                        <h5 class="main_heading according_heading">door lock</h5>
+                        <h5 class="main_heading accordian_heading">door lock</h5>
                         <div class="px-3 py-2 accordian_data">
                             <div id="door_lock" class="button_type_li lock_bar">
                                 <ul>
@@ -665,78 +626,36 @@
                         </div>
                     </div>
                     <div class=" border mb-4">
-                        <h5 class="main_heading according_heading">door operator</h5>
+                        <h5 class="main_heading accordian_heading">door operator</h5>
                         <div class="px-3 py-2 accordian_data">
                             <div class="door_operator">
-                                <div class="row g-2">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 ">
-                                        <div class="door_operator_col_inr border_2px">
-                                            <div class="door_operator_logo"> <img src="./images/life_master_logo.jpeg" alt=""></div>
-                                            <div class="door_operator_machine"><img src="./images/lifemaster-door-operator2.jpeg" alt=""></div>
-                                            <div class="door_operator_select_box">
-                                                <select name="" id="life_mater_door_operator">
-                                                    <option value="life master 1">life master 1</option>
-                                                    <option value="life master 2">life master 2</option><option value="life master 3">life master 3</option><option value="life master 4">life master 4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 ">
-                                        <div class="door_operator_col_inr border_2px">
-                                            <div class="door_operator_logo"> <img src="./images/genie_logo.jpeg" alt=""></div>
-                                            <div class="door_operator_machine"><img src="./images/geniedoor-operator2.jpeg" alt=""></div>
-                                            <div class="door_operator_select_box">
-                                                <select name="" id="genie_door_operator">
-                                                    <option value="genie 1">genie 1</option>
-                                                    <option value="genie 2">genie 2</option><option value="genie 3">genie 3</option><option value="genie 4">genie 4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="door_operator_col_inr border_2px" >
-                                            <div class="door_operator_logo"> <img src="./images/marantech_logo.jpeg" alt=""></div>
-                                            <div class="door_operator_machine"><img src="./images/marantechdoor-operator2.jpeg" alt=""></div>
-                                            <div class="door_operator_select_box">
-                                                <select name="" id="marantech_door_operator">
-                                                    <option value="Marantech 1">Marantech 1</option>
-                                                    <option value="Marantech 2">Marantech 2</option><option value="Marantech 3">Marantech 3</option><option value="Marantech 4">Marantech 4</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div id="doorOperator" class="row g-2">
+                                    
                                 </div>
+                                <span class="error"></span>
+
+                                <!-- <select name="" id="life_mater_door_operator">
+                                    <option value="life master 1">lift master 1</option>
+                                    <option value="lift master 2">lift master 2</option><option value="lift master 3">lift master 3</option><option value="lift master 4">life master 4</option>
+                                </select> -->
                             </div>
                         </div>
                     </div>
                     <div class=" border mb-4">
-                        <h5 class="main_heading according_heading">Strut</h5>
+                        <h5 class="main_heading accordian_heading">Strut</h5>
                         <div class="px-3 py-2 accordian_data">
+                            <p class="mb-3">Default Strut Type (Height/Ga/KSI): None</p>
                             <div class="d-flex flex-wrap gap_10">
                                 <div class="button_type_li  click_function strut_type">
-                                    <p class="mb-3">Default Strut Type (Height/Ga/KSI): None</p>
-
                                     <p>Extra Strut Type</p>
-                                    <div class="button_type_label">
-                                        <label for='2"/22/33'>
-                                            <input type="radio" name='strut' id='2"/22/33'>
-                                            <span>2"/22/33</span>
-                                        </label>
-                                        <label for='3"/20/33'>
-                                            <input type="radio" name='strut' id='3"/20/33'>
-                                            <span>3"/20/33</span>
-                                        </label>
-                                        <label for='2"/20/33'>
-                                            <input type="radio" name='strut' id='2"/20/33'>
-                                            <span>2"/20/33</span>
-                                        </label>
-                                        <label for='3"/17/50'>
-                                            <input type="radio" name='strut' id='3"/17/50'>
-                                            <span>3"/17/50</span>
-                                        </label>
+                                    <div id="strutData" class="button_type_li">
+                                        <ul>
+                                            <!-- strut data will append here  -->
+                                        </ul>
+                                        <span class="error"></span>
                                     </div>
                                 </div>
-                                <div class=" click_function ">
+                                <div id="strut_quantity">
                                     <p>Extra Strut Quantity</p>
                                     <div>
                                         <input type="number" class="w-100 py-2 px-3 rounder-theme">
@@ -747,7 +666,7 @@
                     </div>
 
                     <div class=" border mb-4">
-                        <h5 class="main_heading according_heading">Track</h5>
+                        <h5 class="main_heading accordian_heading">Track</h5>
                         <div class="px-3 py-2 accordian_data">
                             <div class="row g-2 track_row">
                                 <div class="col-lg-6">

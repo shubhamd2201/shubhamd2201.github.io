@@ -1,6 +1,6 @@
 
 var collection_and_family_btn = $('#door_collection_btn button');
-var size_button = $('#size_button button');
+
 var collection_and_family_type_btn = $('.family .raised_type');
 var panel_type_btn = $('.long_short_type .panel_type');
 var model_number = $('#model_number .model_number_col');
@@ -21,59 +21,14 @@ let image_div = document.querySelector('.image_div_inr');
 
 var path_of_img = null;
 
-let width_arr = [8,9,9,10,16,16,18];
-let height_arr = [7,7,8,8,7,8,7];
-let selected_width_ft = null;
-let selected_height_ft = null;
-let selected_width_in = 0;
-let selected_height_in = 0;
 
-$('.custom_size input').on('input', function(){
-    if(isNaN($(this).val())){
-        let this_val = $(this).val().split('');
-        let this_final_val = this_val.pop();
-        $(this).val(this_val.join());
-    }
-    else{
-    ($(this).attr('id') == "custom_width_ft")? selected_width_ft = $(this).val(): '';
-    ($(this).attr('id') == "custom_width_inch")? selected_width_in = $(this).val(): '';
-    ($(this).attr('id') == "custom_height_ft")? selected_height_ft = $(this).val(): '';
-    ($(this).attr('id') == "custom_height_inch")? selected_height_in = $(this).val(): '';
-    }
-});
-size_button.click(function(){
-    size_button.removeClass('selected');
-    $(this).addClass('selected');
-    
-    var this_index = $(this).attr('tab-index');
-    selected_width_ft = width_arr[this_index];
-    selected_height_ft = height_arr[this_index];
-
-    $('#width_for_quatation_ft').text(selected_width_ft+"'ft");
-    $('#height_for_quatation').text(selected_height_ft+"'ft");
-
-    $('#custom_width_ft').val(selected_width_ft);
-    $('#custom_width_inch').val(selected_width_in);
-    $('#custom_height_ft').val(selected_height_ft);
-    $('#custom_height_inch').val(selected_height_in);
-
-});
-let doorSize = {};
-function forDoorSize(){
-    if(selected_width_ft != null && selected_width_in != null && selected_height_ft != null && selected_height_in != null){
-        door_size.doorWidth = selected_width_ft.selected_width_in;
-        door_size.doorHeight = selected_height_ft.selected_height_in;
-        console.log(door_size);
-    }
-}
 
 
 // page accordian 
-
-$('.according_heading').click(function(){
+$('.accordian_heading').click(function(){
     $(this).siblings('.accordian_data').slideToggle(500);
     $(this).toggleClass('closed');
-})
+});
 // collection_and_family_btn.click(function(){
 //     var this_tab = $(this).attr('data-tab');
 //     $('.time_less_data').hide();
@@ -136,17 +91,17 @@ $('.according_heading').click(function(){
 
 // });
 
-$('#select_color ul li').click(function(){
-    $('#select_color ul li').removeClass('selected');
-    $(this).addClass('selected');
-    panel_color = $(this).attr('dapplyColorOverlaata-color');
-    $('#grid_submit').show();
+// $('#select_color ul li').click(function(){
+//     $('#select_color ul li').removeClass('selected');
+//     $(this).addClass('selected');
+//     panel_color = $(this).attr('dapplyColorOverlaata-color');
+//     $('#grid_submit').show();
 
 
-    // $('#color_for_quatation').text(null);
-    $('#color_for_quatation').text(", "+$(this).text()+" color");
+//     // $('#color_for_quatation').text(null);
+//     $('#color_for_quatation').text(", "+$(this).text()+" color");
 
-});
+// });
 
 var this_color = null;
 document.querySelectorAll("#select_color ul li").forEach(e=>{

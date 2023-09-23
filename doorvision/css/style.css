@@ -14,7 +14,8 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
-
+input[type="text"]:focus, input[type="text"]:focus{border-color:  #0d6efd;}
+select{height: 45px; border: 1px solid #d1d1d1;}
 main{max-width: 2100px;}
 input:not(input[type="radio"], input[type="radio"]){height: 45px; border: 1px solid #ccc; border-radius: 2px; width: 100%; padding: 0px 20px;}
 p{margin-bottom: 5px !important; font-size: 16px;}
@@ -22,6 +23,8 @@ input:focus{outline: none; box-shadow: none; border-color: #0d6efd;}
 
 header{padding: 10px 50px; margin-bottom: 20px;}
 .header_logo{max-width: 130px;}
+.sub_heading{font-size: 16px; font-weight: bold; text-transform: capitalize;}
+h6{text-transform: capitalize;}
 
 .left_section_col{width: 500px; display: inline-block; vertical-align: top; position: sticky; top:20px; padding: 10px 1px 10px 10px;}
 .scroll-css{height: calc(100vh - 150px); overflow: auto;}
@@ -60,20 +63,21 @@ header{padding: 10px 50px; margin-bottom: 20px;}
 .model_number_col{border: 2px solid #d1d1d1; width: 150px; aspect-ratio: 1;}
 .model_number_col_inr{display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;}
 .model_number_col.selected{border-color: #0d6efd;}
+.model_number_col:hover{border-color: #0d6efd;}
 .model_number_quality_bar li{list-style: none;}
 #downloadButton{display: none;}
 .model_number_img_col_inr{background-color: rgb(234, 250, 255); aspect-ratio: 1;}
-#model_number_img{display: none; width: fit-content;}
+#model_number_img{width: fit-content;}
 
 .select_boxes ul{display: grid; grid-template-columns: auto auto auto auto;background-color: #eafaff; width: 100%; list-style: none; align-items: center; margin-bottom: 0px !important; padding:0px 10px !important;}
 
 
 .select_boxes ul li{border: 2px solid #d1d1d1; height: 65px; cursor: pointer; background-color: #fff;}
 .select_boxes ul li.selected{border-color: #0d6efd;}
-.image_grid_parent.append_grid ul{left: 0; right: 0; top: 0; bottom: 0;display: grid; position: absolute; width: 100%; height: 100%;   list-style-type: none;}
+/* .image_grid_parent.append_grid ul{left: 0; right: 0; top: 0; bottom: 0;display: grid; position: absolute; width: 100%; height: 100%;   list-style-type: none;} */
 .image_grid_parent.append_grid ul li.i_am_selected{ background-size: 100% !important; position: relative;}
-.image_grid_parent.append_grid ul li img:not(img.for_glass){display: none;}
-.image_grid_parent.append_grid ul li span{display: none;}
+/* .image_grid_parent.append_grid ul li img:not(img.for_glass){display: none;} */
+/* .image_grid_parent.append_grid ul li span{display: none;} */
 
 .image_grid_parent.append_grid ul li.i_am_selected img:not(.for_glass){position: absolute; z-index: 2; width: 100%; height: 100%; background-size: contain; left: 0; top: 0; bottom: 0; right: 0; display: block;}
 .image_grid_parent.append_grid ul li.i_am_selected span{width:calc(100% - 5px); height:calc(100% - 5px); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background-size: cover !important; z-index: 1; display: block;}
@@ -158,8 +162,9 @@ header{padding: 10px 50px; margin-bottom: 20px;}
 .time_less_data{ text-align: center;}
 /* #timeless.time_less_data{display: block;} */
 .small_list ul{padding: 0px !important; margin: 0px !important;}
-.small_list ul li{list-style: none; padding: 8px; border:2px solid #d1d1d1; text-align: center; width: calc(16.66% - 20px); cursor: pointer; display: inline-block; margin:0 15px 18px 0; vertical-align: middle;}
+.small_list ul li{list-style: none; padding: 8px; border:2px solid #d1d1d1; text-align: center; width: 100px; cursor: pointer; display: inline-block; margin:0 7px 10px 0; vertical-align: middle;}
 .small_list ul li:hover{border-color: #0d6efd;}
+.error-border{border-color: #f00 !important;}
 
 .small_list ul li span{ aspect-ratio: 1/0.8; display: block;}
 .small_list ul li p{margin-bottom: 0px !important; font-size: 15px;}
@@ -169,7 +174,7 @@ header{padding: 10px 50px; margin-bottom: 20px;}
 
 
 .button_type_li ul{list-style-type: none;}
-.button_type_li ul li, .button_type_label label span{background-color: rgb(248, 249, 250); border: 2px solid #ddd; transition: 0.3s; padding:10px; cursor: pointer; display: inline-block; vertical-align: middle; margin-right:10px; text-transform: capitalize; margin-bottom: 10px;}
+.button_type_li ul li, .button_type_label label span{background-color: rgb(248, 249, 250); border: 2px solid #ddd; transition: 0.3s; padding:7px 10px; cursor: pointer; display: inline-block; vertical-align: middle; margin-right:10px; text-transform: capitalize; margin-bottom: 10px;}
 .button_type_li ul li:hover, .button_type_label label span:hover{border-color: #0d6efd; background-color: #e9e9e9;}
 .button_type_li ul li.selected , .button_type_label label input:checked + span{border-color: #0d6efd; background-color: #e9e9e9;}
 .window_type ul{display: none;}
@@ -213,8 +218,9 @@ img{max-width: 100%;}
 
 #myCanvas{position: absolute; left: 0px; top: 0; width: 100%; height: 100%;}
 
+.error{color: #f00;}
 .door_operator{list-style-type: none; text-align: center;}
-.door_operator select{width: 100%; height: 40px; padding: 0px 15px;}
+.door_operator select{width: 100%; height: 40px; padding: 0px 10px; font-size: 16px; }
 .main_heading {color: #fff; padding: 0.4rem 1rem; background-color: #0d6efd; text-transform: capitalize;}
 .according_heading{cursor: pointer; position: relative;}
 .according_heading::after{content: ""; position: absolute; top: 50%; transform: translateY(-50%); right: 20px; width: 0px; aspect-ratio: 1;border-style: solid;
@@ -230,10 +236,10 @@ ol, ul{padding-left: 0px;}
 .grid_buttons ul li span{height: 50px; border: 2px solid #d1d1d1; border-radius: 2px; display: flex; align-items: center; width: 100%; justify-content: center; transition: 0.3s; cursor: pointer;}
 .for_all_grid ul li span:hover{background-color: #f0f0f0;}
 .border_2px{border: 2px solid #d1d1d1;}
-.door_operator_col_inr{height: 100%; display: flex; gap: 10%; padding: 10px; align-items: center;}
+.door_operator_col_inr{height: 100%; display: flex; gap: 10px; padding: 10px; align-items: center;}
 .door_operator_col_inr.selected{background-color: #f0f0f0;}
-.door_operator_logo{width: 30%;}
-.door_operator_machine{width: 25%;}
+.door_operator_logo{width: calc(55% - 10px);}
+.door_operator_select_box{width: 45%;}
 .price_details sup{font-size: 1.2rem;}
 #info_for_quatation >* {text-transform: capitalize;}
 .door_catogary_btn{cursor: pointer; padding:10px 15px;}
