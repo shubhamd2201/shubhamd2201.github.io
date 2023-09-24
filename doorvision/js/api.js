@@ -3,6 +3,7 @@
     let token = "";
 
 
+    var numberOfColumn = null;
 
     var doorTypeId = null;
     var doorCompanyId = null;
@@ -297,7 +298,6 @@ size_button.click(function(){
             }
                   page_loader.hide();
                   
-                //   forOtherData();
 
             },
             error: function(xhr, status, error) {
@@ -440,7 +440,12 @@ size_button.click(function(){
                    </div>`);
                     //  });
 
-                    to_append_model_number();
+                    if(selected_height_ft != null && selected_width_ft != null){
+                        to_append_model_number();
+                    }
+                    else{
+                        alert('please select width and height');
+                    }
                    page_loader.hide();
    
                      
@@ -462,22 +467,27 @@ size_button.click(function(){
 
 function to_append_model_number(){
     $("#panel_type .door_catogary").click(function(){
-        // console.log(dataForPostObj);
         page_loader.show();
+
+        $('#window_quantity_for_quatation').text(`Window Quantity:0`);
+         $('#windowQ').text("0");
+
+        let doorPanelId = $(this).attr('doorcategoryid');
         
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected');
         const Door_panel = $(this).attr('doorcategoryid');
 
-        // ${path_of_site}DoorModel/${Door_panel}
+        $('#panel_type_for_quatation').text(' ,'+ $(this).text());
+
         $.ajax({
-            url: `http://doorportal-001-site1.etempurl.com/v1/DoorVisulization/GetVisulizationModelHeightSection`,
+            url: `${path_of_site}DoorVisulization/GetVisulizationModelHeightSection`,
             type: 'POST',
             contentType: 'application/json-patch+json',
             dataType: 'json',
             data: `{ 
-                doorHeight:7,
-                doorWidth: 8,
+                doorHeight:${selected_height_ft},
+                doorWidth: ${selected_width_ft},
                 doorTypeId: ${dataForPostObj.doorTypeId},
                 doorCompanyId: ${dataForPostObj.doorCompanyId}}`,
             headers: {
@@ -486,18 +496,15 @@ function to_append_model_number(){
             success: function(data) {
 
                  JSON.stringify(data);
-                 console.log(data.payload)
-
                  document.querySelector("#model_number_row").innerHTML = null;
                  $("#model_number_row").siblings('.error').text('');
                 if(data.payload == null || data.payload == undefined){
                     $("#model_number_row").siblings('.error').text('data not found');
                 }
                 else{
-                    
                      data.payload.forEach((e, index)=>{
                        document.querySelector("#model_number_row").insertAdjacentHTML('beforeend', 
-                           `<div class="model_number_col p-2 bg-light" data-index="${index}" doorModelId="${e.doorModelId}" doorSalePrice="${e.doorSalePrice}" doorModelPath="${e.doorModelPath}" doorModelDesc="${e.doorModelDesc}">
+                           `<div class="model_number_col p-2 bg-light" data-index="${index}" doorModelId="${e.doorModelId}" doorSalePrice="${e.doorSalePrice}" doorModelPath="${e.doorModelPath}" doorModelDesc='${e.doorModelDesc}' noOfSection="${e.noOfSection}">
                            <div class="model_number_col_inr text-center h-100 d-flex">
                                <p class="mb-1 fs-6 model_num">${e.doorModelName}</p>
                                <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
@@ -509,39 +516,277 @@ function to_append_model_number(){
 
                 $("#model_number_row").siblings('.error').text('');
                page_loader.hide();
+               
             //    modelEvent()
 
 
 
-             $('.model_number_col').hover(function(){
+             $('.model_number_col').mouseenter(function(){
                 $('.modelDesc').text($(this).attr("doorModelDesc"));
                 $('#model_number_img img').attr("src", $(this).attr("doorModelPath"));
             });
 
+            $('.model_number_col').mouseleave(function(){
+                $('.modelDesc').text($(this).siblings('.selected').attr(("doorModelDesc")));
+                $('#model_number_img img').attr("src", $(this).siblings('.selected').attr(("doorModelPath")));
+            });
+
+            let repeatedFile = null;
             $('.model_number_col').click(function(){
+
                 $('.model_number_col').removeClass('selected');
                 $(this).addClass('selected');
                 $('.modelDesc').text($(this).attr("doorModelDesc"));
                 $('#model_number_img img').attr("src", $(this).attr("doorModelPath"));
+        
+                $('#model_number_for_quatation').text($(this).find(".model_num").text());
+        
+                $('.your_door_design ').hide();
+                $('.image_grid_parent.append_grid').show();
+                forOtherData();
 
-                document.querySelector('#select_color ul').innerHTML = "";
+                let doorModelId = $(this).attr('doormodelid');
+            //  big function start 
 
-                data.payload[this.getAttribute('data-index')].lstDoorColor.forEach((e)=>{
-                    if(!e.colorCode){
-                    document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-                    <li data-color="${e.filePath}">
-                        <span style='background:url("${e.filePath}") center no-repeat;'></span>
-                        <p>${e.doorColorName}</p>
-                    </li>`);
+                page_loader.show();
+                $.ajax({
+                    url: `${path_of_site}DoorVisulization/GetVisulizationWidhtSection`,
+                    type: 'POST',
+                    contentType: 'application/json-patch+json',
+                    dataType: 'json',
+                    data: `{ 
+                        doorWidth:${selected_width_ft},
+                        doorCompanyId:11,
+                        doorPanelId: ${doorPanelId},
+                        doorModelId:${doorModelId},
+                        }`,
+                    headers: {
+                        'Authorization':'Bearer ' + token,
+                    },
+                    success:  function(data) {
+                        JSON.stringify(data);
+
+                        numberOfColumn =  data.payload[0].noOfSection;
+                        repeatedFile =  data.payload[0].repeatedFile;
+
+                        
+
+                        
+
+                        page_loader.hide();
+                    },
+                    error: function(xhr, status, error) {
+                        document.querySelector('#model_number_row .error').text('');
+                        document.querySelector('#model_number_row .error').text(`Error: ${error}`);
+                        page_loader.hide();
                     }
-                    else{
-                        document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-                    <li data-color="${e.colorCode}">
-                        <span style="background:${e.colorCode};"></span>
-                        <p>${e.doorColorName}</p>
-                    </li>`);
+                });
+        
+                // for create image and grid 
+                // let heightData = $(this).attr('noOfSection').split(','); 
+                let heightData = [21,18,18,21];
+                let dataIndexForWindow =this.getAttribute('data-index');
+                setTimeout(function(){
+
+                    if(data.payload[0].noOfSection == undefined || data.payload[0].noOfSection == null || numberOfColumn == null || data.payload.length < 1){
+
+                        page_loader.hide();
+
+                        alert("Data not found");
                     }
-                })
+                    
+                    let numberOfRow = heightData.length;
+                    var my_color = null;
+            
+                     $('.create_img').empty();
+                    $('.append_grid_for_selection').empty();
+                    $('.for_all_grid ul').empty();
+                    $('.for_grid_height ul').empty();
+            
+                for(let i = 0; i < numberOfRow; i++){
+                    console.log(numberOfColumn);
+                    // this is for create row in img 
+                    document.querySelectorAll('.create_img').forEach((a)=>{
+                        a.insertAdjacentHTML('beforeend',`<ul class=height${heightData[i]} rowIndex = ${i}> </ul>`);
+                    
+                    });
+                    // this is create grid row 
+                    document.querySelectorAll('.append_grid_for_selection').forEach((a)=>{
+                        a.insertAdjacentHTML('beforeend',`<ul rowIndex = ${i}> </ul>`);
+                    
+                    });
+            
+                    document.querySelector('.for_all_grid ul').insertAdjacentHTML('beforeend',`<li> <span>All</span></li>`);
+                    document.querySelector('.for_grid_height ul').insertAdjacentHTML('beforeend',`<li><span>${heightData[i]}</span> </li>`);
+            
+                    
+                }
+            
+            
+                for(let j = 0; j < numberOfColumn; j++){
+      
+            
+                    // this is for create image column
+                    document.querySelectorAll('.create_img ul').forEach((b)=>{
+                        b.insertAdjacentHTML('beforeend',
+                            `<li listindex = ${j}>
+                                <div class="createImageimg">
+                                    <img class="" src="${repeatedFile}">
+                                    <canvas class="myCanvas"><canvas>
+                                </div>
+                                <div class="window_img"> </div>
+                            </li>`);
+                    })
+            
+                    // this is for selection grid columns 
+                    document.querySelectorAll('.append_grid_for_selection ul').forEach((b)=>{
+                        b.insertAdjacentHTML('beforeend',`<li listindex = ${j}> </li>`);
+                    })
+                }
+            
+                
+                $(".append_grid_for_selection ul li").on('click', function(){
+                     $(this).toggleClass("i_am_selected");
+            
+                     let windowQunatity = $('.append_grid_for_selection ul li.i_am_selected').length;
+                    $('#window_quantity_for_quatation').text(`Window Quantity:${windowQunatity}`);
+                    $('#windowQ').text(windowQunatity);
+            
+                });
+            
+            
+                let arrForGridDataRow = [];
+                let arrForGridDataColumn = [];
+            
+                $('#grid_submit_btn').on("click", function(){
+            
+                    arrForGridDataRow.splice(0, arrForGridDataRow.length);
+                    arrForGridDataColumn.splice(0, arrForGridDataColumn.length);
+            
+            
+                    $('.append_grid_for_selection ul').each(function(index) {
+                        if ($(this).find('li.i_am_selected').length > 0) {
+                            let row_index = this.getAttribute("rowIndex")
+                            if (!arrForGridDataRow.includes(row_index)) {
+                                arrForGridDataRow.push(row_index);
+                            }
+                                            
+                        }
+                    });
+                    // arrForGridDataRow.sort();
+            
+                    for(j = 0; j < arrForGridDataRow.length; j++){
+            
+                    let for_column = [];
+                    document.querySelectorAll(".append_grid_for_selection ul")[arrForGridDataRow[j]].querySelectorAll('li.i_am_selected').forEach((e)=>{
+                    for_column.push(e.getAttribute('listindex'));
+            
+                    });
+            
+                    arrForGridDataColumn.push(for_column);
+                    }
+                   
+            
+                    // for insert window 
+            
+                    $('.create_img ul li .window_img').empty();
+            
+                    for(let i = 0; i < arrForGridDataRow.length; i++){
+                        for(let j = 0; j < arrForGridDataColumn[i].length; j++){
+                           
+                        document.querySelectorAll(".create_img ul")[arrForGridDataRow[i]].querySelectorAll("li")[arrForGridDataColumn[i][j]].querySelector('.window_img').insertAdjacentHTML("beforeend",` <img src="./images/Short_plain.png" >
+                        <canvas class="windowCanavas"></canvas> `
+                            )
+                        }
+                    }
+                    applyColorOverlaywindow(my_color);
+                   
+                    if($(".create_img ul li").find(".window_img").length > 0){
+                        applyColorOverlaywindow(my_color);
+                        setTimeout(applyColorOverlaywindow, 100, my_color);
+                    }
+                });
+            
+            
+            
+                // for all 
+                
+                document.querySelectorAll(".for_all_grid ul li span").forEach((a, x)=>{
+                    a.addEventListener("click", function(){
+            
+                        if(this.className == "selected"){
+            
+                            this.classList.remove("selected");
+                            document.querySelectorAll('.append_grid_for_selection ul')[x].querySelectorAll('li').forEach(lists=>{
+                            lists.classList.remove('i_am_selected');
+                            });
+                        }
+            
+                        else{
+            
+                            this.classList.add("selected");
+                            document.querySelectorAll('.append_grid_for_selection ul')[x].querySelectorAll('li').forEach(lists=>{
+                            lists.classList.add('i_am_selected');
+                            });
+                        }
+            
+                        let windowQunatity = $('.append_grid_for_selection ul li.i_am_selected').length;
+                        $('#window_quantity_for_quatation').text(`Window Quantity:${windowQunatity}`);
+                        $('#windowQ').text(windowQunatity); 
+                    });
+                });
+            // end 
+            
+            
+            
+            
+                            // for color 
+                            document.querySelector('#select_color ul').innerHTML = "";
+                            data.payload[dataIndexForWindow].lstDoorColor.forEach((e)=>{
+                                if(!e.colorCode){
+                                document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
+                                <li data-color="${e.filePath}">
+                                    <span style='background:url("${e.filePath}") center no-repeat;'></span>
+                                    <p>${e.doorColorName}</p>
+                                </li>`);
+                                }
+                                else{
+                                    document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
+                                <li data-color="${e.colorCode}">
+                                    <span style="background:${e.colorCode};"></span>
+                                    <p>${e.doorColorName}</p>
+                                </li>`);
+                                }
+                            });
+            
+                            $('#select_color ul li').eq(0).addClass('selected');
+                            $("#color_for_quatation").text(` ,${$('#select_color ul li.selected').text()}`);
+                            // for color end
+            
+                              // click on color 
+                            $('#select_color ul li').on('click', function(){
+                                my_color = $(this).attr('data-color');
+            
+                                $(this).siblings().removeClass('selected');
+                                $(this).addClass('selected');
+            
+                                $("#color_for_quatation").text(`, ${$(this).text()}`);
+            
+                                applyColorOverlay_multiple(my_color);
+                                applyColorOverlay(my_color);
+            
+            
+                                if($(".create_img ul li").find(".window_img").length > 0){
+                                    applyColorOverlaywindow(my_color);
+                                }
+                            });
+                            // click on color end
+    
+                        // big function end 
+                        
+                }, 2000);
+                // this is set time ^
+            
             });
          
             }
@@ -561,23 +806,6 @@ function to_append_model_number(){
     });
 }
 
-function modelEvent(){
-    // $('.model_number_col').hover(function(){
-    //     $('.modelDesc').text($(this).attr("doorModelDesc"));
-    //     $('#model_number_img img').attr("src", $(this).attr("doorModelPath"));
-    // });
-
-    // $('.model_number_col').click(function(){
-    //     $('.model_number_col').removeClass('selected');
-    //     $(this).addClass('selected');
-    //     $('.modelDesc').text($(this).attr("doorModelDesc"));
-    //     $('#model_number_img img').attr("src", $(this).attr("doorModelPath"));
-
-    //     data.payload[$(this).attr('doorModelId')].lstDoorColor.each(function(e){
-    //         console.log(e.colorCode);
-    //     })
-    // });
-}
 
 
 
@@ -586,73 +814,6 @@ function modelEvent(){
 
 
 
-
-
-
-
-
-
-
-
-// this is click on model number and call the image
-// function toGetAPI(){
-
-//     $("#model_number_row .model_number_col ").click(function(){
-//         page_loader.show();
-        
-//         $(this).siblings().removeClass('selected');
-//         $(this).addClass('selected');
-//         const Door_panel = $(this).attr('doorcategoryid');
-
-//         $.ajax({
-//             url: `${path_of_site}DoorModel/${Door_panel}`,
-//             type: 'GET',
-//             headers: {
-//                 'Authorization':'Bearer ' + token,
-//             },
-//             success: function(data) {
-
-//                  JSON.stringify(data);
-//                  document.querySelector("#model_number_row").innerHTML = null;
-
-//                 //  data.forEach(e=>{
-//                    document.querySelector("#model_number_row").insertAdjacentHTML('beforeend', 
-//                    `<div class="model_number_col p-2 bg-light" data-tab="Insulated">
-//                    <div class="model_number_col_inr text-center h-100 d-flex" doorModelId="${data.payload.doorModelId}">
-//                        <p class="mb-1 fs-6 model_num">${data.payload.doorModelName}</p>
-//                        <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
-//                        <p class="mb-1 fs-6"> R-17-19</p>
-//                        <ul class="model_number_quality_bar d-flex ps-0 mb-0 gap_10 best">
-//                            <li><i class="bi bi-star-fill text-primary"></i></li>
-//                            <li><i class="bi bi-star-fill text-primary"></i></li>
-//                            <li><i class="bi bi-star-fill text-primary"></i></li>
-//                            <li><i class="bi bi-star-fill text-primary"></i></li>
-//                        </ul>
-//                    </div>
-//                </div>`);
-//                 //  });
-//                page_loader.hide();
-
-                 
-//             },
-//             error: function(xhr, status, error) {
-//                 document.querySelector('#model_number_row').innerHTML = null;
-//                 document.querySelector('#model_number_row').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
-
-//                page_loader.hide();
-
-//             }
-//         });
-
-
-
-//     })
-
-
-
-
-
-// }
 
 
 
@@ -667,7 +828,7 @@ function modelEvent(){
 
 
     // for testing of API
-    setTimeout(for_test, 5000);
+    // setTimeout(for_test, 5000);
        function  for_test(){
             page_loader.show();
         

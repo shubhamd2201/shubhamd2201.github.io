@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>visualization</title>
+    <title>Door Master</title>
 </head>
 <body>
     <div id="loader">
@@ -52,14 +52,16 @@
                                     <p class="mb-0">Your door design a few clicks away !</p>
                                 </div>
 
-                                <div class="position-relative">
+                                <!-- <div class="position-relative">
                                     <img id="final_door_image" src="" alt="">
                                     <canvas id="myCanvas"></canvas>
-                                </div>
+                                </div> -->
                                 <div class="image_grid_parent append_grid">
-                                    <ul class=" ">
-
-                                    </ul>
+                                    <div class="createGrid create_img ">
+            
+                                    </div>
+                                    <img class="bg_img_main" src="./images/white_img_for_bg.png" />
+                                    <canvas class="bg_img_main_canvas"></canvas>
                                 </div>
                             </div>
                             
@@ -170,12 +172,10 @@
                                     <p id="lock_for_quatation"></p>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
-                                    <h6>Door Operator</h6>
-                                    <p id="operator_for_quatation"></p>
-                                </div>
-                                <div class="col-lg-4 col-md-6">
                                     <h6>Strut</h6>
-                                    <p id="strut_for_quatation"></p>
+                                    <p><span id="strut_for_quatation"></span>
+                                        <span id="strut_quantity"></span>
+                                    </p>
                                 </div>
                                 <div class="col-lg-4 col-md-6">
                                     <h6>Track</h6>
@@ -188,6 +188,13 @@
                                 <div class="col-lg-4 col-md-6">
                                     <h6>Jamb Material</h6>
                                     <p id="jamb_material_for_quatation"></p>
+                                </div>
+                                <div class="col-lg-12 col-md-12">
+                                    <h6>Door Operator</h6>
+                                    <p>
+                                        <span id="doorOperator_companyName"></span>
+                                        <span id="doorOperatorModel"></span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -317,9 +324,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mx-auto mb-3 text-center" id="raised_submit">
-                            <button  class="btn py-2 px-4 bg-success text-white text-capitalize">click to show</button>
-                        </div>
                     </div>
 
                     <div class=" border mb-4">
@@ -342,24 +346,24 @@
                             <div class="d-flex align-items-center justify-content-center grid_main_row">
                                 <div class="for_all_grid grid_buttons">
                                     <ul>
-
+        
                                     </ul>
                                 </div>
-                                <div class="select_boxes append_grid">
-                                    <ul class="">
-    
-                                    </ul>
+                                <div class="createGrid append_grid_for_selection">
+                                    
                                 </div>
                                 <div class="for_grid_height grid_buttons">
                                     <ul>
-
+        
                                     </ul>
                                 </div>
                             </div>
                             
                             <div class="window_quantity mt-3 text-capitalize d-flex flex-wrap align-items-center">
-                                <h5 class="pe-3">selected window quantity is :</h5> <h4 class="text-primary">0</h4>
+                                <h5 class="pe-3">selected window quantity is :<span id="windowQ"> 0</span></h5>
                             </div>
+
+                            <button id="grid_submit_btn" class="btn btn-success px-5 mt-4 text-uppercase fw-medium ">Add</button>
                         </div>
                     </div>
 
@@ -601,7 +605,7 @@
                     <div class=" border mb-4">
                         <h5 class="main_heading accordian_heading">Seals</h5>
                         <div class="px-3 py-2 accordian_data">
-                            <div id="sealData" class="button_type_li  click_function seals_quataion">
+                            <div id="sealData" class="button_type_li seals_quataion">
                                 <ul class="ps-0 mb-1">
                                     <!-- seal name will append here  -->
                                 </ul>
@@ -630,14 +634,9 @@
                         <div class="px-3 py-2 accordian_data">
                             <div class="door_operator">
                                 <div id="doorOperator" class="row g-2">
-                                    
+                                    <!-- door operator col will append here  -->
                                 </div>
                                 <span class="error"></span>
-
-                                <!-- <select name="" id="life_mater_door_operator">
-                                    <option value="life master 1">lift master 1</option>
-                                    <option value="lift master 2">lift master 2</option><option value="lift master 3">lift master 3</option><option value="lift master 4">life master 4</option>
-                                </select> -->
                             </div>
                         </div>
                     </div>

@@ -212,7 +212,6 @@ img{max-width: 100%;}
 
 .selected{border: 2px solid #0d6efd; border-color: #0d6efd !important;}
 .grey_border{border: 2px solid #d1d1d1;}
-#grid_submit{display: none;}
 #downloadButton{display: none;}
 .info_for_quatation p{margin-bottom: 0px !important;}
 
@@ -230,10 +229,11 @@ border-width: 10px 6.5px 0 6.5px;border-color: #fff transparent transparent tran
 dl, ol, ul{margin-bottom: 0px;}
 ol, ul{padding-left: 0px;}
 .grid_main_row{background-color: #eafaff; padding: 10px;}
-.select_boxes{width:80%;}
+.append_grid_for_selection{width:80%; padding: 0px 10px;}
 .grid_buttons{width: 10%;}
 .grid_buttons ul li{height: 65px; display: flex; flex-direction: column; align-items: center; justify-content: center; list-style-type: none; }
-.grid_buttons ul li span{height: 50px; border: 2px solid #d1d1d1; border-radius: 2px; display: flex; align-items: center; width: 100%; justify-content: center; transition: 0.3s; cursor: pointer;}
+.grid_buttons ul li span{height: 50px; border: 2px solid #d1d1d1; border-radius: 2px; display: flex; align-items: center; width: 100%; justify-content: center; transition: 0.3s}
+.for_all_grid ul li span{cursor: pointer;}
 .for_all_grid ul li span:hover{background-color: #f0f0f0;}
 .border_2px{border: 2px solid #d1d1d1;}
 .door_operator_col_inr{height: 100%; display: flex; gap: 10px; padding: 10px; align-items: center;}
@@ -247,3 +247,35 @@ ol, ul{padding-left: 0px;}
 
 .custom_size{padding:15px 0px;}
 .custom_size input[type="text"]{width: calc(100% - 50px); margin-right: 10px; display: inline-block;}
+
+
+
+
+
+
+
+ul li{list-style-type: none;}
+.create_img{padding: 10px;}
+.createGrid ul{display: flex;}
+.create_img > ul > li{position: relative;}
+.createImageimg{display:flex; position: relative;}
+.append_grid{position: relative;}
+.bg_img_main, .bg_img_main_canvas{position: absolute;  left: 0; right: 0; top: 0; bottom: 0; width: 100%; height: 100%; z-index: -1;}
+.bg_img_main_canvas{z-index: 0 !important; }
+.append_grid_for_selection ul li{flex: 1;  width: 80px; height: 65px; background-color: #fff; cursor: pointer;}
+.append_grid_for_selection ul li.i_am_selected{border-color: #0d6efd;}
+.append_grid_for_selection ul li{border: 2px solid #d1d1d1;}
+
+.window_img{position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: calc(100% - 16px); height: calc(100% - 16px); z-index: 10;}
+.window_img img{ width: 100%; height: 100%; object-fit: cover;}
+.window_img canvas{position: absolute; z-index: 1; left: -1px; right: -1px; top: -1px; bottom: -1px; width: calc(100% + 2px); height: calc(100% + 2px);}
+
+.height21{padding: 5px 0px;}
+.height21:first-child{padding-top:0px;}
+.height21:last-child{padding-bottom:0px;}
+
+.height24{padding: 10px 0px;}
+.height24:first-child{padding-top:0px;}
+.height24:last-child{padding-bottom:0px;}
+.modelDesc{font-size: 14px; display: block; margin-bottom: 15px; max-width: 200px;}
+.image_grid_parent.append_grid{display: none;}

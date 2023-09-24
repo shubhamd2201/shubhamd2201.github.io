@@ -1,107 +1,13 @@
 
-var collection_and_family_btn = $('#door_collection_btn button');
-
-var collection_and_family_type_btn = $('.family .raised_type');
-var panel_type_btn = $('.long_short_type .panel_type');
-var model_number = $('#model_number .model_number_col');
-
-var door_size = null;
-var collection_and_family_value = null;
-var collection_and_family_type = null;
-var panel_type_value = null;
-var model_number_value = null;
-var window_quantity = null;
-var panel_color = null;
-var glass_type = null;
-var window_type = null;
-var window_panel_type = null;
-
-
-let image_div = document.querySelector('.image_div_inr');
-
-var path_of_img = null;
-
-
-
 
 // page accordian 
 $('.accordian_heading').click(function(){
     $(this).siblings('.accordian_data').slideToggle(500);
     $(this).toggleClass('closed');
 });
-// collection_and_family_btn.click(function(){
-//     var this_tab = $(this).attr('data-tab');
-//     $('.time_less_data').hide();
-//     $('#'+this_tab+".time_less_data").show();
-
-//     collection_and_family_btn.removeClass('selected');
-//     $(this).addClass('selected');
-//     collection_and_family_value = $(this).attr('data-tab'); 
-    
-//     $('.model_num_row').hide();
-//     $('.long_short_type').hide();
-
-//     // $('#collection_for_quatation').text(null);
-//     $('#collection_for_quatation').text($(this).text() + " collection"); 
-// });
-
-
-// $('.raised_type').click(function(){
-//     $('.raised_type').removeClass('selected');
-//     $('.model_num_row').hide();
-//     $('.long_short_type').hide();
-//     $(this).addClass('selected');
-//     collection_and_family_type = $(this).attr('data-tab');
-//     $('#'+collection_and_family_type).show();
-
-//     // $('#family_for_quatation').text(null);
-//     $('#family_for_quatation').text(" ," +$(this).text() + " family");
-
-// });
 
 
 
-// panel_type_btn.click(function(){
-//     panel_type_btn.removeClass('selected');
-//     $(this).addClass('selected');
-//     panel_type_value = $(this).attr('data-tab'); 
-
-//     $(".window_type ul").hide();
-//     $('.model_num_row').hide();
-//     $('.window_type ul#'+panel_type_value).show();
-
-//     $('.model_num_row#'+$(this).attr('model-tab')).show();
-
-//     window_panel_type = $(this).attr('window');
-
-//     // $('#panel_type_for_quatation').text(null);
-//     $('#panel_type_for_quatation').text(" ," +$(this).text());
-
-
-// });
-
-// model_number.click(function(){
-//     model_number.removeClass('selected');
-//     $(this).addClass('selected');
-//     model_number_value = $(this).attr('data-tab'); 
-//     $('#model_number_img img').attr('src',"./images/"+model_number_value+'.png');
-//     $('#model_number_img').show();
-
-    
-
-// });
-
-// $('#select_color ul li').click(function(){
-//     $('#select_color ul li').removeClass('selected');
-//     $(this).addClass('selected');
-//     panel_color = $(this).attr('dapplyColorOverlaata-color');
-//     $('#grid_submit').show();
-
-
-//     // $('#color_for_quatation').text(null);
-//     $('#color_for_quatation').text(", "+$(this).text()+" color");
-
-// });
 
 var this_color = null;
 document.querySelectorAll("#select_color ul li").forEach(e=>{
@@ -203,139 +109,7 @@ function image_append(){
 }
 
 
-// select grid 
-var quantity_of_window = null;
-function grid_append(grid_length){
 
-    if(grid_length != null){
-        document.querySelector('.window_quantity h4').innerText = "0"
-        document.querySelectorAll('.append_grid ul').forEach(e=>{
-            e.innerHTML = "";
-            
-        });
-        document.querySelectorAll('.append_grid ul').forEach(e=>{
-            for(let i = 0; i < grid_length; i++){
-            e.insertAdjacentHTML('beforeend' , '<li></li>');
-            }
-        });
-
-        // this is dummy function 
-        let height_arr = [21, 21, 21,21];
-
-        document.querySelector('.for_all_grid ul').innerHTML="";
-        document.querySelector('.for_grid_height ul').innerHTML = "";
-        for(let i = 0; i < 4; i++){
-            document.querySelector('.for_all_grid ul').insertAdjacentHTML("beforeend", `<li><span>All</span></li>`);
-
-        document.querySelector('.for_grid_height ul').insertAdjacentHTML('beforeend', `<li><span>${height_arr[i]}</span></li>`);
-    }
-        // dummy function end 
-
-
-        document.querySelector('.image_grid_parent.append_grid ul').className = '';
-        document.querySelector('.image_grid_parent.append_grid ul').classList.add(panel_type_value+'-'+door_size);
-
-        document.querySelector('.select_boxes.append_grid ul').className = "";
-        document.querySelector('.select_boxes.append_grid ul').classList.add(panel_type_value+'-'+door_size);
-
-    }
-    
-        document.querySelectorAll('.select_boxes ul li').forEach(e=>{
-            e.addEventListener('click' , function(){
-                this.classList.toggle('selected');  
-                quantity_of_window = $(this).siblings('li.selected').length + 1;
-                $('.window_quantity h4').text(quantity_of_window);
-
-                // $('#window_quantity_for_quatation').text(null);
-                $('#window_quantity_for_quatation').text('window quantity is - '+ quantity_of_window);
-
-            });
-        });
-
-        // dummy function click 
-        let for_select_box = []
-        document.querySelectorAll('.select_boxes ul li').forEach((e, i)=>{
-            for_select_box.push(i);
-        });
-        
-        let partSize = for_select_box.length / 4;
-        let parts = [];
-        for (let i = 0; i < 4; i++) {
-            let startIndex = i * partSize;
-            let endIndex = startIndex + partSize;
-            let part = for_select_box.slice(startIndex, endIndex);
-            parts.push(part);
-          }
-
-        document.querySelectorAll('.for_all_grid ul li span').forEach((e, index_this)=>{
-            e.addEventListener('click', function(){
-                
-                this.classList.toggle('selected');
-                console.log(parts[index_this][0]);
-                console.log(parts[index_this].length);
-                console.log(this.className)
-                
-                if(this.className == "selected"){
-                    for(i = parts[index_this][0]; i < (parts[index_this][0] + parts[index_this].length); i++){
-                    document.querySelectorAll('.select_boxes ul li')[i].classList.add('selected');
-                    }
-                }
-                else{
-                    for(i = parts[index_this][0]; i < (parts[index_this][0] + parts[index_this].length); i++){
-                        document.querySelectorAll('.select_boxes ul li')[i].classList.remove('selected');
-                        } 
-                }
-
-                let length_of_window  = $('.select_boxes ul li.selected').length;
-                $('.window_quantity h4').text(length_of_window);
-                $('#window_quantity_for_quatation').text("window quantity is - "+length_of_window);  
-            });
-        });
-
-        // dummy function click end
-
-    }
-
-
-
-
-
-    document.querySelector('#grid_submit_btn button').addEventListener('click', function(){
-        let index_num_arr = [];
-        var list = document.querySelector('.select_boxes ul');
-        list.querySelectorAll('li.selected').forEach(a =>{
-            var this_index = Array.from(list.children).indexOf(a);
-            index_num_arr.push(this_index);
-        });
-       
-    
-        document.querySelectorAll('.image_grid_parent.append_grid ul li').forEach(e=>{
-            e.classList.remove('i_am_selected');
-            e.innerHTML = "";
-            e.style.background = '';
-        });
-        
-        
-        
-        for(let i = 0; i < index_num_arr.length; i++){
-            document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].insertAdjacentHTML('beforeend' , '<img class=window_frame"/><canvas class="myCanvas"></canvas><span></span>');
-            document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].classList.add('i_am_selected');
-
-            document.querySelectorAll('.image_grid_parent.append_grid ul li')[index_num_arr[i]].querySelector('img').src = `images/window/${panel_type_value}/${window_type}.png`;
-
-            $('.image_grid_parent.append_grid ul li.i_am_selected').find('span').css('background' , 'url(images/glass/'+glass_type+'.jpg)');
-
-
-        }
-
-        applyColorOverlay_multiple(this_color);
-
-        setTimeout(function(){
-        applyColorOverlay_multiple(this_color);
-
-        },100);
-    });
-    
     $('.click_function ul li').click(function(){
         $(this).parent().find('li.selected').removeClass('selected');
         $(this).addClass('selected');
@@ -372,11 +146,39 @@ function grid_append(grid_length){
         $(this).addClass('selected');
        
         $('#track_for_quatation').text($('.track_row').find('.selected').text());
-        console.log($('.track_row').find('.selected').text());
 
     });
 
     $('.strut_type ul li').click(function(){
         $('#strut_for_quatation').text($(this).text());
-    })
+    });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
