@@ -6,7 +6,6 @@ const sectionToCapture = document.getElementById('image_download_section');
 
 document.querySelector('#downloadButton button').addEventListener('click', function () {
 
-  console.log('i am clicked');
 
   html2canvas(sectionToCapture).then( function(canvas) {
 

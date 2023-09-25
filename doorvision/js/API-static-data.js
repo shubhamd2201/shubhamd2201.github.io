@@ -143,15 +143,8 @@ $.ajax({
    
         }
         page_loader.hide();
+        clickStrut();
 
-        $('#strutData ul li').click(function(){
-
-            $(this).siblings().removeClass('selected');
-            $(this).toggleClass('selected');
-            $('#strut_for_quatation').text($("#strutData ul li.selected").text());
-
-        });
-        
 
 
     },
@@ -161,6 +154,78 @@ $.ajax({
     }
 
 });
+
+// this is for click on strut and append extra strut 
+function clickStrut(){
+    $('#strutData ul li').click(function(){
+
+        $(this).siblings().removeClass('selected');
+        $(this).toggleClass('selected');
+        $('#strut_for_quatation').text($("#strutData ul li.selected").text());
+
+       let this_id =  $(this).attr("sturtcategorytypeid");
+
+
+        $.ajax({
+            url: `${path_of_site}SturtCategory/GetSturtCategoryTypeId?SturtCategoryTypeId=${this_id}`,
+            type: 'GET',
+            headers: {
+                'Authorization':'Bearer ' + token,
+            },
+            success: function(data) {
+        
+                JSON.stringify(data);
+                $('#extrastrutData .error').text("");
+        
+                if(data.payload == null || data.payload == undefined){
+                    $('#extrastrutData .error').text("Data does not exist");
+        
+                }
+                else{
+                    document.querySelector('#extrastrutData ul').innerHTML = null;
+                    document.querySelector('#extrastrutData p').innerHTML = "Extra Strut Type";
+
+                    document.querySelector('#strut_quantity').innerHTML = null;
+                    data.payload.forEach(e=>{
+                     document.querySelector('#extrastrutData ul').insertAdjacentHTML('beforeend', ` <li sturtCategoryId="${e.sturtCategoryId}">
+                     ${e.sturtCategoryName}
+                     </li>`
+                     );
+                    });
+                    
+                    document.querySelector('#strut_quantity').insertAdjacentHTML('beforeend', 
+                    `<p>Extra Strut Quantity</p>
+                    <div>
+                        <input type="number" class="w-100 py-2 px-3 rounder-theme">
+                    </div>`
+                     );
+           
+                }
+                page_loader.hide();
+        
+            },
+            error: function(xhr, status, error) {
+                $('#extrastrutData .error').text("Error:"+error);
+                page_loader.hide();
+            }
+        
+        });
+
+
+
+
+
+
+
+
+
+
+
+        
+    });
+}
+
+
 
 
 // for door operator 
@@ -305,6 +370,7 @@ function springTypeClick(){
                 else{
                     document.querySelector('#spriingCyclage').insertAdjacentHTML('beforeend', ` <option>Select Cyclage</option>`
                 );
+                console.log(data.payload);
                 //  data.payload.forEach(e=>{
                 document.querySelector('#spriingCyclage').insertAdjacentHTML('beforeend', ` <option springCategoryName="${data.payload.springCategoryName}" value="${data.payload.springCategoryId}" springCategoryId="${data.payload.springCategoryId}">${data.payload.springCategoryName}</option>`
                 );

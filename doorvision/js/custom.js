@@ -156,7 +156,17 @@ function image_append(){
 
 
 
+$("#window_glass ul li").click(function(){
+   
 
+   $(this).find("img").attr("src")
+
+//    $('.window_img').css('background-image',`url(${glassImgPath}) center no-repeat`);
+
+$('.window_img').has("canvas").css('background', 'url('+$(this).find("img").attr("src")+') center no-repeat');
+
+
+})
 
 
 

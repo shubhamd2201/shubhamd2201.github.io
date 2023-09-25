@@ -543,6 +543,7 @@ function to_append_model_number(){
         
                 $('.your_door_design ').hide();
                 $('.image_grid_parent.append_grid').show();
+                $('#downloadButton').show();
                 forOtherData();
 
                 let doorModelId = $(this).attr('doormodelid');
@@ -604,7 +605,6 @@ function to_append_model_number(){
                     $('.for_grid_height ul').empty();
             
                 for(let i = 0; i < numberOfRow; i++){
-                    console.log(numberOfColumn);
                     // this is for create row in img 
                     document.querySelectorAll('.create_img').forEach((a)=>{
                         a.insertAdjacentHTML('beforeend',`<ul class=height${heightData[i]} rowIndex = ${i}> </ul>`);
@@ -694,7 +694,7 @@ function to_append_model_number(){
                     for(let i = 0; i < arrForGridDataRow.length; i++){
                         for(let j = 0; j < arrForGridDataColumn[i].length; j++){
                            
-                        document.querySelectorAll(".create_img ul")[arrForGridDataRow[i]].querySelectorAll("li")[arrForGridDataColumn[i][j]].querySelector('.window_img').insertAdjacentHTML("beforeend",` <img src="./images/Short_plain.png" >
+                        document.querySelectorAll(".create_img ul")[arrForGridDataRow[i]].querySelectorAll("li")[arrForGridDataColumn[i][j]].querySelector('.window_img').insertAdjacentHTML("beforeend",` <img src="./images/Casecade.png" >
                         <canvas class="windowCanavas"></canvas> `
                             )
                         }
@@ -836,9 +836,10 @@ function to_append_model_number(){
             // http://doorportal-001-site1.etempurl.com/v1/DoorColor
 
             // http://doorportal-001-site1.etempurl.com/v1/SpringCategory/2
+            // strut catogary 
 
             $.ajax({
-                url: `http://doorportal-001-site1.etempurl.com/v1/DoorSealType/DoorSealType`,
+                url: `http://doorportal-001-site1.etempurl.com/v1/SturtCategory/GetSturtCategoryTypeId?SturtCategoryTypeId=1`,
                 type: 'GET',
                 headers: {
                     'Authorization':'Bearer ' + token,
