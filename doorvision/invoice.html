@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Example 1</title>
+    <style>
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        a {
+            color: #5D6975;
+            text-decoration: underline;
+        }
+
+        body {
+            position: relative;
+            width: 21cm;
+            height: 29.7cm;
+            margin: 0 auto;
+            color: #001028;
+            background: #FFFFFF;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-family: Arial;
+        }
+
+        header {
+            padding: 10px 0;
+            margin-bottom: 30px;
+        }
+
+        #logo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #logo img {
+            width: 90px;
+        }
+        .logo img{max-width: 170px;}
+
+        h1 {
+            border-top: 1px solid #5D6975;
+            border-bottom: 1px solid #5D6975;
+            color: #5D6975;
+            font-size: 2.4em;
+            line-height: 1.4em;
+            font-weight: normal;
+            text-align: center;
+            margin: 0 0 20px 0;
+            background: url(dimension.png);
+        }
+
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justif .align-items-start {
+            align-items: start;
+        }
+
+        /*===width===*/
+
+        .w10 {
+            width: 10%;
+        }
+
+        .w15 {
+            width: 15%;
+        }
+
+        .w20 {
+            width: 20%;
+        }
+
+        .w25 {
+            width: 25%;
+        }
+
+        .w30 {
+            width: 30%;
+        }
+
+        .w33 {
+            width: 33%;
+        }
+
+        .w40 {
+            width: 40%;
+        }
+
+        .w50 {
+            width: 50%;
+        }
+
+        .w45 {
+            width: 45%;
+        }
+
+        .w60 {
+            width: 60%;
+        }
+
+        .w70 {
+            width: 70%;
+        }
+
+        .w75 {
+            width: 75%;
+        }
+
+        .w80 {
+            width: 80%;
+        }
+
+        .w90 {
+            width: 90%;
+        }
+
+        .w100 {
+            width: 100%;
+        }
+
+        .pl-12 {
+            padding-left: 12px;
+        }
+
+        .pr-12 {
+            padding-right: 12px;
+        }
+
+        .my-12 {
+            margin: 12px 0px;
+        }
+
+        .mb-12 {
+            margin-bottom: 12px;
+        }
+
+        .mt-12 {
+            margin-top: 12px;
+        }
+
+        .d-flex {
+            display: -ms-flexbox;
+            display: flex
+        }
+
+        .flex-row {
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+            flex-direction: row;
+        }
+
+        .flex-wrap {
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+
+        .justify-content-start {
+            -webkit-box-pack: start;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+        }
+
+        .justify-content-between {
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+
+        .justify-content-end {
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+        }
+
+        .justify-content-center {
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .align-items-start {
+            -webkit-box-align: start;
+            -ms-flex-align: start;
+            align-items: flex-start;
+        }
+
+        .align-items-end {
+            -webkit-box-align: end;
+            -ms-flex-align: end;
+            align-items: flex-end;
+        }
+
+        .align-items-center {
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 20px;
+        }
+
+        table tr:nth-child(2n-1) td {
+            background: #F5F5F5;
+        }
+
+        table th,
+        table td {
+            text-align: center;
+        }
+
+        table th {
+            padding: 5px 20px;
+            color: #5D6975;
+            border-bottom: 1px solid #C1CED9;
+            white-space: nowrap;
+            font-weight: normal;
+        }
+
+        table .service,
+        table .desc {
+            text-align: left;
+        }
+
+        table td {
+            padding: 20px;
+            text-align: right;
+        }
+
+        table td.service,
+        table td.desc {
+            vertical-align: top;
+        }
+
+        table td.unit,
+        table td.qty,
+        table td.total {
+            font-size: 1.2em;
+        }
+
+        table td.grand {
+            border-top: 1px solid #5D6975;
+            ;
+        }
+
+        #notices .notice {
+            color: #5D6975;
+            font-size: 1.2em;
+        }
+
+        footer {
+            color: #5D6975;
+            width: 100%;
+            height: 30px;
+            position: absolute;
+            bottom: 0;
+            border-top: 1px solid #C1CED9;
+            padding: 8px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="clearfix">
+
+        <div class="invoiceHeader">
+            <div class="w100 d-flex  justify-content-between align-items-end">
+                <div class="w33 mb-12 d-flex flex-row flex-wrap">
+                    <div class="w100">
+                        DoorMaster Industries Inc,
+                        5000 Linbar Drive Suite 205, Nashville, TN
+                    </div>
+                    <div class="w100 d-flex flex-row justify-content-between align-items-start">
+                        https://doormasterind.com
+                    </div>
+                    <div class="w100 d-flex flex-row justify-content-start align-items-start">
+                        <strong class="w15">Email</strong>
+                        <div class="w70 pl-12">contact@doormasterind.com</div>
+                    </div>
+                    <div class="w100 d-flex flex-row justify-content-start align-items-start">
+                        <strong class="w15">Tel</strong>
+                        <div class="w70 pl-12">615-678-5251</div>
+                    </div>
+                </div>
+                <div class="w33 mb-12 d-flex justify-content-center flex-row flex-wrap">
+                    <div class="logo">
+                        <img src="./images/DoorMaster-Logo-CMYK.png" alt="">
+                    </div>
+                </div>
+                <div class="w33 d-flex mb-12 flex-row flex-wrap justify-content-end align-items-start">
+                    <div class="w100 d-flex justify-content-end align-items-start">
+                        <strong class="w30">Order#</strong>
+                        <div class="w30 pl-12">SO-000051</div>
+                    </div>
+                    <div class="w100 d-flex mt-12 justify-content-end align-items-start">
+                        <strong class="w30">Date</strong>
+                        <div class="w30 pl-12">06/12/23</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <h1>QUOTATION</h1>
+
+        <div class="invoiceHeader">
+            <div class="w100 d-flex  justify-content-between align-items-start">
+                <div class="w45 d-flex flex-row   justify-content-between align-items-start">
+                    <strong class="w30">Billing Address</strong>
+                    <div class="w70 pl-12">
+                        Hello, Philip Brooks.
+                        Thank you for shopping from our store and for your order.
+                    </div>
+                </div>
+                <div class="w45 d-flex flex-row  justify-content-between align-items-start">
+                    <strong class="w30">Shipping Address</strong>
+                    <div class="w70 pl-12 d-flex flex-row flex-wrap align-items-start">
+                        Hello, Philip Brooks.
+                        Thank you for shopping from our store and for your order.
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 my-12 d-flex flex-row  justify-content-start align-items-start">
+                <div class="w45 d-flex flex-row   justify-content-between align-items-start">
+                    <strong class="w30">Contect</strong>
+                    <div class="w70 pl-12">Tim Carnes
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 d-flex flex-row  justify-content-start align-items-start">
+                <div class="w45 d-flex flex-row   justify-content-between align-items-start">
+                    <strong class="w30">Phone</strong>
+                    <div class="w70 pl-12">
+                        615-678-5251 Or 615-678-5251</div>
+                </div>
+            </div>
+            <div class="w-100 my-12 d-flex flex-row  justify-content-start align-items-start">
+                <div class="w45 d-flex flex-row   justify-content-between align-items-start">
+                    <strong class="w30">Payment Terms</strong>
+                    <div class="w70 pl-12"></div>
+                </div>
+            </div>
+            <div class="w-100 d-flex flex-row  justify-content-start align-items-start">
+                <div class="w45 d-flex flex-row   justify-content-between align-items-start">
+                    <strong class="w30">Due on Receipt</strong>
+                    <div class="w70 pl-12"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th class="service">PRODUCT</th>
+                    <th class="desc">DESCRIPTION</th>
+                    <th>QUANTITY</th>
+                    <th>UNIT PRICE</th>
+                    <th>SUB-TOTALE</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td class="service">Development</td>
+                    <td class="desc">Developing a Content Management System-based Website</td>
+                    <td class="unit">$40.00</td>
+                    <td class="qty">80</td>
+                    <td class="total">$3,200.00</td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">SUBTOTAL</td>
+                    <td class="total">$5,200.00</td>
+                </tr>
+                <tr>
+                    <td colspan="4">TAX 25%</td>
+                    <td class="total">$1,300.00</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="grand total">TOTAL</td>
+                    <td class="grand total">$6,500.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+    <footer>
+        Invoice was created on a computer and is valid without the signature and seal.
+    </footer>
+
+
+    <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="js/custom.js" type="text/javascript"></script>
+
+</body>
+
+</html>

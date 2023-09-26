@@ -215,7 +215,7 @@ size_button.click(function(){
       
         
               }
-
+var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('doorcollectionid');
 
               $.ajax({
                 url: `${path_of_site}DoorSubCollection/GetDoorCollectionListById?DoorCollectionId=1`,
@@ -227,9 +227,10 @@ size_button.click(function(){
    
                      JSON.stringify(data);
                      document.querySelector("#door_collection_family").innerHTML = null;
+                     console.log(data.payload);
                      data.payload.forEach(e=>{
                        document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="col-lg-3 col-md-6 col-sm-12">
-                       <div class="door_family p-2" doorCollectionId="${e.doorCollectionId}"f>
+                       <div class="door_family p-2" doorSubCollectionId="${e.doorSubCollectionId}"f>
                            <div class="img d-table mx-auto mb-2">
                                <img src="${e.filePath}" alt="${e.doorSubCollectionName}">
                            </div>
@@ -377,9 +378,10 @@ size_button.click(function(){
     
                       JSON.stringify(data);
                       document.querySelector("#door_collection_family").innerHTML = null;
+                    console.log(data.payload);
                       data.payload.forEach(e=>{
                         document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="door_family p-2" doorCollectionId="${e.doorCollectionId}"f>
+                        <div class="door_family p-2" doorSubCollectionId="${e.doorSubCollectionId}"f>
                             <div class="img d-table mx-auto mb-2">
                                 <img src="${e.filePath}" alt="${e.doorSubCollectionName}">
                             </div>
@@ -415,10 +417,10 @@ size_button.click(function(){
         
             $('#door_collection_family .door_family').removeClass('selected');
             $(this).addClass('selected');
-            const DoorCategory = $(this).attr('doorcollectionid');
+            const SubSubCollectionId = $(this).attr('doorSubcollectionid');
 
             $.ajax({
-                url: `${path_of_site}DoorCategory/${DoorCategory}`,
+                url: `${path_of_site}DoorSubCollectionPanel/GetBySubCollectionId?SubCollectionId=${SubSubCollectionId}`,
                 type: 'GET',
                 headers: {
                     'Authorization':'Bearer ' + token,
@@ -426,19 +428,20 @@ size_button.click(function(){
                 success: function(data) {
    
                      JSON.stringify(data);
-                     document.querySelector("#panel_type").innerHTML = null;
 
-                    //  data.forEach(e=>{
+                     document.querySelector("#panel_type").innerHTML = null;
+                     console.log(data.payload)
+                     data.payload.forEach(e=>{
                        document.querySelector("#panel_type").insertAdjacentHTML('beforeend', 
                        `<div class="col-lg-3 col-md-4 col-sm-6 ">
-                       <div class="door_catogary  bg-light rounded " doorCategoryId="${data.payload.doorCategoryId}">
+                       <div class="door_catogary  bg-light rounded " doorPanelId="${e.doorPanelId}">
                            <div class="img">
-                               <img src="./images/Raised_Panel_Short.jpg" alt="">
+                               <img src="${e.filePath}" alt="">
                            </div>
-                           <p class="mb-0">${data.payload.doorCategoryName}</p>
+                           <p class="mb-0">${e.doorPanelName}</p>
                        </div>
                    </div>`);
-                    //  });
+                     });
 
                     if(selected_height_ft != null && selected_width_ft != null){
                         to_append_model_number();
@@ -472,11 +475,11 @@ function to_append_model_number(){
         $('#window_quantity_for_quatation').text(`Window Quantity:0`);
          $('#windowQ').text("0");
 
-        let doorPanelId = $(this).attr('doorcategoryid');
+        let doorPanelId = $(this).attr('doorPanelId');
         
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected');
-        const Door_panel = $(this).attr('doorcategoryid');
+        const Door_panel = $(this).attr('doorPanelId');
 
         $('#panel_type_for_quatation').text(' ,'+ $(this).text());
 
@@ -543,7 +546,7 @@ function to_append_model_number(){
         
                 $('.your_door_design ').hide();
                 $('.image_grid_parent.append_grid').show();
-                $('#downloadButton').show();
+                $('.left_btns').show();
                 forOtherData();
 
                 let doorModelId = $(this).attr('doormodelid');
@@ -585,7 +588,7 @@ function to_append_model_number(){
         
                 // for create image and grid 
                 // let heightData = $(this).attr('noOfSection').split(','); 
-                let heightData = [21,18,18,21];
+                let heightData = [21,21,21,21];
                 let dataIndexForWindow =this.getAttribute('data-index');
                 setTimeout(function(){
 
@@ -651,6 +654,10 @@ function to_append_model_number(){
                      let windowQunatity = $('.append_grid_for_selection ul li.i_am_selected').length;
                     $('#window_quantity_for_quatation').text(`Window Quantity:${windowQunatity}`);
                     $('#windowQ').text(windowQunatity);
+
+                    setWindow();
+                    setGlass();
+
             
                 });
             
@@ -672,6 +679,8 @@ function to_append_model_number(){
                             }
                                             
                         }
+
+                        
                     });
                     // arrForGridDataRow.sort();
             
@@ -691,20 +700,25 @@ function to_append_model_number(){
             
                     $('.create_img ul li .window_img').empty();
             
+                    let window_typeand_color = './images/window/'+$("#select_color ul li.selected p").text()+'_'+$('#window_type ul li.selected').attr('data-window')+'.png';
+
                     for(let i = 0; i < arrForGridDataRow.length; i++){
                         for(let j = 0; j < arrForGridDataColumn[i].length; j++){
                            
-                        document.querySelectorAll(".create_img ul")[arrForGridDataRow[i]].querySelectorAll("li")[arrForGridDataColumn[i][j]].querySelector('.window_img').insertAdjacentHTML("beforeend",` <img src="./images/Casecade.png" >
-                        <canvas class="windowCanavas"></canvas> `
+                        document.querySelectorAll(".create_img ul")[arrForGridDataRow[i]].querySelectorAll("li")[arrForGridDataColumn[i][j]].querySelector('.window_img').insertAdjacentHTML("beforeend",` <img src="${window_typeand_color}" >
+                        <!-- <canvas class="windowCanavas"></canvas> -->`
                             )
                         }
                     }
-                    applyColorOverlaywindow(my_color);
+
+                    setWindow();
+                    setGlass();
+                    // applyColorOverlaywindow(my_color);
                    
-                    if($(".create_img ul li").find(".window_img").length > 0){
-                        applyColorOverlaywindow(my_color);
-                        setTimeout(applyColorOverlaywindow, 100, my_color);
-                    }
+                    // if($(".create_img ul li").find(".window_img").length > 0){
+                    //     applyColorOverlaywindow(my_color);
+                    //     setTimeout(applyColorOverlaywindow, 100, my_color);
+                    // }
                 });
             
             
@@ -714,6 +728,8 @@ function to_append_model_number(){
                 document.querySelectorAll(".for_all_grid ul li span").forEach((a, x)=>{
                     a.addEventListener("click", function(){
             
+                        ;
+
                         if(this.className == "selected"){
             
                             this.classList.remove("selected");
@@ -733,7 +749,12 @@ function to_append_model_number(){
                         let windowQunatity = $('.append_grid_for_selection ul li.i_am_selected').length;
                         $('#window_quantity_for_quatation').text(`Window Quantity:${windowQunatity}`);
                         $('#windowQ').text(windowQunatity); 
+
+                        setWindow();
+                        setGlass();
                     });
+
+                    
                 });
             // end 
             
@@ -761,10 +782,13 @@ function to_append_model_number(){
             
                             $('#select_color ul li').eq(0).addClass('selected');
                             $("#color_for_quatation").text(` ,${$('#select_color ul li.selected').text()}`);
+
                             // for color end
             
                               // click on color 
                             $('#select_color ul li').on('click', function(){
+
+
                                 my_color = $(this).attr('data-color');
             
                                 $(this).siblings().removeClass('selected');
@@ -777,8 +801,12 @@ function to_append_model_number(){
             
             
                                 if($(".create_img ul li").find(".window_img").length > 0){
-                                    applyColorOverlaywindow(my_color);
+                                    // applyColorOverlaywindow(my_color);
                                 }
+
+                                setWindow();
+                                setGlass();
+
                             });
                             // click on color end
     

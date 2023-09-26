@@ -162,6 +162,7 @@ function clickStrut(){
         $(this).siblings().removeClass('selected');
         $(this).toggleClass('selected');
         $('#strut_for_quatation').text($("#strutData ul li.selected").text());
+        document.querySelector('#strut_quantity').innerHTML = null;
 
        let this_id =  $(this).attr("sturtcategorytypeid");
 
@@ -193,15 +194,27 @@ function clickStrut(){
                      );
                     });
                     
-                    document.querySelector('#strut_quantity').insertAdjacentHTML('beforeend', 
-                    `<p>Extra Strut Quantity</p>
-                    <div>
-                        <input type="number" class="w-100 py-2 px-3 rounder-theme">
-                    </div>`
-                     );
+                    if(data.payload.length > 0){
+                        document.querySelector('#strut_quantity').insertAdjacentHTML('beforeend', 
+                        `<p>Extra Strut Quantity</p>
+                        <div>
+                            <input type="number" class="w-100 py-2 px-3 rounder-theme">
+                        </div>`
+                        );
+                    }
            
                 }
                 page_loader.hide();
+
+                $('#extrastrutData ul li').click(function(){
+                    $('#extrastrutData ul li').removeClass('selected');
+                    $(this).addClass('selected');
+                    $('#extraStrut_for_quotation').text($(this).text());
+                });
+
+                $('#strut_quantity input').on('input', function(){
+                    $('#strut_quantity_for_quatation').text($(this).val());
+                });
         
             },
             error: function(xhr, status, error) {
@@ -248,10 +261,10 @@ $.ajax({
             document.querySelector('#doorOperator').innerHTML = null;
             data.payload.forEach((e, index)=>{
              document.querySelector('#doorOperator').insertAdjacentHTML('beforeend', `<div class="col-lg-4 col-md-6 col-sm-12 ">
-                <div class="door_operator_col_inr border_2px" data-index="${index}" company_Operator_Type_Id="${e.company_Operator_Type_Id}" company_Operator_Type_Name=${e.company_Operator_Type_Name} >
-                    <div class="door_operator_logo"> <img src="${e.file_Path}" alt="${e.company_Operator_Type_Name}"></div>
+                <div class="door_operator_col_inr border_2px" data-index="${index}" companyOperatorTypeId="${e.companyOperatorTypeId}" companyOperatorTypeName=${e.companyOperatorTypeName} >
+                    <div class="door_operator_logo"> <img src="${e.filePath}" alt="${e.companyOperatorTypeName}"></div>
                     <div class="door_operator_select_box">
-                        <select name="${e.company_Operator_Type_Name}">
+                        <select name="${e.companyOperatorTypeName}">
                         
                         </select>
                         <span class="error"></span>
@@ -281,11 +294,11 @@ function doorOperatorEvent (){
     let doorOperatorSelect = document.querySelectorAll('#doorOperator .door_operator_col_inr');
 
     for (let i = 0; i < doorOperatorSelect.length; i++){
-        let company_operator_type_id = doorOperatorSelect[i].getAttribute('company_operator_type_id');
+        let companyOperatorTypeId = doorOperatorSelect[i].getAttribute('companyOperatorTypeId');
 
 page_loader.show();
     $.ajax({
-        url: `${path_of_site}CompanyOperator/CompanyOperatorByTypeId?CompanyOperatorTypeId=${company_operator_type_id}`,
+        url: `${path_of_site}CompanyOperator/CompanyOperatorByTypeId?CompanyOperatorTypeId=${companyOperatorTypeId}`,
         type: 'GET',
         headers: {
             'Authorization':'Bearer ' + token,
@@ -346,7 +359,7 @@ function springTypeClick(){
         $(this).addClass('selected');
 
         $('#Spring_for_quatation').text($(this).text());
-        console.log($(this).text())
+   
 
         let springcategorytypeid = $(this).attr('springcategorytypeid');
         page_loader.show();

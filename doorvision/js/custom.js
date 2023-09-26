@@ -6,7 +6,25 @@ $('.accordian_heading').click(function(){
     $(this).toggleClass('closed');
 });
 
+function setWindow(){
+    
+    let window_typeand_color = './images/window/'+$("#select_color ul li.selected p").text()+'_'+$('#window_type ul li.selected').attr('data-window')+'.png';
+    
 
+    $(".window_img").find("img").attr('src',window_typeand_color);
+
+    $('#window_type_for_quatation').text(", Window Insert: "+$('#window_type ul li.selected').text());
+    
+}
+
+function setGlass(){
+
+    $('.window_img').css('background', "none");
+    $('.window_img').has("img").css('background', 'url('+$("#window_glass ul li.selected").find("img").attr("src")+') center no-repeat');
+
+    $('#window_glass_type_for_quatation').text(", Window Glass:"+$('#window_glass_type ul li.selected').text() + $('#window_glass ul li.selected').text());
+    
+}
 
 
 var this_color = null;
@@ -18,13 +36,14 @@ document.querySelectorAll("#select_color ul li").forEach(e=>{
         applyColorOverlay(this_color);
 
         if($(".image_grid_parent.append_grid ul li img").length > 0){
-        applyColorOverlay_multiple(this_color);
+        // applyColorOverlay_multiple(this_color);
 
+        setWindow();
+        setGlass()
         }
 
     });
 
-    $('#grid_submit').show();
 });
 
 
@@ -36,77 +55,8 @@ $('.window_glass_tabbing ul li').click(function(){
     $('#window_glass #'+this_tab).show();
 })
 
-$("#window_glass ul li").click(function(){
-    $("#window_glass ul li").removeClass('selected');
-    $(this).addClass('selected');
-    glass_type = $(this).attr('data-glass');
-
-    // $('#window_glass_type_for_quatation').text(null);
-    $('#window_glass_type_for_quatation').text(", "+$('.window_glass_tabbing ul li.selected').text() +" "+ $(this).text());
 
 
-    $('.image_grid_parent.append_grid ul li.i_am_selected').find('span').css('background' , 'url(./images/glass/'+glass_type+'.jpg)');
-});
-
-$('#window_type ul li').click(function(){
-    $("#window_type ul li").removeClass('selected');
-    $(this).addClass('selected');
-    window_type = $(this).attr('data-window');
-
-    // $('#window_type_for_quatation').text(null);
-    $('#window_type_for_quatation').text($(this).text());
-
-
-    if($(".image_grid_parent.append_grid ul li img").length > 0){
-        applyColorOverlay_multiple(this_color);
-        // grid_append(window_quantity);
-        }
-        
-    
-
-});
-
-
-
-$('#raised_submit button').click(function(){
-    image_append();
-    $('#downloadButton').show();
-});
-
-
-// image append 
-function image_append(){
-    {
-
-        if(door_size != null && collection_and_family_value != null && collection_and_family_type != null && panel_type_value != null){
-    
-            path_of_img = door_size+"-"+collection_and_family_value+"-"+collection_and_family_type+"-"+panel_type_value;
-            
-    
-            document.querySelector('.your_door_design ').style.display = "none";
-            document.querySelector('#final_door_image').src = "./images/door_images/"+path_of_img+".png";
-    
-            console.log(path_of_img);
-            // console.log(`./images/"+"/door_images/"+path_of_img+".png"`)
-    
-            let window_q = $('#size_button').find('.selected').attr('window');
-
-        
-            if(door_size == '10x8' && panel_type_value == 'long_panel'){
-                window_q = 10;
-            }
-            window_quantity = window_q * window_panel_type;
-    
-            grid_append(window_quantity);
-    
-           $('#downloadButton').show();
-            
-        }
-        else{
-            alert('please select all option');
-        }
-    }
-}
 
 
 
@@ -157,18 +107,37 @@ function image_append(){
 
 
 $("#window_glass ul li").click(function(){
-   
+    $("#window_glass ul li").removeClass("selected");
+    $(this).addClass("selected");
+    
+   $('#window_type').show();
 
-   $(this).find("img").attr("src")
+   setGlass();
 
-//    $('.window_img').css('background-image',`url(${glassImgPath}) center no-repeat`);
+});
 
-$('.window_img').has("canvas").css('background', 'url('+$(this).find("img").attr("src")+') center no-repeat');
+$("#window_type ul li").click(function(){
+    $("#window_type ul li").removeClass("selected");
+    $(this).addClass("selected");
 
 
+    setWindow();
+    setGlass()
 })
 
+$("#generateQuotation").click(function(){
+    let b = "CHI - 2250"
+    printData (b)
+})
 
+function printData (a){
+    document.querySelector("td.service").innerText = a;
+}
+
+$("#flipbtn").click(function(){
+    $(this).toggleClass('btn-success');
+    $('.backdoorImg').slideToggle();
+})
 
 
 
