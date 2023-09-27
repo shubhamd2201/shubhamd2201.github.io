@@ -140,6 +140,7 @@ $.ajax({
              </li>`
              );
             });
+            document.querySelector('.strut_type .strut_type_inline').innerText = data.payload[0].sturtCategoryTypeName;
    
         }
         page_loader.hide();
@@ -364,8 +365,7 @@ function springTypeClick(){
         let springcategorytypeid = $(this).attr('springcategorytypeid');
         page_loader.show();
         $.ajax({
-            
-            url: `${path_of_site}SpringCategory/${springcategorytypeid}`,
+            url: `${path_of_site}SpringCategory/SpringCategoryTypeId?SpringCategoryTypeId=${springcategorytypeid}`,
             type: 'GET',
             headers: {
                 'Authorization':'Bearer ' + token,
@@ -384,10 +384,10 @@ function springTypeClick(){
                     document.querySelector('#spriingCyclage').insertAdjacentHTML('beforeend', ` <option>Select Cyclage</option>`
                 );
                 console.log(data.payload);
-                //  data.payload.forEach(e=>{
-                document.querySelector('#spriingCyclage').insertAdjacentHTML('beforeend', ` <option springCategoryName="${data.payload.springCategoryName}" value="${data.payload.springCategoryId}" springCategoryId="${data.payload.springCategoryId}">${data.payload.springCategoryName}</option>`
+                 data.payload.forEach(e=>{
+                document.querySelector('#spriingCyclage').insertAdjacentHTML('beforeend', ` <option springCategoryName="${e.springCategoryName}" value="${e.springCategoryId}" springCategoryId="${e.springCategoryId}">${e.springCategoryName}</option>`
                 );
-                //  });
+                 });
                 }
                 page_loader.hide();
                 

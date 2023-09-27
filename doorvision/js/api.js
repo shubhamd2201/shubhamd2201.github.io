@@ -227,9 +227,9 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
    
                      JSON.stringify(data);
                      document.querySelector("#door_collection_family").innerHTML = null;
-                     console.log(data.payload);
+                
                      data.payload.forEach(e=>{
-                       document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="col-lg-3 col-md-6 col-sm-12">
+                       document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="col-lg-2 col-md-4 col-sm-6">
                        <div class="door_family p-2" doorSubCollectionId="${e.doorSubCollectionId}"f>
                            <div class="img d-table mx-auto mb-2">
                                <img src="${e.filePath}" alt="${e.doorSubCollectionName}">
@@ -241,9 +241,14 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
 
                      $('#family_for_quatation').text(data.payload[0].doorSubCollectionName+' Family');
                      
-                     append_door_sub_collection();
-                     DoorCategory_event();
                    page_loader.hide();
+
+                   append_door_sub_collection();
+
+                     DoorCategory_event();
+                     forDoorCollection();
+
+
                 },
                 error: function(xhr, status, error) {
                    document.querySelector('#door_collection_family').innerHTML = null;
@@ -378,9 +383,9 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
     
                       JSON.stringify(data);
                       document.querySelector("#door_collection_family").innerHTML = null;
-                    console.log(data.payload);
+                    
                       data.payload.forEach(e=>{
-                        document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="col-lg-3 col-md-6 col-sm-12">
+                        document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="door_family p-2" doorSubCollectionId="${e.doorSubCollectionId}"f>
                             <div class="img d-table mx-auto mb-2">
                                 <img src="${e.filePath}" alt="${e.doorSubCollectionName}">
@@ -477,7 +482,7 @@ function to_append_model_number(){
 
         let doorPanelId = $(this).attr('doorPanelId');
         
-        $(this).siblings().removeClass('selected');
+        $("#panel_type .door_catogary").removeClass('selected');
         $(this).addClass('selected');
         const Door_panel = $(this).attr('doorPanelId');
 
@@ -499,6 +504,8 @@ function to_append_model_number(){
             success: function(data) {
 
                  JSON.stringify(data);
+
+                 console.log(data);
                  document.querySelector("#model_number_row").innerHTML = null;
                  $("#model_number_row").siblings('.error').text('');
                 if(data.payload == null || data.payload == undefined){
@@ -570,6 +577,8 @@ function to_append_model_number(){
                     success:  function(data) {
                         JSON.stringify(data);
 
+                        console.log(data);
+
                         numberOfColumn =  data.payload[0].noOfSection;
                         repeatedFile =  data.payload[0].repeatedFile;
 
@@ -587,15 +596,16 @@ function to_append_model_number(){
                 });
         
                 // for create image and grid 
-                // let heightData = $(this).attr('noOfSection').split(','); 
-                let heightData = [21,21,21,21];
+                let heightData = $(this).attr('noOfSection').split(','); 
                 let dataIndexForWindow =this.getAttribute('data-index');
                 setTimeout(function(){
 
                     if(data.payload[0].noOfSection == undefined || data.payload[0].noOfSection == null || numberOfColumn == null || data.payload.length < 1){
 
                         page_loader.hide();
-
+                        $('.your_door_design ').show();
+                        $('.image_grid_parent.append_grid').hide();
+                        $('.left_btns').hide();
                         alert("Data not found");
                     }
                     

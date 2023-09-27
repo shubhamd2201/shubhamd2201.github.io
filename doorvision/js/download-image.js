@@ -52,7 +52,7 @@ document.getElementById("downloadButton").addEventListener("click", function () 
   // this is for color final 
 
 
-  var selectedOpacity = 0.80;
+  var selectedOpacity = 0.92;
   
 function applyColorOverlay(my_color) {
 
