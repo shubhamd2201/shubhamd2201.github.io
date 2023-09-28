@@ -33,10 +33,8 @@ $(document).ready(function() {
 
 
 
-const divToCapture = document.getElementById('image_download_section');
-
 captureButton.addEventListener('click', () => {
-  html2canvas(divToCapture).then((canvas) => {
+  html2canvas(sectionToCapture).then((canvas) => {
     const imageDataURL = canvas.toDataURL('image/png');
 
     let short_panel_windowPrice = [51.20, 66.10, 61.40, 91.74, 72.96, 97.70];
@@ -49,7 +47,10 @@ captureButton.addEventListener('click', () => {
     }
     else if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 2){
       perWindowPrice = long_panel_windowPrice[window_glassIndex];
+
+
     }
+
   
 
     const product_main_detal = $('#door_company_quatation').text()+', '+$('#model_number_for_quatation').text();
@@ -69,6 +70,7 @@ const modelPrice = $('#model_number_row .model_number_col.selected').attr('doors
 
     const doorOperatorPrice = $('#doorOperator .door_operator_col_inr.selected select option:selected').attr('saleprice');
 
+    $('#total_amount_show').text((perWindowPrice * window_qty) + (parseInt(modelPrice)) + (parseInt(doorOperatorPrice)));
 
 var dataToStore = {
   product_main_detal: product_main_detal,
@@ -98,10 +100,9 @@ localStorage.setItem("myData", jsonData);
 
 
 
-// const divToCapture = document.getElementById('image_download_section');
 
 // downloadButton.addEventListener('click', () => {
-//   domtoimage.toBlob(divToCapture)
+//   domtoimage.toBlob(sectionToCapture)
 //     .then(function (blob) {
 //       const a = document.createElement('a');
 //       a.href = URL.createObjectURL(blob);

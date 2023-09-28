@@ -52,6 +52,7 @@ $('#customSize input').on('input', function(){
         
     }
 
+
     if ($(this).val() === '') {
         $(this).addClass('error-border');
     } else {
@@ -632,16 +633,25 @@ function to_append_model_number(){
                     
                 }
             
-            
+                let repeat_img_path;
+
+                if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 1){
+                    repeat_img_path = './images/window_img.png'
+                }
+                else if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 2){
+                    repeat_img_path = './images/Long_Panel_Repete_Image.png'
+                }
                 for(let j = 0; j < numberOfColumn; j++){
       
-            
+                    // ${repeatedFile} for dynamic img src
+
+
                     // this is for create image column
                     document.querySelectorAll('.create_img ul').forEach((b)=>{
                         b.insertAdjacentHTML('beforeend',
                             `<li listindex = ${j}>
                                 <div class="createImageimg">
-                                    <img class="" src="${repeatedFile}">
+                                    <img class="" src="${repeat_img_path}">
                                     <canvas class="myCanvas"><canvas>
                                 </div>
                                 <div class="window_img"> </div>
@@ -765,7 +775,12 @@ function to_append_model_number(){
                 });
             // end 
             
-            
+            // if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 2 && selected_height_ft == 8 && selected_height_ft == 10){
+            //     $('.createGrid.create_img ').addClass('bigpadding');
+            // }
+            // else {
+            //     $('.createGrid.create_img').removeClass('bigpadding');
+            // }
             
             
                             // for color 
