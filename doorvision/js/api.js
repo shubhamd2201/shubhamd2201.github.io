@@ -435,7 +435,7 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
                      JSON.stringify(data);
 
                      document.querySelector("#panel_type").innerHTML = null;
-                     console.log(data.payload)
+                    
                      data.payload.forEach(e=>{
                        document.querySelector("#panel_type").insertAdjacentHTML('beforeend', 
                        `<div class="col-lg-3 col-md-4 col-sm-6 ">
@@ -472,7 +472,7 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
 
 
 // this is for append model number and click on panel type 
-
+let doorPanelId;
 function to_append_model_number(){
     $("#panel_type .door_catogary").click(function(){
         page_loader.show();
@@ -480,7 +480,7 @@ function to_append_model_number(){
         $('#window_quantity_for_quatation').text(`Window Quantity:0`);
          $('#windowQ').text("0");
 
-        let doorPanelId = $(this).attr('doorPanelId');
+        doorPanelId = $(this).attr('doorPanelId');
         
         $("#panel_type .door_catogary").removeClass('selected');
         $(this).addClass('selected');
@@ -504,8 +504,6 @@ function to_append_model_number(){
             success: function(data) {
 
                  JSON.stringify(data);
-
-                 console.log(data);
                  document.querySelector("#model_number_row").innerHTML = null;
                  $("#model_number_row").siblings('.error').text('');
                 if(data.payload == null || data.payload == undefined){
@@ -577,7 +575,6 @@ function to_append_model_number(){
                     success:  function(data) {
                         JSON.stringify(data);
 
-                        console.log(data);
 
                         numberOfColumn =  data.payload[0].noOfSection;
                         repeatedFile =  data.payload[0].repeatedFile;
@@ -597,7 +594,7 @@ function to_append_model_number(){
         
                 // for create image and grid 
                 let heightData = $(this).attr('noOfSection').split(','); 
-                let dataIndexForWindow =this.getAttribute('data-index');
+                let dataIndexForWindow = this.getAttribute('data-index');
                 setTimeout(function(){
 
                     if(data.payload[0].noOfSection == undefined || data.payload[0].noOfSection == null || numberOfColumn == null || data.payload.length < 1){
@@ -772,23 +769,39 @@ function to_append_model_number(){
             
             
                             // for color 
+                            let colorArr = ['#ebeeee', '#d6cdbe','#a09387', '#4b3933','#231f20'];
+
+                            let colorName = ['White', 'Almond','Sandstone', 'Brown', 'Black', 'Gray', 'Desert Tan']
+
                             document.querySelector('#select_color ul').innerHTML = "";
-                            data.payload[dataIndexForWindow].lstDoorColor.forEach((e)=>{
-                                if(!e.colorCode){
+                            colorArr.forEach((e, i)=>{
                                 document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-                                <li data-color="${e.filePath}">
-                                    <span style='background:url("${e.filePath}") center no-repeat;'></span>
-                                    <p>${e.doorColorName}</p>
+                                <li data-color="${e}">
+                                    <span style="background:${e};"></span>
+                                    <p>${colorName[i]}</p>
                                 </li>`);
-                                }
-                                else{
-                                    document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-                                <li data-color="${e.colorCode}">
-                                    <span style="background:${e.colorCode};"></span>
-                                    <p>${e.doorColorName}</p>
-                                </li>`);
-                                }
                             });
+
+
+                            // this is dynamic 
+
+                            // document.querySelector('#select_color ul').innerHTML = "";
+                            // data.payload[dataIndexForWindow].lstDoorColor.forEach((e)=>{
+                            //     if(!e.colorCode){
+                            //     document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
+                            //     <li data-color="${e.filePath}">
+                            //         <span style='background:url("${e.filePath}") center no-repeat;'></span>
+                            //         <p>${e.doorColorName}</p>
+                            //     </li>`);
+                            //     }
+                            //     else{
+                            //         document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
+                            //     <li data-color="${e.colorCode}">
+                            //         <span style="background:${e.colorCode};"></span>
+                            //         <p>${e.doorColorName}</p>
+                            //     </li>`);
+                            //     }
+                            // });
             
                             $('#select_color ul li').eq(0).addClass('selected');
                             $("#color_for_quatation").text(` ,${$('#select_color ul li.selected').text()}`);
@@ -904,4 +917,29 @@ function to_append_model_number(){
             });
         };
 
-    
+
+
+
+
+        // click on window glass 
+
+        $("#window_glass ul li").click(function(){
+            $("#window_glass ul li").removeClass("selected");
+            $(this).addClass("selected");
+            
+           $('#window_type').show();
+        
+           if(doorPanelId == 1){
+            $('#long_panel').hide();
+            $('#short_panel').show();
+        
+           }
+           else if(doorPanelId == 2){
+            $('#short_panel').hide();
+            $('#long_panel').show();
+        
+           }
+        
+           setGlass();
+        
+        });

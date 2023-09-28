@@ -285,6 +285,7 @@ ul li{list-style-type: none;}
 .backdoorImg{position: absolute; left: 0; right: 0; top: 0; bottom: 0; width: 100%; height: 100%; z-index: 10; display: none;}
 
 .backdoorImg img{width: 100%;}
-.createGrid.create_img ul{position: relative;}
+/* .createGrid.create_img ul{position: relative;}
 .createGrid.create_img ul::after{position: absolute; content: ""; left: -10px; width: calc(100% + 20px); bottom: -1px;height: 1px; background-color: #989898; z-index: 1;} 
 .createGrid.create_img ul:last-child:after{content: none;}
+#window_type > ul{display: none;} */

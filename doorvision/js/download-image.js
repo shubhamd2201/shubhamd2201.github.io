@@ -3,47 +3,120 @@
 
 
 const sectionToCapture = document.getElementById('image_download_section');
+const captureButton = document.getElementById('downloadButton');
 
-// document.querySelector('#downloadButton button').addEventListener('click', function () {
+// captureButton.addEventListener('click', function () {
 
 
-  // html2canvas(sectionToCapture).then( function(canvas) {
+//   html2canvas(sectionToCapture).then( function(canvas) {
 
-  //   const dataUrl =  canvas.toDataURL('image/jpg');
+//     const dataUrl =  canvas.toDataURL('image/jpg');
 
-  //   const link = document.createElement('a');
-  //   link.href = dataUrl;
-  //   link.download = 'section_image.jpg';
+//     const link = document.createElement('a');
+//     link.href = dataUrl;
+//     link.download = 'section_image.jpg';
 
-  //   link.click();
+//     link.click();
     
 
-  //   // canvas.toBlob(function(blob) {
-  //   //   const url = URL.createObjectURL(blob);
+    // canvas.toBlob(function(blob) {
+    //   const url = URL.createObjectURL(blob);
    
-  //   // });
+    // });
   // });
 
 
   
 // });
 
-document.getElementById("downloadButton").addEventListener("click", function () {
+$(document).ready(function() {
 
-   const sectionToCapture = document.getElementById("capture");
 
-   domtoimage.toPng(sectionToCapture)
-       .then(function (dataUrl) {
-           const link = document.createElement("a");
-           link.href = dataUrl;
-           link.download = "div_image.png";
 
-           link.click();
-       })
-       .catch(function (error) {
-           console.error("Error:", error);
-       });
+const divToCapture = document.getElementById('image_download_section');
+
+captureButton.addEventListener('click', () => {
+  html2canvas(divToCapture).then((canvas) => {
+    const imageDataURL = canvas.toDataURL('image/png');
+
+    let short_panel_windowPrice = [51.20, 66.10, 61.40, 91.74, 72.96, 97.70];
+    let long_panel_windowPrice = [102.40, 132.20, 122.81, 183.49, 145.92, 195.41]
+
+    let window_glassIndex = $('#window_glass ul li.selected').attr('data-index');
+    let perWindowPrice;
+    if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 1){
+      perWindowPrice = short_panel_windowPrice[window_glassIndex];
+    }
+    else if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 2){
+      perWindowPrice = long_panel_windowPrice[window_glassIndex];
+    }
+  
+
+    const product_main_detal = $('#door_company_quatation').text()+', '+$('#model_number_for_quatation').text();
+
+    const other_info = $('#model_and_detail_quo span').text();
+    let window_info = $('#window_glass_type_for_quatation').text();
+    window_info += $('#window_type_for_quatation').text();
+    const size_info = $('#width_for_quatation_ft').text()+', '+$('#height_for_quatation_ft');
+    const remain_info = $('#remain_info_quot span').text();
+
+    const door_operator_name = $('#doorOperator_companyName').text();
+    const door_operator_model = $('#doorOperatorModel').text();
+   
+    const doorBackImg = $('.backdoorImg img').attr('src');
+    const window_qty = $('#windowQ').text();
+const modelPrice = $('#model_number_row .model_number_col.selected').attr('doorsaleprice');
+
+    const doorOperatorPrice = $('#doorOperator .door_operator_col_inr.selected select option:selected').attr('saleprice');
+
+
+var dataToStore = {
+  product_main_detal: product_main_detal,
+  other_info: other_info,
+  window_info: window_info,
+  size_info: size_info,
+  remain_info: remain_info,
+  door_operator_name: door_operator_name,
+  door_operator_model:door_operator_model,
+  imageDataURL: imageDataURL,
+  doorBackImg: doorBackImg,
+  window_qty: window_qty,
+  modelPrice: modelPrice,
+  doorOperatorPrice:doorOperatorPrice,
+  perWindowPrice:perWindowPrice,
+};
+
+var jsonData = JSON.stringify(dataToStore);
+
+
+localStorage.clear();
+
+localStorage.setItem("myData", jsonData);
+    alert('success');
+  });
 });
+
+
+
+// const divToCapture = document.getElementById('image_download_section');
+
+// downloadButton.addEventListener('click', () => {
+//   domtoimage.toBlob(divToCapture)
+//     .then(function (blob) {
+//       const a = document.createElement('a');
+//       a.href = URL.createObjectURL(blob);
+//       a.download = 'captured_image.png'; 
+
+//       a.click();
+
+//       URL.revokeObjectURL(a.href);
+//     })
+//     .catch(function (error) {
+//       console.error('Error capturing image:', error);
+//     });
+// });
+
+})
 
 
 

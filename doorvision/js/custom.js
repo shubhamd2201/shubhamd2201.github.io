@@ -22,7 +22,7 @@ function setGlass(){
     $('.window_img').css('background', "none");
     $('.window_img').has("img").css('background', 'url('+$("#window_glass ul li.selected").find("img").attr("src")+') center no-repeat');
 
-    $('#window_glass_type_for_quatation').text(", Window Glass:"+$('#window_glass_type ul li.selected').text() + $('#window_glass ul li.selected').text());
+    $('#window_glass_type_for_quatation').text("Window Glass:"+$('#window_glass_type ul li.selected').text() + $('#window_glass ul li.selected').text());
     
 }
 
@@ -106,15 +106,7 @@ $('.window_glass_tabbing ul li').click(function(){
 
 
 
-$("#window_glass ul li").click(function(){
-    $("#window_glass ul li").removeClass("selected");
-    $(this).addClass("selected");
-    
-   $('#window_type').show();
 
-   setGlass();
-
-});
 
 $("#window_type ul li").click(function(){
     $("#window_type ul li").removeClass("selected");

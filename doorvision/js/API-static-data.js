@@ -161,7 +161,7 @@ function clickStrut(){
     $('#strutData ul li').click(function(){
 
         $(this).siblings().removeClass('selected');
-        $(this).toggleClass('selected');
+        $(this).addClass('selected');
         $('#strut_for_quatation').text($("#strutData ul li.selected").text());
         document.querySelector('#strut_quantity').innerHTML = null;
 
@@ -334,7 +334,7 @@ page_loader.show();
 
 $('#doorOperator .door_operator_select_box select').on('change', function(){
     $("#doorOperator_companyName").text($(this).attr("name"));
-    $('#doorOperatorModel').text(`, ${$(this).val()}`);
+    $('#doorOperatorModel').text(`${$(this).val()}`);
     $('.door_operator_col_inr').removeClass('selected');
     $(this).closest('.door_operator_col_inr').addClass('selected');
 
@@ -383,7 +383,6 @@ function springTypeClick(){
                 else{
                     document.querySelector('#spriingCyclage').insertAdjacentHTML('beforeend', ` <option>Select Cyclage</option>`
                 );
-                console.log(data.payload);
                  data.payload.forEach(e=>{
                 document.querySelector('#spriingCyclage').insertAdjacentHTML('beforeend', ` <option springCategoryName="${e.springCategoryName}" value="${e.springCategoryId}" springCategoryId="${e.springCategoryId}">${e.springCategoryName}</option>`
                 );
