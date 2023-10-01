@@ -140,7 +140,7 @@ $.ajax({
              </li>`
              );
             });
-            document.querySelector('.strut_type .strut_type_inline').innerText = data.payload[0].sturtCategoryTypeName;
+            
    
         }
         page_loader.hide();

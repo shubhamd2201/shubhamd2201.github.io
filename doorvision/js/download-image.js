@@ -77,7 +77,7 @@ var modelPrice = $('#model_number_row .model_number_col.selected').attr('doorsal
 ((perWindowPrice == NaN)||(perWindowPrice == undefined))? perWindowPrice = 0:'';
 ((doorOperatorPrice == NaN)||(doorOperatorPrice == undefined))? doorOperatorPrice = 0:'';
 
-    $('#total_amount_show').text(parseFloat(parseFloat(modelPrice) + parseFloat(perWindowPrice * window_qty) + parseFloat(doorOperatorPrice)).toFixed(2));
+    $('#total_amount_show').text(Number(Number(modelPrice) + Number(perWindowPrice * window_qty) + Number(doorOperatorPrice)).toFixed(2));
 
  
     

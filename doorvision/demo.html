@@ -129,9 +129,9 @@
     
     <script>
         // let hexColor = "#d6cdbe";
-        let numberOfRow = 5;
-        let numberOfColumn = 4;
-        let heightQuantity = [21,21,21,21,21];
+        let numberOfRow = 4;
+        let numberOfColumn = 2;
+        let heightQuantity = [21,21,21,21];
 
         var selectedOpacity = 0.85;
         var my_color = null;
@@ -161,7 +161,7 @@
                 b.insertAdjacentHTML('beforeend',
                     `<li listindex = ${j}>
                         <div class="createImageimg">
-                            <img class="" src="./images/stampped_carrige_short.png">
+                            <img class="" src="./images/stampped_short.jpeg">
                             <canvas class="myCanvas"><canvas>
                         </div>
                         <div class="window_img"> </div>
@@ -220,7 +220,7 @@
             for(let i = 0; i < arrForGridDataRow.length; i++){
                 for(let j = 0; j < arrForGridDataColumn[i].length; j++){
                    
-                document.querySelectorAll(".create_img ul")[arrForGridDataRow[i]].querySelectorAll("li")[arrForGridDataColumn[i][j]].querySelector('.window_img').insertAdjacentHTML("beforeend",` <img src="./images/Short_plain.png" >
+                document.querySelectorAll(".create_img ul")[arrForGridDataRow[i]].querySelectorAll("li")[arrForGridDataColumn[i][j]].querySelector('.window_img').insertAdjacentHTML("beforeend",` <img src="./images/window/White_long_plain.png" >
                 <canvas class="windowCanavas"></canvas> `
                     )
                 }

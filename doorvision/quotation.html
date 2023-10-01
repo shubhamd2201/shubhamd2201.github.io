@@ -519,11 +519,11 @@ $('#door_operator_total').text('$'+doorOperatorPrice * 1);
 ((doorOperatorPrice == NaN)||(doorOperatorPrice == undefined))? doorOperatorPrice = 0:'';
 
 
-var total_amount =(parseFloat(modelPrice) + parseFloat(window_qty * perWindowPrice)+ parseFloat(doorOperatorPrice)).toFixed(2)
-$('#subtotal_amount').text('$'+parseFloat(total_amount));
-var taxable_amount = parseFloat(parseFloat(total_amount * 8)/100).toFixed(2);
+var total_amount =(Number(modelPrice) + (window_qty * perWindowPrice)+ Number(doorOperatorPrice)).toFixed(2);
+$('#subtotal_amount').text('$'+total_amount);
+var taxable_amount = (total_amount * 8/100).toFixed(2);
 $('#taxable_amount').text('$'+ taxable_amount);
-$("#grand_total_amount").text('$'+(parseFloat(total_amount) + parseFloat(taxable_amount)).toFixed(2));
+$("#grand_total_amount").text('$'+(Number(total_amount) + Number(taxable_amount)).toFixed(2));
 
 
 if (imageDataURL) {
