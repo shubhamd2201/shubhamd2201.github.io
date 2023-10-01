@@ -30,6 +30,8 @@
         .window_img{position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: calc(100% - 16px); height: calc(100% - 16px); z-index: 10;}
         .window_img img{ width: 100%; height: 100%; object-fit: cover;}
         .window_img canvas{position: absolute; z-index: 1; left: -1px; right: -1px; top: -1px; bottom: -1px; width: calc(100% + 2px); height: calc(100% + 2px);}
+
+        .image_grid_parent.append_grid{display: block !important;}
     </style>
 </head>
 <body>
@@ -129,7 +131,7 @@
         // let hexColor = "#d6cdbe";
         let numberOfRow = 5;
         let numberOfColumn = 4;
-        let heightQuantity = [21, 18, 18,18, 21];
+        let heightQuantity = [21,21,21,21,21];
 
         var selectedOpacity = 0.85;
         var my_color = null;
@@ -159,7 +161,7 @@
                 b.insertAdjacentHTML('beforeend',
                     `<li listindex = ${j}>
                         <div class="createImageimg">
-                            <img class="" src="./images/window_img.png">
+                            <img class="" src="./images/stampped_carrige_short.png">
                             <canvas class="myCanvas"><canvas>
                         </div>
                         <div class="window_img"> </div>

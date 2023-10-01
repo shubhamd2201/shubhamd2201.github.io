@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 captureButton.addEventListener('click', () => {
   html2canvas(sectionToCapture).then((canvas) => {
-    const imageDataURL = canvas.toDataURL('image/png');
+    var imageDataURL = canvas.toDataURL('image/png');
 
     let short_panel_windowPrice = [51.20, 66.10, 61.40, 91.74, 72.96, 97.70];
     let long_panel_windowPrice = [102.40, 132.20, 122.81, 183.49, 145.92, 195.41]
@@ -46,34 +46,48 @@ captureButton.addEventListener('click', () => {
       perWindowPrice = short_panel_windowPrice[window_glassIndex];
     }
     else if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 2){
-      perWindowPrice = long_panel_windowPrice[window_glassIndex];
+      perWindowPrice =long_panel_windowPrice[window_glassIndex];
 
 
     }
 
   
 
-    const product_main_detal = $('#door_company_quatation').text()+', '+$('#model_number_for_quatation').text();
+    var product_main_detail = $('#door_company_quatation').text()+', '+$('#model_number_for_quatation').text();
 
-    const other_info = $('#model_and_detail_quo span').text();
+    var other_info = $('#model_and_detail_quo span').text();
     let window_info = $('#window_glass_type_for_quatation').text();
     window_info += $('#window_type_for_quatation').text();
-    const size_info = $('#width_for_quatation_ft').text()+', '+$('#height_for_quatation_ft');
-    const remain_info = $('#remain_info_quot span').text();
+    var size_info = $('#width_for_quatation_ft').text()+', '+$('#height_for_quatation_ft');
+    var remain_info = $('#remain_info_quot span').text();
 
-    const door_operator_name = $('#doorOperator_companyName').text();
-    const door_operator_model = $('#doorOperatorModel').text();
+    var door_operator_name = $('#doorOperator_companyName').text();
+    var door_operator_model = $('#doorOperatorModel').text();
    
-    const doorBackImg = $('.backdoorImg img').attr('src');
-    const window_qty = $('#windowQ').text();
-const modelPrice = $('#model_number_row .model_number_col.selected').attr('doorsaleprice');
+    var doorBackImg = $('#model_number_img img').attr('src');
 
-    const doorOperatorPrice = $('#doorOperator .door_operator_col_inr.selected select option:selected').attr('saleprice');
+    var window_qty = parseInt($('#windowQ').text());
+var modelPrice = $('#model_number_row .model_number_col.selected').attr('doorsaleprice');
 
-    $('#total_amount_show').text((perWindowPrice * window_qty) + (parseInt(modelPrice)) + (parseInt(doorOperatorPrice)));
+    var doorOperatorPrice =  $('#doorOperator .door_operator_col_inr.selected select option:selected').attr('saleprice');
+
+
+ ((modelPrice == NaN)||(modelPrice == undefined))? modelPrice = 0:'';
+((window_qty == NaN)||(window_qty == undefined))? window_qty = 0:'';
+((perWindowPrice == NaN)||(perWindowPrice == undefined))? perWindowPrice = 0:'';
+((doorOperatorPrice == NaN)||(doorOperatorPrice == undefined))? doorOperatorPrice = 0:'';
+
+    $('#total_amount_show').text(parseFloat(parseFloat(modelPrice) + parseFloat(perWindowPrice * window_qty) + parseFloat(doorOperatorPrice)).toFixed(2));
+
+ 
+    
+
+    
+    
+    
 
 var dataToStore = {
-  product_main_detal: product_main_detal,
+  product_main_detail: product_main_detail,
   other_info: other_info,
   window_info: window_info,
   size_info: size_info,
@@ -126,7 +140,7 @@ localStorage.setItem("myData", jsonData);
   // this is for color final 
 
 
-  var selectedOpacity = 0.92;
+  var selectedOpacity = 0.95;
   
 function applyColorOverlay(my_color) {
 

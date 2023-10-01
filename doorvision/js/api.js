@@ -1,19 +1,19 @@
-    var path_of_site = "http://doorportal-001-site1.etempurl.com/v1/";
-    var page_loader = $('#loader');
-    let token = "";
+var path_of_site = "http://doorportal-001-site1.etempurl.com/v1/";
+var page_loader = $('#loader');
+let token = "";
 
 
-    var numberOfColumn = null;
+var numberOfColumn = null;
 
-    var doorTypeId = null;
-    var doorCompanyId = null;
+var doorTypeId = null;
+var doorCompanyId = null;
 
-    let dataForPostObj = {
-        doorHeight: null,
-        doorWidth: null,
-        doorTypeId: null,
-        doorCompanyId:null
-    }
+let dataForPostObj = {
+    doorHeight: null,
+    doorWidth: null,
+    doorTypeId: null,
+    doorCompanyId:null
+}
 
 
  // door size function
@@ -40,7 +40,7 @@ $('#customSize input').on('input', function(){
     ($(this).attr('id') == "custom_height_inch")? selected_height_in = $(this).val(): '';
     
     }
-
+    $('#size_button button').removeClass('selected');
     $('#width_for_quatation_ft').text(selected_width_ft+"'ft");
     $('#height_for_quatation_ft').text(selected_height_ft+"'ft");
     $("#width_for_quatation_inch").text(selected_width_in+"in");
@@ -204,7 +204,7 @@ size_button.click(function(){
       
                             $('#collection_for_quatation').text(data.payload[0].doorCollectionName+' collection')
                           
-                            $('#door_collection_btn button:first').addClass('selected')
+                            $('#door_collection_btn button:first').addClass('selected');
                             page_loader.hide();
                       },
                       error: function(xhr, status, error) {
@@ -216,7 +216,8 @@ size_button.click(function(){
       
         
               }
-var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('doorcollectionid');
+
+            var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('doorcollectionid');
 
               $.ajax({
                 url: `${path_of_site}DoorSubCollection/GetDoorCollectionListById?DoorCollectionId=1`,
@@ -245,9 +246,7 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
                    page_loader.hide();
 
                    append_door_sub_collection();
-
-                     DoorCategory_event();
-                     forDoorCollection();
+                    DoorCategory_event();
 
 
                 },
@@ -262,8 +261,6 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
                 
 
             });
-            
-
           });
 
 
@@ -275,9 +272,15 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
 
     
       //   this is for diffrent company name 
-     $('#type_of_doors').on('change', forDoorCompany);
-     function forDoorCompany(){
+     $('#type_of_doors').on('change',function(){
         doorTypeId = $(this).val();
+        dataForPostObj.doorCompanyId = $(this).doorCompanyId;
+        forDoorCompany(doorTypeId);
+
+    });
+     
+     function forDoorCompany(doorTypeId){
+        
         
         page_loader.show();
         $.ajax({
@@ -301,7 +304,7 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
                 });
                 
                 $('#door_company_quatation').text(data.payload[0].doorCompanyName);
-                dataForPostObj.doorCompanyId = $(this).doorCompanyId;
+                
             }
                   page_loader.hide();
                   
@@ -325,11 +328,14 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
 
     
      // this is for DoorCollection append timeless
-           $('#door_company').on('change',forDoorCollection) 
+           $('#door_company').on('change',function(){
+            forDoorCollection($(this).val());
+            $('#door_company_quatation').text(", "+$('#door_company option:selected').attr('doorComapanyName'));
+           }) 
     
-           function forDoorCollection(){
+           function forDoorCollection(doorCompanyVal){
 
-            doorCompanyId = $(this).val();
+            doorCompanyId = doorCompanyVal;
            
             page_loader.show();
             $.ajax({
@@ -356,10 +362,6 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
                     page_loader.hide();
                 }
             });
-
-            $('#door_company_quatation').text(", "+$('option:selected', this).attr('doorComapanyName'));
-            
-
         } ;
  
 
@@ -419,11 +421,13 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
     //DoorCategory this is for click on raised panel and append short long panel
     function DoorCategory_event(){
         $('#door_collection_family .door_family').click(function(){
-            page_loader.show();
-        
+            
             $('#door_collection_family .door_family').removeClass('selected');
             $(this).addClass('selected');
             const SubSubCollectionId = $(this).attr('doorSubcollectionid');
+
+            if(selected_height_ft != null && selected_width_ft != null){
+                page_loader.show();
 
             $.ajax({
                 url: `${path_of_site}DoorSubCollectionPanel/GetBySubCollectionId?SubCollectionId=${SubSubCollectionId}`,
@@ -449,14 +453,8 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
                    </div>`);
                      });
 
-                    if(selected_height_ft != null && selected_width_ft != null){
-                        to_append_model_number();
-                    }
-                    else{
-                        alert('please select width and height');
-                    }
                    page_loader.hide();
-   
+                    to_append_model_number();
                      
                 },
                 error: function(xhr, status, error) {
@@ -467,6 +465,13 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
    
                 }
             });
+        }
+        else{
+            alert('please select width and height');
+            page_loader.hide();
+            $('#door_collection_family .door_family').removeClass('selected');
+
+        }
         });
     }
 
@@ -474,6 +479,9 @@ var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('do
 
 // this is for append model number and click on panel type 
 let doorPanelId;
+let repeatedFile;
+let doorModelId;
+
 function to_append_model_number(){
     $("#panel_type .door_catogary").click(function(){
         page_loader.show();
@@ -481,11 +489,10 @@ function to_append_model_number(){
         $('#window_quantity_for_quatation').text(`Window Quantity:0`);
          $('#windowQ').text("0");
 
-        doorPanelId = $(this).attr('doorPanelId');
+         doorPanelId = $(this).attr('doorPanelId');
         
         $("#panel_type .door_catogary").removeClass('selected');
         $(this).addClass('selected');
-        const Door_panel = $(this).attr('doorPanelId');
 
         $('#panel_type_for_quatation').text(' ,'+ $(this).text());
 
@@ -526,8 +533,6 @@ function to_append_model_number(){
                 $("#model_number_row").siblings('.error').text('');
                page_loader.hide();
                
-            //    modelEvent()
-
 
 
              $('.model_number_col').mouseenter(function(){
@@ -540,7 +545,8 @@ function to_append_model_number(){
                 $('#model_number_img img').attr("src", $(this).siblings('.selected').attr(("doorModelPath")));
             });
 
-            let repeatedFile = null;
+           
+
             $('.model_number_col').click(function(){
 
                 $('.model_number_col').removeClass('selected');
@@ -555,9 +561,9 @@ function to_append_model_number(){
                 $('.left_btns').show();
                 forOtherData();
 
-                let doorModelId = $(this).attr('doormodelid');
-            //  big function start 
+                doorModelId = $(this).attr('doorModelId');
 
+   
                 page_loader.show();
                 $.ajax({
                     url: `${path_of_site}DoorVisulization/GetVisulizationWidhtSection`,
@@ -580,10 +586,6 @@ function to_append_model_number(){
                         numberOfColumn =  data.payload[0].noOfSection;
                         repeatedFile =  data.payload[0].repeatedFile;
 
-                        
-
-                        
-
                         page_loader.hide();
                     },
                     error: function(xhr, status, error) {
@@ -592,6 +594,8 @@ function to_append_model_number(){
                         page_loader.hide();
                     }
                 });
+
+                //  big function start 
         
                 // for create image and grid 
                 let heightData = $(this).attr('noOfSection').split(','); 
@@ -610,17 +614,17 @@ function to_append_model_number(){
                     let numberOfRow = heightData.length;
                     var my_color = null;
             
-                     $('.create_img').empty();
+                     $('#create_img').empty();
+
                     $('.append_grid_for_selection').empty();
                     $('.for_all_grid ul').empty();
                     $('.for_grid_height ul').empty();
             
                 for(let i = 0; i < numberOfRow; i++){
                     // this is for create row in img 
-                    document.querySelectorAll('.create_img').forEach((a)=>{
-                        a.insertAdjacentHTML('beforeend',`<ul class=height${heightData[i]} rowIndex = ${i}> </ul>`);
-                    
-                    });
+                  
+                    document.querySelector('#create_img').insertAdjacentHTML('beforeend',`<ul class=height${heightData[i]} rowIndex = ${i}> </ul>`);
+
                     // this is create grid row 
                     document.querySelectorAll('.append_grid_for_selection').forEach((a)=>{
                         a.insertAdjacentHTML('beforeend',`<ul rowIndex = ${i}> </ul>`);
@@ -647,7 +651,7 @@ function to_append_model_number(){
 
 
                     // this is for create image column
-                    document.querySelectorAll('.create_img ul').forEach((b)=>{
+                    document.querySelectorAll('#create_img ul').forEach((b)=>{
                         b.insertAdjacentHTML('beforeend',
                             `<li listindex = ${j}>
                                 <div class="createImageimg">
@@ -715,14 +719,14 @@ function to_append_model_number(){
             
                     // for insert window 
             
-                    $('.create_img ul li .window_img').empty();
+                    $('#create_img ul li .window_img').empty();
             
                     let window_typeand_color = './images/window/'+$("#select_color ul li.selected p").text()+'_'+$('#window_type ul li.selected').attr('data-window')+'.png';
 
                     for(let i = 0; i < arrForGridDataRow.length; i++){
                         for(let j = 0; j < arrForGridDataColumn[i].length; j++){
                            
-                        document.querySelectorAll(".create_img ul")[arrForGridDataRow[i]].querySelectorAll("li")[arrForGridDataColumn[i][j]].querySelector('.window_img').insertAdjacentHTML("beforeend",` <img src="${window_typeand_color}" >
+                        document.querySelectorAll("#create_img ul")[arrForGridDataRow[i]].querySelectorAll("li")[arrForGridDataColumn[i][j]].querySelector('.window_img').insertAdjacentHTML("beforeend",` <img src="${window_typeand_color}" >
                         <!-- <canvas class="windowCanavas"></canvas> -->`
                             )
                         }
@@ -732,7 +736,7 @@ function to_append_model_number(){
                     setGlass();
                     // applyColorOverlaywindow(my_color);
                    
-                    // if($(".create_img ul li").find(".window_img").length > 0){
+                    // if($("#create_img ul li").find(".window_img").length > 0){
                     //     applyColorOverlaywindow(my_color);
                     //     setTimeout(applyColorOverlaywindow, 100, my_color);
                     // }
@@ -774,13 +778,18 @@ function to_append_model_number(){
                     
                 });
             // end 
+
             
-            // if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 2 && selected_height_ft == 8 && selected_height_ft == 10){
-            //     $('.createGrid.create_img ').addClass('bigpadding');
-            // }
-            // else {
-            //     $('.createGrid.create_img').removeClass('bigpadding');
-            // }
+            $('#create_img ').removeClass();
+            let panel_type;
+            if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 1){
+                panel_type = "short";
+            }
+            else if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 2) {
+                panel_type = "long";
+            }
+
+            $('#create_img ').addClass(panel_type+'_'+selected_width_ft+'_'+selected_height_ft);
             
             
                             // for color 
@@ -837,10 +846,15 @@ function to_append_model_number(){
                                 applyColorOverlay_multiple(my_color);
                                 applyColorOverlay(my_color);
             
-            
-                                if($(".create_img ul li").find(".window_img").length > 0){
-                                    // applyColorOverlaywindow(my_color);
-                                }
+                                
+                               let borderColor =  hexToRgba(my_color, 0.5)
+                                $('#create_img > ul').css("border-color",borderColor)
+                                
+
+
+                                // if($("#create_img ul li").find(".window_img").length > 0){
+                                //     // applyColorOverlaywindow(my_color);
+                                // }
 
                                 setWindow();
                                 setGlass();

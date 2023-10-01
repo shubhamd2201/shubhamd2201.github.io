@@ -112,25 +112,22 @@ $("#window_type ul li").click(function(){
     $("#window_type ul li").removeClass("selected");
     $(this).addClass("selected");
 
-
     setWindow();
     setGlass()
 })
 
-$("#generateQuotation").click(function(){
-    let b = "CHI - 2250"
-    printData (b)
-})
 
-function printData (a){
-    document.querySelector("td.service").innerText = a;
-}
 
-$("#flipbtn").click(function(){
-    $(this).toggleClass('btn-success');
-    $('.backdoorImg').slideToggle();
-})
-
+// hex to rgba 
+function hexToRgba(hex, opacity) {
+    hex = hex.replace(/^#/, '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    opacity = Math.min(1, Math.max(0, opacity));
+    const rgba = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+    return rgba;
+    }
 
 
 
