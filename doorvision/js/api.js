@@ -104,9 +104,7 @@ size_button.click(function(){
         $("#customSize input").removeClass('error-border');
     }
 
-    if(dataForPostObj.doorHeight != null && dataForPostObj.doorWidth != null && doorPanelId != null && doorModelId != null){
-
-        console.log("create image with size button");
+    if(dataForPostObj.doorHeight != null && dataForPostObj.doorWidth != null && doorPanelId != null){
         createImgwithModel();
     }
 
@@ -316,16 +314,7 @@ size_button.click(function(){
                 $('#panel_type').empty();
                 $('#model_number_row').empty();
 
-
-                $('#create_img').empty();
-                $('.append_grid_for_selection').empty();
-                $('.for_all_grid ul').empty();
-                $('.for_grid_height ul').empty();
-                $('.your_door_design').show();
-                $('.image_grid_parent.append_grid').hide();
-                $('.left_btns').hide();
-                $('.modelDesc').text('');
-                $('#model_number_img img').attr("src", '');
+                clearDataFromModel();
 
 
                 $('#door_company').siblings('.error').text('');
@@ -393,15 +382,8 @@ size_button.click(function(){
                      $('#model_number_row').empty();
 
 
-                     $('#create_img').empty();
-                     $('.append_grid_for_selection').empty();
-                     $('.for_all_grid ul').empty();
-                     $('.for_grid_height ul').empty();
-                     $('.your_door_design').show();
-                     $('.image_grid_parent.append_grid').hide();
-                     $('.left_btns').hide();
-                     $('.modelDesc').text('');
-                     $('#model_number_img img').attr("src", '');
+                     clearDataFromModel();
+
                      
                      data.payload.forEach(e=>{
                       document.querySelector('#door_collection_btn').insertAdjacentHTML('beforeend', `<button doorCollectionId = "${e.doorCollectionId}" > ${e.doorCollectionName} </button>`);
@@ -445,15 +427,8 @@ size_button.click(function(){
                       $('#panel_type').empty();
                       $('#model_number_row').empty();
 
-                      $('#create_img').empty();
-                      $('.append_grid_for_selection').empty();
-                      $('.for_all_grid ul').empty();
-                      $('.for_grid_height ul').empty();
-                      $('.your_door_design').show();
-                      $('.image_grid_parent.append_grid').hide();
-                      $('.left_btns').hide();
-                      $('.modelDesc').text('');
-                      $('#model_number_img img').attr("src", '');
+                      clearDataFromModel();
+
 
                       data.payload.forEach(e=>{
                         document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="col-lg-2 col-md-4 col-sm-6">
@@ -510,15 +485,7 @@ size_button.click(function(){
                       $('#panel_type').empty();
                       $('#model_number_row').empty();
 
-                    $('#create_img').empty();
-                    $('.append_grid_for_selection').empty();
-                    $('.for_all_grid ul').empty();
-                    $('.for_grid_height ul').empty();
-                    $('.your_door_design').show();
-                    $('.image_grid_parent.append_grid').hide();
-                    $('.left_btns').hide();
-                    $('.modelDesc').text('');
-                    $('#model_number_img img').attr("src", '');
+                      clearDataFromModel();
 
                      data.payload.forEach(e=>{
                        document.querySelector("#panel_type").insertAdjacentHTML('beforeend', 
@@ -585,10 +552,7 @@ function to_append_model_number(){
     });
 }
 
-
-
-function createImgwithModel(){
-
+function clearDataFromModel(){
 
     $('#create_img').empty();
     $('.append_grid_for_selection').empty();
@@ -599,6 +563,10 @@ function createImgwithModel(){
     $('.left_btns').hide();
     $('.modelDesc').text('');
     $('#model_number_img img').attr("src", '');
+}
+
+function createImgwithModel(){
+    clearDataFromModel();
 
 
     if(dataForPostObj.doorHeight == null || dataForPostObj.doorWidth == null){
@@ -624,9 +592,10 @@ function createImgwithModel(){
         success: function(data) {
 
              JSON.stringify(data);
+
              document.querySelector("#model_number_row").innerHTML = null;
              $("#model_number_row").siblings('.error').text('');
-            if(data.payload == null || data.payload == undefined){
+            if(data.payload.length < 1 || data.payload == undefined){
                 $("#model_number_row").siblings('.error').text('data not found');
             }
             else{
@@ -671,7 +640,9 @@ function createImgwithModel(){
 
             doorModelId = $(this).attr('doorModelId');
             let clickedThis = $(this);
+            let colorArr = data.payload[$(this).attr('data-index')].lstDoorColor;
 
+            
             if(doorPanelId == null || doorModelId == null){
                
                 (doorPanelId == null)?alert("please select panel type"):'';
@@ -679,57 +650,7 @@ function createImgwithModel(){
 
             }
             else{
-            page_loader.show();
-            $.ajax({
-                url: `${path_of_site}DoorVisulization/GetVisulizationWidhtSection`,
-                type: 'POST',
-                contentType: 'application/json-patch+json',
-                dataType: 'json',
-                data: `{ 
-                    doorWidth:${dataForPostObj.doorWidth},
-                    doorCompanyId:${doorCompanyId},
-                    doorPanelId: ${doorPanelId},
-                    doorModelId:${doorModelId},
-                    }`,
-                headers: {
-                    'Authorization':'Bearer ' + token,
-                },
-                success:  function(data) {
-                    JSON.stringify(data);
-
-                    if(data.payload.length < 1 || data.payload[0].noOfSection == null ){
-
-                        page_loader.hide();
-                        alert("Data not found");
-
-                    }
-                    else if(data.payload[0].repeatedFile == undefined || data.payload[0].repeatedFile == null){
-
-                        alert("Image not found");
-
-                    }
-                    else{
-
-                        $('.your_door_design').hide();
-                        $('.image_grid_parent.append_grid').show();
-                        $('.left_btns').show();
-
-                        let numberOfColumn =  data.payload[0].noOfSection;
-                        repeatedFile =  data.payload[0].repeatedFile;
-
-                        createImageRowColumn(clickedThis, numberOfColumn, repeatedFile);
-
-                    }
-
-
-                    page_loader.hide();
-                },
-                error: function(xhr, status, error) {
-                    document.querySelector('#model_number_row .error').text('');
-                    document.querySelector('#model_number_row .error').text(`Error: ${error}`);
-                    page_loader.hide();
-                }
-            });
+            calledDataForImageCreate(clickedThis, colorArr);
 
             }
                 
@@ -752,7 +673,62 @@ function createImgwithModel(){
 }
 
 
+// GetVisulizationWidhtSection API 
+function calledDataForImageCreate(clickedThis, colorArr){
 
+    page_loader.show();
+    $.ajax({
+        url: `${path_of_site}DoorVisulization/GetVisulizationWidhtSection`,
+        type: 'POST',
+        contentType: 'application/json-patch+json',
+        dataType: 'json',
+        data: `{ 
+            doorWidth:${dataForPostObj.doorWidth},
+            doorCompanyId:${doorCompanyId},
+            doorPanelId: ${doorPanelId},
+            doorModelId:${doorModelId},
+            }`,
+        headers: {
+            'Authorization':'Bearer ' + token,
+        },
+        success:  function(data) {
+            JSON.stringify(data);
+
+            if(data.payload.length < 1 || data.payload[0].noOfSection == null ){
+
+                page_loader.hide();
+                alert("Data not found");
+
+            }
+            else if(data.payload[0].repeatedFile == undefined || data.payload[0].repeatedFile == null){
+
+                alert("Image not found");
+
+            }
+            else{
+
+                $('.your_door_design').hide();
+                $('.image_grid_parent.append_grid').show();
+                $('.left_btns').show();
+
+                let numberOfColumn =  data.payload[0].noOfSection;
+                repeatedFile =  data.payload[0].repeatedFile;
+                
+
+                createImageRowColumn(clickedThis, numberOfColumn, repeatedFile, colorArr);
+
+            }
+
+
+            page_loader.hide();
+        },
+        error: function(xhr, status, error) {
+            document.querySelector('#model_number_row .error').text('');
+            document.querySelector('#model_number_row .error').text(`Error: ${error}`);
+            page_loader.hide();
+        }
+    });
+}
 
 
 

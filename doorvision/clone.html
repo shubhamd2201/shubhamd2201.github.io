@@ -132,7 +132,7 @@
     <script>
         // let hexColor = "#d6cdbe";
         let numberOfRow = 4;
-        let numberOfColumn = 2;
+        let numberOfColumn = 1;
         let heightQuantity = [21,21,21,21];
 
         var selectedOpacity = 0.85;
@@ -178,7 +178,11 @@
 
         
         $(".append_grid_for_selection ul li").on('click', function(){
+            $(".append_grid_for_selection ul li").removeClass('i_am_selected');
              $(this).toggleClass("i_am_selected");
+
+             $('.for_all_grid.grid_buttons ul li span').removeClass('selected');
+             $('.for_all_grid.grid_buttons ul li').eq($(this).parent('ul').attr('rowindex')).find('span').addClass('selected');
 
         });
 
@@ -256,7 +260,13 @@
         document.querySelectorAll(".for_all_grid ul li span").forEach((a, x)=>{
             a.addEventListener("click", function(){
 
+                document.querySelectorAll(".for_all_grid ul li span").forEach(e=>{
+                e.classList.remove('selected');
+           });
+
                 if(this.className == "selected"){
+
+                    $(".append_grid_for_selection ul li").removeClass('i_am_selected');
 
                     this.classList.remove("selected");
                     document.querySelectorAll('.append_grid_for_selection ul')[x].querySelectorAll('li').forEach(lists=>{
@@ -265,6 +275,8 @@
                 }
 
                 else{
+
+                    $(".append_grid_for_selection ul li").removeClass('i_am_selected');
 
                     this.classList.add("selected");
                     document.querySelectorAll('.append_grid_for_selection ul')[x].querySelectorAll('li').forEach(lists=>{

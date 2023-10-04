@@ -129,6 +129,27 @@ function hexToRgba(hex, opacity) {
     return rgba;
     }
 
+    function adjustColor(hexColor) {
+        hexColor = hexColor.replace(/^#/, '');
+    
+        const r = parseInt(hexColor.slice(0, 2), 16);
+        const g = parseInt(hexColor.slice(2, 4), 16);
+        const b = parseInt(hexColor.slice(4, 6), 16);
+    
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    
+        const isDark = brightness < 128;
+    
+        const adjustment = isDark ? 40 : -40;
+    
+        const newR = Math.max(0, Math.min(255, r + adjustment));
+        const newG = Math.max(0, Math.min(255, g + adjustment));
+        const newB = Math.max(0, Math.min(255, b + adjustment));
+    
+        const newHexColor = `#${(1 << 24 | newR << 16 | newG << 8 | newB).toString(16).slice(1)}`;
+    
+        return newHexColor;
+    }
 
 
 

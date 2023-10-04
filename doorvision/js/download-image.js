@@ -146,7 +146,7 @@ function applyColorOverlay(my_color) {
 
   var canvas = document.querySelector('.bg_img_main_canvas');
   var ctx = canvas.getContext('2d');
-  var image = document.querySelector('.bg_img_main');
+  var image = document.querySelector('.bg_img_main img');
   
   
   canvas.width = image.width;

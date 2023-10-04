@@ -1,14 +1,19 @@
 
-function createImageRowColumn(clickedThis, numberOfColumn, repeatedFile){
+function createImageRowColumn(clickedThis, numberOfColumn, repeatedFile, colorArr){
 
 
 let heightData = clickedThis.attr('noOfSection').split(','); 
-let dataIndexForWindow = clickedThis.attr('data-index');
+// let dataIndexForWindow = clickedThis.attr('data-index');
 
 $('#create_img').empty();
 $('.append_grid_for_selection').empty();
 $('.for_all_grid ul').empty();
 $('.for_grid_height ul').empty();
+
+
+$('.bg_img_main').empty();
+document.querySelector('.bg_img_main').insertAdjacentHTML('beforeend',
+ `<img src="./images/white_img_for_bg.png" /> <canvas class="bg_img_main_canvas"></canvas>`);
 
 for(let i = 0; i < heightData.length; i++){
 // this is for create row in img 
@@ -182,39 +187,39 @@ $('#create_img ').addClass(panel_type+'_'+selected_width_ft+'_'+selected_height_
 
 
         // for color 
-        let colorArr = ['#ebeeee', '#d6cdbe','#a09387', '#4b3933','#231f20'];
+        // let colorArr = ['#ebeeee', '#d6cdbe','#a09387', '#4b3933','#231f20'];
 
-        let colorName = ['White', 'Almond','Sandstone', 'Brown', 'Black', 'Gray', 'Desert Tan']
+        // let colorName = ['White', 'Almond','Sandstone', 'Brown', 'Black', 'Gray', 'Desert Tan']
 
-        document.querySelector('#select_color ul').innerHTML = "";
-        colorArr.forEach((e, i)=>{
-            document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-            <li data-color="${e}">
-                <span style="background:${e};"></span>
-                <p>${colorName[i]}</p>
-            </li>`);
-        });
+        // document.querySelector('#select_color ul').innerHTML = "";
+        // colorArr.forEach((e, i)=>{
+        //     document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
+        //     <li data-color="${e}">
+        //         <span style="background:${e};"></span>
+        //         <p>${colorName[i]}</p>
+        //     </li>`);
+        // });
 
 
         // this is dynamic 
 
-        // document.querySelector('#select_color ul').innerHTML = "";
-        // data.payload[dataIndexForWindow].lstDoorColor.forEach((e)=>{
-        //     if(!e.colorCode){
-        //     document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-        //     <li data-color="${e.filePath}">
-        //         <span style='background:url("${e.filePath}") center no-repeat;'></span>
-        //         <p>${e.doorColorName}</p>
-        //     </li>`);
-        //     }
-        //     else{
-        //         document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-        //     <li data-color="${e.colorCode}">
-        //         <span style="background:${e.colorCode};"></span>
-        //         <p>${e.doorColorName}</p>
-        //     </li>`);
-        //     }
-        // });
+        document.querySelector('#select_color ul').innerHTML = "";
+        colorArr.forEach((e)=>{
+            if(e.colorCode.length < 6){
+            document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
+            <li data-color="${e.filePath}">
+                <span style='background:url("${e.filePath}") center no-repeat;'></span>
+                <p>${e.doorColorName}</p>
+            </li>`);
+            }
+            else{
+                document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
+            <li data-color="${e.colorCode}">
+                <span style="background:${e.colorCode};"></span>
+                <p>${e.doorColorName}</p>
+            </li>`);
+            }
+        });
 
         $('#select_color ul li').eq(0).addClass('selected');
         $("#color_for_quatation").text(` ,${$('#select_color ul li.selected').text()}`);
@@ -238,7 +243,7 @@ $('#create_img ').addClass(panel_type+'_'+selected_width_ft+'_'+selected_height_
             applyColorOverlay(my_color);
 
             
-           let borderColor =  hexToRgba(my_color, 0.5)
+           let borderColor =  adjustColor(my_color)
             $('#create_img > ul').css("border-color",borderColor)
             
 
