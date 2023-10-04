@@ -254,7 +254,7 @@ ul li{list-style-type: none;}
 .append_grid_for_selection ul li.i_am_selected{border-color: #0d6efd;}
 .append_grid_for_selection ul li{border: 2px solid #d1d1d1;}
 
-.window_img{position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: calc(100% - 16px); height: calc(100% - 16px); z-index: 10;}
+.window_img{position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: calc(90%); height: calc(90%); z-index: 10;}
 .window_img img{ width: 100%; height: 100%;}
 .window_img canvas{position: absolute; z-index: 1; left: -1px; right: -1px; top: -1px; bottom: -1px; width: calc(100% + 2px); height: calc(100% + 2px);}
 

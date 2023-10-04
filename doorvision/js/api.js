@@ -56,10 +56,9 @@ $('#customSize input').on('input', function(){
         $(this).removeClass('error-border');
     }
 
-    if(dataForPostObj.doorHeight != null && dataForPostObj.doorWidth != null && doorPanelId != null && doorModelId != null){
+    if(dataForPostObj.doorHeight != null && dataForPostObj.doorWidth != null &&SubSubCollectionId != null){
 
-        console.log("create image with size button");
-        createImgwithModel();
+        apiForPanelType(SubSubCollectionId);
     }
 
 
@@ -73,7 +72,10 @@ $('#customSize input').on('blur', function (){
     }
 });
 
-
+let clickedThis = null;
+let colorArr = null;
+let numberOfColumn = null;
+let SubSubCollectionId = null;
 size_button.click(function(){
     size_button.removeClass('selected');
     $(this).addClass('selected');
@@ -104,8 +106,9 @@ size_button.click(function(){
         $("#customSize input").removeClass('error-border');
     }
 
-    if(dataForPostObj.doorHeight != null && dataForPostObj.doorWidth != null && doorPanelId != null){
-        createImgwithModel();
+    if(dataForPostObj.doorHeight != null && dataForPostObj.doorWidth != null &&SubSubCollectionId != null){
+
+        apiForPanelType(SubSubCollectionId)
     }
 
 });
@@ -277,10 +280,6 @@ size_button.click(function(){
 
             });
           });
-
-
-
-
 
 
 
@@ -460,57 +459,19 @@ size_button.click(function(){
             });
     }
 
-
     //DoorCategory this is for click on raised panel and append short long panel
     function DoorCategory_event(){
         $('#door_collection_family .door_family').click(function(){
             
             $('#door_collection_family .door_family').removeClass('selected');
             $(this).addClass('selected');
-            const SubSubCollectionId = $(this).attr('doorSubcollectionid');
+            SubSubCollectionId = $(this).attr('doorSubcollectionid');
+
+            
 
             if(selected_height_ft != null && selected_width_ft != null){
-                page_loader.show();
 
-            $.ajax({
-                url: `${path_of_site}DoorSubCollectionPanel/GetBySubCollectionId?SubCollectionId=${SubSubCollectionId}`,
-                type: 'GET',
-                headers: {
-                    'Authorization':'Bearer ' + token,
-                },
-                success: function(data) {
-   
-                     JSON.stringify(data);
-
-                      $('#panel_type').empty();
-                      $('#model_number_row').empty();
-
-                      clearDataFromModel();
-
-                     data.payload.forEach(e=>{
-                       document.querySelector("#panel_type").insertAdjacentHTML('beforeend', 
-                       `<div class="col-lg-3 col-md-4 col-sm-6 ">
-                       <div class="door_catogary  bg-light rounded " doorPanelId="${e.doorPanelId}">
-                           <div class="img">
-                               <img src="${e.filePath}" alt="">
-                           </div>
-                           <p class="mb-0">${e.doorPanelName}</p>
-                       </div>
-                   </div>`);
-                     });
-
-                   page_loader.hide();
-                    to_append_model_number();
-                     
-                },
-                error: function(xhr, status, error) {
-                    document.querySelector('#panel_type').innerHTML = null;
-                    document.querySelector('#panel_type').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
-
-                   page_loader.hide();
-   
-                }
-            });
+                apiForPanelType(SubSubCollectionId)
         }
         else{
             alert('please select width and height');
@@ -520,6 +481,61 @@ size_button.click(function(){
         }
         });
     }
+
+
+// API for panel type 
+function apiForPanelType(SubSubCollectionId){
+
+    page_loader.show();
+
+    $.ajax({
+        url: `${path_of_site}DoorSubCollectionPanel/GetBySubCollectionId?SubCollectionId=${SubSubCollectionId}`,
+        type: 'GET',
+        headers: {
+            'Authorization':'Bearer ' + token,
+        },
+        success: function(data) {
+
+             JSON.stringify(data);
+             console.log(data.payload);
+
+              $('#panel_type').empty();
+              $('#model_number_row').empty();
+
+              clearDataFromModel();
+
+             data.payload.forEach(e=>{
+               document.querySelector("#panel_type").insertAdjacentHTML('beforeend', 
+               `<div class="col-lg-3 col-md-4 col-sm-6 ">
+               <div class="door_catogary  bg-light rounded " doorPanelId="${e.doorPanelId}" repeatfilePath='${e.repeatfilePath}'>
+                   <div class="img">
+                       <img src="${e.filePath}" alt="">
+                   </div>
+                   <p class="mb-0">${e.doorPanelName}</p>
+               </div>
+           </div>`);
+             });
+
+           page_loader.hide();
+            to_append_model_number();
+             
+        },
+        error: function(xhr, status, error) {
+            document.querySelector('#panel_type').innerHTML = null;
+            document.querySelector('#panel_type').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+
+           page_loader.hide();
+
+        }
+    });
+}
+
+
+
+
+
+
+
 
 
 
@@ -536,16 +552,15 @@ function to_append_model_number(){
          $('#windowQ').text("0");
 
          doorPanelId = $(this).attr('doorPanelId');
+         repeatedFile = $(this).attr('repeatfilepath');
         
         $("#panel_type .door_catogary").removeClass('selected');
         $(this).addClass('selected');
 
         $('#panel_type_for_quatation').text(' ,'+ $(this).text());
 
-
-
         //-============================-==========================
-        createImgwithModel();
+        toAppendModel(doorPanelId);
         //======================
 
         forOtherData();
@@ -563,13 +578,14 @@ function clearDataFromModel(){
     $('.left_btns').hide();
     $('.modelDesc').text('');
     $('#model_number_img img').attr("src", '');
+    $('#select_color ul').empty();
 }
 
-function createImgwithModel(){
+function toAppendModel(doorPanelId){
     clearDataFromModel();
 
 
-    if(dataForPostObj.doorHeight == null || dataForPostObj.doorWidth == null){
+    if(dataForPostObj.doorHeight == null || dataForPostObj.doorWidth == null ||  dataForPostObj.doorTypeId == null || doorPanelId == null){
 
     alert('Please select Door Size');
 
@@ -577,7 +593,7 @@ function createImgwithModel(){
 
     else{
     $.ajax({
-        url: `${path_of_site}DoorVisulization/GetVisulizationModelHeightSection`,
+        url: `${path_of_site}DoorVisulization/GetVisulizationModel`,
         type: 'POST',
         contentType: 'application/json-patch+json',
         dataType: 'json',
@@ -585,29 +601,35 @@ function createImgwithModel(){
             doorHeight:${dataForPostObj.doorHeight},
             doorWidth: ${dataForPostObj.doorWidth},
             doorTypeId: ${dataForPostObj.doorTypeId},
-            doorCompanyId: ${dataForPostObj.doorCompanyId}}`,
+            doorCompanyId: ${dataForPostObj.doorCompanyId},
+            doorPanelId:${doorPanelId}}`,
         headers: {
             'Authorization':'Bearer ' + token,
         },
         success: function(data) {
 
              JSON.stringify(data);
-
              document.querySelector("#model_number_row").innerHTML = null;
              $("#model_number_row").siblings('.error').text('');
+
+             let colorMainArr = [];
             if(data.payload.length < 1 || data.payload == undefined){
                 $("#model_number_row").siblings('.error').text('data not found');
             }
             else{
                  data.payload.forEach((e, index)=>{
                    document.querySelector("#model_number_row").insertAdjacentHTML('beforeend', 
-                       `<div class="model_number_col p-2 bg-light" data-index="${index}" doorModelId="${e.doorModelId}" doorSalePrice="${e.doorSalePrice}" doorModelPath="${e.doorModelPath}" doorModelDesc='${e.doorModelDesc}' noOfSection="${e.noOfSection}">
+                       `<div class="model_number_col p-2 bg-light" data-index="${index}" doorModelId="${e.doorModelId}" doorSalePrice="${e.doorSalePrice}" doorModelPath="${e.doorModelPath}" doorModelDesc='${e.doorModelDesc}' noOfSection="${e.noOfSection}" widthSection='${e.widthSection}'>
                        <div class="model_number_col_inr text-center h-100 d-flex">
                            <p class="mb-1 fs-6 model_num">${e.doorModelName}</p>
                            <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
                            <p class="mb-1 fs-6"> R-17-19</p>
                        </div>
                    </div>`);
+
+                   e.lstDoorColor.forEach((a)=>{
+                    colorMainArr.push(a);
+                   })
 
                  });
 
@@ -637,23 +659,13 @@ function createImgwithModel(){
             $('#model_number_for_quatation').text($(this).find(".model_num").text());
     
             
+            // need to handle error handle on this 
 
-            doorModelId = $(this).attr('doorModelId');
-            let clickedThis = $(this);
-            let colorArr = data.payload[$(this).attr('data-index')].lstDoorColor;
+             numberOfColumn = $(this).attr('widthSection');
+             clickedThis = $(this);
+             colorArr = [];
 
-            
-            if(doorPanelId == null || doorModelId == null){
-               
-                (doorPanelId == null)?alert("please select panel type"):'';
-                (doorModelId == null)?alert("please select Model"):'';
-
-            }
-            else{
-            calledDataForImageCreate(clickedThis, colorArr);
-
-            }
-                
+             createImageRowColumn(clickedThis, numberOfColumn, repeatedFile);
         
         });
      
@@ -673,62 +685,6 @@ function createImgwithModel(){
 }
 
 
-// GetVisulizationWidhtSection API 
-function calledDataForImageCreate(clickedThis, colorArr){
-
-    page_loader.show();
-    $.ajax({
-        url: `${path_of_site}DoorVisulization/GetVisulizationWidhtSection`,
-        type: 'POST',
-        contentType: 'application/json-patch+json',
-        dataType: 'json',
-        data: `{ 
-            doorWidth:${dataForPostObj.doorWidth},
-            doorCompanyId:${doorCompanyId},
-            doorPanelId: ${doorPanelId},
-            doorModelId:${doorModelId},
-            }`,
-        headers: {
-            'Authorization':'Bearer ' + token,
-        },
-        success:  function(data) {
-            JSON.stringify(data);
-
-            if(data.payload.length < 1 || data.payload[0].noOfSection == null ){
-
-                page_loader.hide();
-                alert("Data not found");
-
-            }
-            else if(data.payload[0].repeatedFile == undefined || data.payload[0].repeatedFile == null){
-
-                alert("Image not found");
-
-            }
-            else{
-
-                $('.your_door_design').hide();
-                $('.image_grid_parent.append_grid').show();
-                $('.left_btns').show();
-
-                let numberOfColumn =  data.payload[0].noOfSection;
-                repeatedFile =  data.payload[0].repeatedFile;
-                
-
-                createImageRowColumn(clickedThis, numberOfColumn, repeatedFile, colorArr);
-
-            }
-
-
-            page_loader.hide();
-        },
-        error: function(xhr, status, error) {
-            document.querySelector('#model_number_row .error').text('');
-            document.querySelector('#model_number_row .error').text(`Error: ${error}`);
-            page_loader.hide();
-        }
-    });
-}
 
 
 
@@ -799,12 +755,12 @@ function calledDataForImageCreate(clickedThis, colorArr){
             
            $('#window_type').show();
         
-           if(doorPanelId == 1){
+           if(doorPanelId == 1 || doorPanelId == 27 || doorPanelId == 18){
             $('#long_panel').hide();
             $('#short_panel').show();
         
            }
-           else if(doorPanelId == 2){
+           else if(doorPanelId == 2 || doorPanelId == 28 || doorPanelId == 19){
             $('#short_panel').hide();
             $('#long_panel').show();
         

@@ -1,5 +1,6 @@
+// need to pass colorArr in last for dynamic color 
 
-function createImageRowColumn(clickedThis, numberOfColumn, repeatedFile, colorArr){
+function createImageRowColumn(clickedThis, numberOfColumn, repeatedFile){
 
 
 let heightData = clickedThis.attr('noOfSection').split(','); 
@@ -9,11 +10,21 @@ $('#create_img').empty();
 $('.append_grid_for_selection').empty();
 $('.for_all_grid ul').empty();
 $('.for_grid_height ul').empty();
-
-
 $('.bg_img_main').empty();
+
+
+$('.your_door_design').hide();
+$('.image_grid_parent.append_grid').show();
+$('.left_btns').show();
+
+let selected_panel = $('#panel_type .door_catogary.selected').attr('doorpanelid');
+let bgImg = 'white_img_for_bg.png';
+
+if( selected_panel == 27 || selected_panel == 28){
+    bgImg = 'bg_light_white.jpeg';
+}
 document.querySelector('.bg_img_main').insertAdjacentHTML('beforeend',
- `<img src="./images/white_img_for_bg.png" /> <canvas class="bg_img_main_canvas"></canvas>`);
+ `<img src="./images/${bgImg}" /> <canvas class="bg_img_main_canvas"></canvas>`);
 
 for(let i = 0; i < heightData.length; i++){
 // this is for create row in img 
@@ -34,12 +45,12 @@ document.querySelector('.for_grid_height ul').insertAdjacentHTML('beforeend',`<l
 
 let repeat_img_path;
 
-if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 1){
-repeat_img_path = './images/window_img.png'
-}
-else if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 2){
-repeat_img_path = './images/Long_Panel_Repete_Image.png'
-}
+// if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 1){
+// repeat_img_path = './images/window_img.png'
+// }
+// else if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 2){
+// repeat_img_path = './images/Long_Panel_Repete_Image.png'
+// }
 for(let j = 0; j < numberOfColumn; j++){
 
 // ${repeatedFile} for dynamic img src
@@ -50,7 +61,7 @@ document.querySelectorAll('#create_img ul').forEach((b)=>{
     b.insertAdjacentHTML('beforeend',
         `<li listindex = ${j}>
             <div class="createImageimg">
-                <img class="" src="${repeat_img_path}">
+                <img class="" src="${repeatedFile}">
                 <canvas class="myCanvas"><canvas>
             </div>
             <div class="window_img"> </div>
@@ -187,39 +198,39 @@ $('#create_img ').addClass(panel_type+'_'+selected_width_ft+'_'+selected_height_
 
 
         // for color 
-        // let colorArr = ['#ebeeee', '#d6cdbe','#a09387', '#4b3933','#231f20'];
+        let colorArr = ['#ebeeee', '#d6cdbe','#a09387', '#4b3933','#231f20'];
 
-        // let colorName = ['White', 'Almond','Sandstone', 'Brown', 'Black', 'Gray', 'Desert Tan']
+        let colorName = ['White', 'Almond','Sandstone', 'Brown', 'Black', 'Gray', 'Desert Tan']
 
-        // document.querySelector('#select_color ul').innerHTML = "";
-        // colorArr.forEach((e, i)=>{
-        //     document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-        //     <li data-color="${e}">
-        //         <span style="background:${e};"></span>
-        //         <p>${colorName[i]}</p>
-        //     </li>`);
-        // });
+        document.querySelector('#select_color ul').innerHTML = "";
+        colorArr.forEach((e, i)=>{
+            document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
+            <li data-color="${e}">
+                <span style="background:${e};"></span>
+                <p>${colorName[i]}</p>
+            </li>`);
+        });
 
 
         // this is dynamic 
 
-        document.querySelector('#select_color ul').innerHTML = "";
-        colorArr.forEach((e)=>{
-            if(e.colorCode.length < 6){
-            document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-            <li data-color="${e.filePath}">
-                <span style='background:url("${e.filePath}") center no-repeat;'></span>
-                <p>${e.doorColorName}</p>
-            </li>`);
-            }
-            else{
-                document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-            <li data-color="${e.colorCode}">
-                <span style="background:${e.colorCode};"></span>
-                <p>${e.doorColorName}</p>
-            </li>`);
-            }
-        });
+        //document.querySelector('#select_color ul').innerHTML = "";
+        // colorArr.forEach((e)=>{
+        //     if(e.colorCode.length < 6){
+        //     document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
+        //     <li data-color="${e.filePath}" doorSalePrice=${e.doorSalePrice}>
+        //         <span style='background:url("${e.filePath}") center no-repeat;'></span>
+        //         <p>${e.doorColorName}</p>
+        //     </li>`);
+        //     }
+        //     else{
+        //         document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
+        //     <li data-color="${e.colorCode}" doorSalePrice=${e.doorSalePrice}>
+        //         <span style="background:${e.colorCode};"></span>
+        //         <p>${e.doorColorName}</p>
+        //     </li>`);
+        //     }
+        // });
 
         $('#select_color ul li').eq(0).addClass('selected');
         $("#color_for_quatation").text(` ,${$('#select_color ul li.selected').text()}`);

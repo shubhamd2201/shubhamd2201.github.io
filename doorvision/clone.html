@@ -442,6 +442,170 @@ downloadButton.addEventListener('click', () => {
 //     });
 //   });
 
+
+
+
+
+// height old API 
+
+
+// $.ajax({
+//         url: `${path_of_site}DoorVisulization/GetVisulizationModelHeightSection`,
+//         type: 'POST',
+//         contentType: 'application/json-patch+json',
+//         dataType: 'json',
+//         data: `{ 
+//             doorHeight:${dataForPostObj.doorHeight},
+//             doorWidth: ${dataForPostObj.doorWidth},
+//             doorTypeId: ${dataForPostObj.doorTypeId},
+//             doorCompanyId: ${dataForPostObj.doorCompanyId}}`,
+//         headers: {
+//             'Authorization':'Bearer ' + token,
+//         },
+//         success: function(data) {
+
+//              JSON.stringify(data);
+
+//              document.querySelector("#model_number_row").innerHTML = null;
+//              $("#model_number_row").siblings('.error').text('');
+//             if(data.payload.length < 1 || data.payload == undefined){
+//                 $("#model_number_row").siblings('.error').text('data not found');
+//             }
+//             else{
+//                  data.payload.forEach((e, index)=>{
+//                    document.querySelector("#model_number_row").insertAdjacentHTML('beforeend', 
+//                        `<div class="model_number_col p-2 bg-light" data-index="${index}" doorModelId="${e.doorModelId}" doorSalePrice="${e.doorSalePrice}" doorModelPath="${e.doorModelPath}" doorModelDesc='${e.doorModelDesc}' noOfSection="${e.noOfSection}">
+//                        <div class="model_number_col_inr text-center h-100 d-flex">
+//                            <p class="mb-1 fs-6 model_num">${e.doorModelName}</p>
+//                            <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
+//                            <p class="mb-1 fs-6"> R-17-19</p>
+//                        </div>
+//                    </div>`);
+
+//                  });
+
+//             $("#model_number_row").siblings('.error').text('');
+//            page_loader.hide();
+           
+
+
+//          $('.model_number_col').mouseenter(function(){
+//             $('.modelDesc').text($(this).attr("doorModelDesc"));
+//             $('#model_number_img img').attr("src", $(this).attr("doorModelPath"));
+//         });
+
+//         $('.model_number_col').mouseleave(function(){
+//             $('.modelDesc').text($(this).siblings('.selected').attr(("doorModelDesc")));
+//             $('#model_number_img img').attr("src", $(this).siblings('.selected').attr(("doorModelPath")));
+//         });
+
+
+//         $('.model_number_col').click(function(){
+
+//             $('.model_number_col').removeClass('selected');
+//             $(this).addClass('selected');
+//             $('.modelDesc').text($(this).attr("doorModelDesc"));
+//             $('#model_number_img img').attr("src", $(this).attr("doorModelPath"));
+    
+//             $('#model_number_for_quatation').text($(this).find(".model_num").text());
+    
+            
+
+//             doorModelId = $(this).attr('doorModelId');
+//             let clickedThis = $(this);
+//             let colorArr = data.payload[$(this).attr('data-index')].lstDoorColor;
+
+            
+//             if(doorPanelId == null || doorModelId == null){
+               
+//                 (doorPanelId == null)?alert("please select panel type"):'';
+//                 (doorModelId == null)?alert("please select Model"):'';
+
+//             }
+//             else{
+//             calledDataForImageCreate(clickedThis, colorArr);
+
+//             }
+                
+        
+//         });
+     
+//         }
+             
+//         },
+//         error: function(xhr, status, error) {
+//             document.querySelector('#model_number_row').innerHTML = null;
+//             document.querySelector('#model_number_row').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+
+//            page_loader.hide();
+
+//         }
+//     });
+
+
+
+
+// model click function 
+
+// if(dataForPostObj.doorWidth == null || doorCompanyId == null|| doorPanelId == null || doorModelId == null){
+    //     alert('please select Model');
+    // }
+    // else{
+
+    //     console.log(dataForPostObj.doorWidth, doorCompanyId, doorPanelId, doorModelId);
+    // page_loader.show();
+    // $.ajax({
+    //     url: `${path_of_site}DoorVisulization/GetVisulizationWidhtSection`,
+    //     type: 'POST',
+    //     contentType: 'application/json-patch+json',
+    //     dataType: 'json',
+    //     data: `{ 
+    //         doorWidth:${dataForPostObj.doorWidth},
+    //         doorCompanyId:${doorCompanyId},
+    //         doorPanelId: ${doorPanelId},
+    //         doorModelId:${doorModelId},
+    //         }`,
+    //     headers: {
+    //         'Authorization':'Bearer ' + token,
+    //     },
+    //     success:  function(data) {
+    //         JSON.stringify(data);
+
+    //         if(data.payload.length < 1 || data.payload[0].noOfSection == null ){
+
+    //             page_loader.hide();
+    //             alert("Data not found");
+
+    //         }
+    //         else if(data.payload[0].repeatedFile == undefined || data.payload[0].repeatedFile == null){
+
+    //             alert("Image not found");
+
+    //         }
+    //         else{
+
+    //             $('.your_door_design').hide();
+    //             $('.image_grid_parent.append_grid').show();
+    //             $('.left_btns').show();
+
+    //             let numberOfColumn =  data.payload[0].noOfSection;
+    //             repeatedFile =  data.payload[0].repeatedFile;
+                
+
+    //             createImageRowColumn(clickedThis, numberOfColumn, repeatedFile, colorArr);
+
+    //         }
+
+
+    //         page_loader.hide();
+    //     },
+    //     error: function(xhr, status, error) {
+    //         document.querySelector('#model_number_row .error').text('');
+    //         document.querySelector('#model_number_row .error').text(`Error: ${error}`);
+    //         page_loader.hide();
+    //     }
+    // });
+    // // }
 </script>
 </body>
 </html>
