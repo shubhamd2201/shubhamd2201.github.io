@@ -26,6 +26,24 @@ if( selected_panel == 27 || selected_panel == 28){
 document.querySelector('.bg_img_main').insertAdjacentHTML('beforeend',
  `<img src="./images/${bgImg}" /> <canvas class="bg_img_main_canvas"></canvas>`);
 
+
+//  repeat image static 
+
+if(selected_panel == 1){
+    repeatedFile = './images/window_img.png';
+}
+else if(selected_panel == 2){
+    repeatedFile = './images/Long_Panel_Repete_Image.png';
+}
+else if(selected_panel == 27){
+    repeatedFile = './images/skyline_short.png';
+}
+
+else if(selected_panel == 28){
+    repeatedFile = './images/skyline_long.png';
+}
+
+
 for(let i = 0; i < heightData.length; i++){
 // this is for create row in img 
 
@@ -57,16 +75,16 @@ for(let j = 0; j < numberOfColumn; j++){
 
 
 // this is for create image column
-document.querySelectorAll('#create_img ul').forEach((b)=>{
-    b.insertAdjacentHTML('beforeend',
-        `<li listindex = ${j}>
-            <div class="createImageimg">
-                <img class="" src="${repeatedFile}">
-                <canvas class="myCanvas"><canvas>
-            </div>
-            <div class="window_img"> </div>
-        </li>`);
-})
+    document.querySelectorAll('#create_img ul').forEach((b)=>{
+        b.insertAdjacentHTML('beforeend',
+            `<li listindex = ${j}>
+                <div class="createImageimg">
+                    <img class="" src="${repeatedFile}">
+                    <canvas class="myCanvas"><canvas>
+                </div>
+                <div class="window_img"> </div>
+            </li>`);
+    });
 
 // this is for selection grid columns 
 document.querySelectorAll('.append_grid_for_selection ul').forEach((b)=>{

@@ -288,5 +288,5 @@ ul li{list-style-type: none;}
 
 
 /* for padding  */
-#create_img.long_10_8{padding-top: 5px; padding-top: 5px;}
+#create_img.long_10_8{padding-top: 5px; padding-bottom: 5px;}
 #create_img.long_10_8 >ul{gap: 15px;  padding-left: 50px; padding-right: 50px;}
