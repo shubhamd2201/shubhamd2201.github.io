@@ -221,6 +221,8 @@
         table th,
         table td {
             padding: 10px;
+        }
+        table th{
             text-align: center;
         }
 
@@ -236,7 +238,7 @@
             text-align: left;
         }
 
-        table td {
+        table tbody tr td:last-child, table tbody tr td:nth-last-child(2), table tbody tr td:nth-last-child(3) {
             text-align: right;
         }
 
@@ -278,15 +280,15 @@
         .door_images{/*display: flex;gap: 70px;*/ max-height: 300px; }
         #door_back_img{margin-left: 70px;} 
         .door_images > div{width: 35%;  display: inline-block; vertical-align: top;}
-        .text-left{text-align: left;}
-        #product_second_desc{word-spacing: 5px;}
+        .text-left{text-align: left !important;}
+        #moreinfoquotation{word-spacing: 5px;}
         .mb-2{margin-bottom: 8px;}
         *{margin: 0; padding: 0;}
         .bold{font-weight: 600;}
         .main_heading{color: rgb(13,110,253); font-weight: 600;} 
         table td, table th{font-size: 14px;}
-
- 
+.text-right{text-align: right !important;}
+ .service{width: 100px;}
         
         @page {
         size: A4;
@@ -333,11 +335,11 @@
                 <div class="w33 d-flex mb-12 flex-row flex-wrap justify-content-end align-items-start">
                     <div class="w100 d-flex justify-content-end align-items-start">
                         <strong class="w50">Quotation No#</strong>
-                        <div class="w30 pl-12">DMI-000051</div>
+                        <div class="w30 pl-12 text-right">DMI-000051</div>
                     </div>
                     <div class="w100 d-flex mt-12 justify-content-end align-items-start">
                         <strong class="w50">Date of Issue</strong>
-                        <div class="w30 pl-12" id="todayDate"></div>
+                        <div class="w30 pl-12 text-right" id="todayDate"></div>
                     </div>
                 </div>
             </div>
@@ -397,37 +399,47 @@
 
                 <tr>
                     <td class="service" id="product_main_detail"></td>
-                    <td class="desc" id="product_second_desc"></td>
+                    <td class="desc" >
+                        <p id="product_second_desc"></p>
+                        <p id="doorsize"></p>
+                        <p id="springandCyclage"></p>
+                        <p id="moreinfoquotation"></p>
+
+                    </td>
                     <td class="qty  " >1</td>
                     <td class="unit  " id="model_quantity_price"></td>
                     <td class="total  " id="total_model_price"></td>
                 </tr>
 
                 <tr>
-                    <td></td>
-                    <td id="window_details" class="text-left"></td>
-                    <td id="window_quantity" class=" " ></td>
-                    <td id="window_price" class=" "></td>
+                    <td id="windowGlass"></td>
+                    <td id="window_glass_type_for_quatation"></td>
+                    <td id="window_quantity"></td>
+                    <td id="window_price"></td>
                     <td class="total  " id="window_total_amount"></td>
                 </tr>
                 <tr>
-                    <td  id="door_operator_Name" class="text-left"></td>
-                    <td  id="door_operator_details" class="text-left"></td>
-                    <td id="door_operator_quantity" class=" "></td>
-                    <td id="door_operator_price" class=" "></td>
+                    <td id="windowinsert" class="text-left"></td>
+                    <td id="window_details" colspan="4" class="text-left"></td>
+                </tr>
+                <tr>
+                    <td  id="door_operator_Name"></td>
+                    <td  id="door_operator_details"></td>
+                    <td id="door_operator_quantity"></td>
+                    <td id="door_operator_price"></td>
                     <td class="total  " id="door_operator_total"></td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="bold  ">TOTAL</td>
-                    <td class="total bold  " id="subtotal_amount"></td>
+                    <td colspan="4" class="bold text-right">TOTAL</td>
+                    <td class="total bold" id="subtotal_amount"></td>
                 </tr>
                 <tr>
-                    <td colspan="4" class=" ">TAX 8%</td>
+                    <td colspan="4" class="text-right">TAX 8%</td>
                     <td class="total  " id="taxable_amount"></td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="grand total bold  ">GRAND TOTAL</td>
-                    <td class="grand total bold  "  id="grand_total_amount"></td>
+                    <td colspan="4" class="grand total bold text-right">GRAND TOTAL</td>
+                    <td class="grand total bold" id="grand_total_amount"></td>
                 </tr>
             </tbody>
         </table>
@@ -471,10 +483,9 @@ var storedData = localStorage.getItem("myData");
 var parsedData = JSON.parse(storedData);
 
  var product_main_detail = parsedData.product_main_detail;
- var other_info = parsedData.other_info;
  var window_info = parsedData.window_info;
- var size_info = parsedData.size_info;
- var remain_info = parsedData.remain_info;
+ var doorWidth_info = parsedData.doorWidth_info;
+ var doorheight_info = parsedData.doorheight_info;
  var door_operator_name = parsedData.door_operator_name;
  var door_operator_model = parsedData.door_operator_model;
  var imageDataURL = parsedData.imageDataURL;
@@ -483,11 +494,21 @@ var parsedData = JSON.parse(storedData);
  var doorOperatorPrice = parsedData.doorOperatorPrice;
  var perWindowPrice = parsedData.perWindowPrice;
  var modelPrice = parsedData.modelPrice;
+var doorMaininfo = parsedData.doorMaininfo;
+var springandCyclage = parsedData.springandCyclage;
+var moreinfoquotation = parsedData.moreinfoquotation;
+var window_glass_type_for_quatation = parsedData.window_glass_type_for_quatation;
 
 
 
 $('#product_main_detail').text(product_main_detail);
-$('#product_second_desc').text(other_info + '('+ remain_info+')');
+$('#product_second_desc').text(doorMaininfo);
+
+$('#doorsize').text(doorWidth_info+'x'+doorheight_info);
+$('#springandCyclage').text(springandCyclage);
+$('#moreinfoquotation').text(moreinfoquotation);
+
+
 $('#door_back_img img').attr('src', doorBackImg);
 
 if(door_operator_name != undefined && door_operator_name != null){
@@ -503,7 +524,11 @@ $('#door_operator_Name').text(door_operator_name);
 $('#door_operator_details').text(door_operator_model);
 
 if(window_qty != NaN && window_qty != undefined && perWindowPrice != NaN && perWindowPrice != undefined){
-    $('#window_quantity').text(window_qty);
+
+$('#window_glass_type_for_quatation').text(window_glass_type_for_quatation);
+$('#windowGlass').text('Window Glass:');
+$('#windowinsert').text('Window Insert:');
+$('#window_quantity').text(window_qty);
 $('#window_total_amount').text('$'+ window_qty * perWindowPrice);
 $('#window_price').text('$'+perWindowPrice);
 }

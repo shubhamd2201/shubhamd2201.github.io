@@ -2,16 +2,15 @@ var path_of_site = "http://doorportal-001-site1.etempurl.com/v1/";
 var page_loader = $('#loader');
 let token = "";
 
-var doorTypeId = null;
-var doorCompanyId = 11;
-
 let dataForPostObj = {
     doorHeight: null,
     doorWidth: null,
-    doorTypeId: null,
-    doorCompanyId:null
+    doorTypeId: 1,
+    doorCompanyId:11,
+
 }
 
+let modelindex = null;
 
  // door size function
 
@@ -19,6 +18,7 @@ let dataForPostObj = {
  let width_arr = [8,9,9,10,16,16,18];
 let height_arr = [7,7,8,8,7,8,7];
 
+var doorCollectionId = 1;
 let selected_width_ft = null;
 let selected_height_ft = null;
 let selected_width_in = 0;
@@ -38,10 +38,10 @@ $('#customSize input').on('input', function(){
     
     }
     $('#size_button button').removeClass('selected');
-    $('#width_for_quatation_ft').text(selected_width_ft+"'ft");
-    $('#height_for_quatation_ft').text(selected_height_ft+"'ft");
-    $("#width_for_quatation_inch").text(selected_width_in+"in");
-    $("#height_for_quatation_inch").text(selected_height_in+"in");
+    $('#width_for_quatation_ft').text(selected_width_ft+"'");
+    $('#height_for_quatation_ft').text(selected_height_ft+"'");
+    $("#width_for_quatation_inch").text(selected_width_in+'"');
+    $("#height_for_quatation_inch").text(selected_height_in+'"');
 
     if(selected_width_ft != null && selected_width_in != null && selected_height_ft != null && selected_height_in != null){
         dataForPostObj.doorWidth = selected_width_ft+"."+selected_width_in;
@@ -56,9 +56,8 @@ $('#customSize input').on('input', function(){
         $(this).removeClass('error-border');
     }
 
-    if(dataForPostObj.doorHeight != null && dataForPostObj.doorWidth != null &&SubSubCollectionId != null){
-
-        apiForPanelType(SubSubCollectionId);
+    if( modelindex != null){
+        createImageRowColumn(clickedThis, numberOfColumn, repeatedFile, clickColorArr);
     }
 
 
@@ -73,7 +72,6 @@ $('#customSize input').on('blur', function (){
 });
 
 let clickedThis = null;
-let colorArr = null;
 let numberOfColumn = null;
 let SubSubCollectionId = null;
 size_button.click(function(){
@@ -85,10 +83,10 @@ size_button.click(function(){
     selected_height_ft = height_arr[this_index];
 
     
-    $('#width_for_quatation_ft').text(selected_width_ft+"'ft");
-    $('#height_for_quatation_ft').text(selected_height_ft+"'ft");
-    $("#width_for_quatation_inch").text(selected_width_in+"in");
-    // $("#height_for_quatation_inch").text(selected_height_in+"in");
+    $('#width_for_quatation_ft').text(selected_width_ft+"'");
+    $('#height_for_quatation_ft').text(selected_height_ft+"'");
+    $("#width_for_quatation_inch").text(selected_width_in+'"');
+    $("#height_for_quatation_inch").text(selected_height_in+'"');
 
 
     $('#custom_width_ft').val(selected_width_ft);
@@ -106,9 +104,9 @@ size_button.click(function(){
         $("#customSize input").removeClass('error-border');
     }
 
-    if(dataForPostObj.doorHeight != null && dataForPostObj.doorWidth != null &&SubSubCollectionId != null){
+    if( modelindex != null){
+        createImageRowColumn(clickedThis, numberOfColumn, repeatedFile, clickColorArr);
 
-        apiForPanelType(SubSubCollectionId)
     }
 
 });
@@ -157,10 +155,25 @@ size_button.click(function(){
 
                             $('#type_of_door_quatation').text(data.payload[0].doorTypeName);
 
-                            dataForPostObj.doorTypeId = data.payload[0].doorTypeId;
                         }
                             page_loader.hide();
     
+
+                            $('#type_of_doors').on('change',function(){
+                                $('#type_of_door_quatation').text($('option:selected', this).attr('doorType'));
+                                $('#door_company').empty();
+                                $('#door_collection_btn').empty();
+                                $('#door_collection_family').empty();
+                                $('#panel_type').empty();
+                                $('#model_number_row').empty();
+                                clearDataFromModel();
+                                modelindex = null;
+                        
+                                dataForPostObj.doorTypeId = $(this).val();
+                        
+                                forDoorCollection(dataForPostObj.doorTypeId, dataForPostObj.doorCompanyId);
+                            });
+
                       },
                       error: function(xhr, status, error) {
                           document.querySelector('.type_of_doors  .select_box').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
@@ -169,204 +182,80 @@ size_button.click(function(){
                   });
 
 
+                  page_loader.show();
                   $.ajax({
-                    url: path_of_site+"DoorCompany/DoorCompany",
-                    type: 'GET',
-                    headers: {
-                        'Authorization':'Bearer ' + token,
-                    },
-                    success: function(data) {
-                
-                         JSON.stringify(data);
-                         document.querySelector('#door_company').innerHTML = null;
-                         $('#door_company').siblings('.error').text('');
-
-                         if(data.payload == null || data.payload == undefined){
-                            $('#door_company').siblings('.error').text('Error: Data does not exist');
-                         }
-                         else{
-                            data.payload.forEach(e=>{
-                            document.querySelector('#door_company').insertAdjacentHTML('beforeend', `<option doorCompanyId = "${e.doorCompanyId}" doorComapanyName="${e.doorCompanyName}" value = "${e.doorCompanyId}" > ${e.doorCompanyName} </option>`);
-                            });
-                            
-                            $('#door_company_quatation').text(data.payload[0].doorCompanyName);
-                            dataForPostObj.doorCompanyId = data.payload[0].doorCompanyId;
-                        }
-                          page_loader.hide();
-                    },
-                    error: function(xhr, status, error) {
-                        document.querySelector('.door_company .select_box').innerHTML = null;
-                        document.querySelector('.door_company .select_box').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
-        
-                        page_loader.hide();
-        
-        
-                    }
-                });
-        
-
-                  $.ajax({
-                      url: `${path_of_site}DoorCollection/DoorCollectionByTypeCompanyId?DoorTypeId=1&DoorCompanyId=${doorCompanyId}`,
+                      url: path_of_site+"DoorCompany/DoorCompany",
                       type: 'GET',
                       headers: {
                           'Authorization':'Bearer ' + token,
                       },
                       success: function(data) {
-                           JSON.stringify(data);
-                           document.querySelector('#door_collection_btn').innerHTML = null;
-                           
-                           data.payload.forEach(e=>{
-                            document.querySelector('#door_collection_btn').insertAdjacentHTML('beforeend', `<button doorCollectionId = "${e.doorCollectionId}" > ${e.doorCollectionName} </button>`);
-                           });
-      
-                            $('#collection_for_quatation').text(data.payload[0].doorCollectionName+' collection')
+                  
+                          JSON.stringify(data);
+  
+                          $('#door_company').siblings('.error').text('');
+  
+                          if(data.payload == null || data.payload == undefined){
+                          $('#door_company').siblings('.error').text('Error: Data does not exist');
+                          }
+                          else{
+                          data.payload.forEach(e=>{
+                          document.querySelector('#door_company').insertAdjacentHTML('beforeend', `<option doorCompanyId = "${e.doorCompanyId}" doorComapanyName="${e.doorCompanyName}" value = "${e.doorCompanyId}" > ${e.doorCompanyName} </option>`);
+                          });
                           
-                            $('#door_collection_btn button:first').addClass('selected');
-                            append_door_sub_collection();
-                            page_loader.hide();
+                          $('#door_company_quatation').text(data.payload[0].doorCompanyName);
+                          
+                      }
+                          page_loader.hide();
+  
+                          
+                          
+                          forDoorCollection(dataForPostObj.doorTypeId, dataForPostObj.doorCompanyId);
+                         
+                          setTimeout(function(){
+                             $('#door_collection_btn button').eq(0).addClass('selected');
+                          },1000)
+
+                          appendDoorcollectionfamily(doorCollectionId);
+  
                       },
                       error: function(xhr, status, error) {
-                          document.querySelector('#door_collection_btn').innerHTML = null;
-                          document.querySelector('#door_collection_btn').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+                          document.querySelector('.door_company .select_box').innerHTML = null;
+                          document.querySelector('.door_company .select_box').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
                           page_loader.hide();
+  
+  
                       }
                   });
-      
-        
-              }
-
-            var doorCollectionId_loaded = $('#door_collection_btn button.selected').attr('doorcollectionid');
-
-              $.ajax({
-                url: `${path_of_site}DoorSubCollection/GetDoorCollectionListById?DoorCollectionId=1`,
-                type: 'GET',
-                headers: {
-                    'Authorization':'Bearer ' + token,
-                },
-                success: function(data) {
-   
-                     JSON.stringify(data);
-                     document.querySelector("#door_collection_family").innerHTML = null;
-                
-                     data.payload.forEach(e=>{
-                       document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="col-lg-2 col-md-4 col-sm-6">
-                       <div class="door_family p-2" doorSubCollectionId="${e.doorSubCollectionId}"f>
-                           <div class="img d-table mx-auto mb-2">
-                               <img src="${e.filePath}" alt="${e.doorSubCollectionName}">
-                           </div>
-                           <p class="mb-0 ">${e.doorSubCollectionName}</p>
-                       </div>
-                   </div>`);
-                     });
-
-                     $('#family_for_quatation').text(data.payload[0].doorSubCollectionName+' Family');
-                     
-                   page_loader.hide();
-
-                   append_door_sub_collection();
-                    DoorCategory_event();
-
-
-                },
-                error: function(xhr, status, error) {
-                   document.querySelector('#door_collection_family').innerHTML = null;
-
-                    document.querySelector('#door_collection_family').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
-           
-                   page_loader.hide();
-   
-                }
-                
-
-            });
-          });
-
-
-
-
-    
-      //   this is for diffrent company name 
-     $('#type_of_doors').on('change',function(){
-        doorTypeId = $(this).val();
-        dataForPostObj.doorCompanyId = $(this).doorCompanyId;
-        forDoorCompany(doorTypeId);
-
-    });
-     
-     function forDoorCompany(doorTypeId){
-        
-        
-        page_loader.show();
-        $.ajax({
-            url: path_of_site+"DoorCompany/DoorCompany",
-            type: 'GET',
-            headers: {
-                'Authorization':'Bearer ' + token,
-            },
-            success: function(data) {
-        
-                JSON.stringify(data);
-
-                $('#door_company').empty();
-                $('#door_collection_btn').empty();
-                $('#door_collection_family').empty();
-                $('#panel_type').empty();
-                $('#model_number_row').empty();
-
-                clearDataFromModel();
-
-
-                $('#door_company').siblings('.error').text('');
-
-                if(data.payload == null || data.payload == undefined){
-                $('#door_company').siblings('.error').text('Error: Data does not exist');
-                }
-                else{
-                data.payload.forEach(e=>{
-                document.querySelector('#door_company').insertAdjacentHTML('beforeend', `<option doorCompanyId = "${e.doorCompanyId}" doorComapanyName="${e.doorCompanyName}" value = "${e.doorCompanyId}" > ${e.doorCompanyName} </option>`);
-                });
-                
-                $('#door_company_quatation').text(data.payload[0].doorCompanyName);
-                
-            }
-                  page_loader.hide();
-                  
-
-            },
-            error: function(xhr, status, error) {
-                document.querySelector('.door_company .select_box').innerHTML = null;
-                document.querySelector('.door_company .select_box').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
-                page_loader.hide();
-
-
-            }
-        });
-
-        $('#type_of_door_quatation').text($('option:selected', this).attr('doorType'));
-
-
     }
-    
 
+});
 
-    
+//=====================================================================================
+
      // this is for DoorCollection append timeless
            $('#door_company').on('change',function(){
-            doorCompanyId = $(this).val()
-            forDoorCollection(doorCompanyId);
+            doorCompanyId = $(this).val();
+            dataForPostObj.doorCompanyId = $(this).val();
+
             $('#door_company_quatation').text(", "+$('#door_company option:selected').attr('doorComapanyName'));
 
-            
+            $('#door_company').empty();
+            $('#door_collection_btn').empty();
+            $('#door_collection_family').empty();
+            $('#panel_type').empty();
+            $('#model_number_row').empty();
+            clearDataFromModel();
+            modelindex = null;
+
+            forDoorCollection(dataForPostObj.doorTypeId, dataForPostObj.doorCompanyId);
 
            }) ;
     
-           function forDoorCollection(doorCompanyVal){
-
-            doorCompanyId = doorCompanyVal;
-           
+           function forDoorCollection(doorTypeId, doorCompanyId){
             page_loader.show();
             $.ajax({
-                url: `${path_of_site}DoorCollection/DoorCollectionByTypeCompanyId?DoorTypeId=1&DoorCompanyId=${doorCompanyId}`,
+                url: `${path_of_site}DoorCollection/DoorCollectionByTypeCompanyId?DoorTypeId=${doorTypeId}&DoorCompanyId=${doorCompanyId}`,
                 type: 'GET',
                 headers: {
                     'Authorization':'Bearer ' + token,
@@ -374,22 +263,26 @@ size_button.click(function(){
                 success: function(data) {
                      JSON.stringify(data);
 
-
-                    $('#door_collection_btn').empty();
-                     $('#door_collection_family').empty();
-                     $('#panel_type').empty();
-                     $('#model_number_row').empty();
-
-
-                     clearDataFromModel();
-
-                     
                      data.payload.forEach(e=>{
                       document.querySelector('#door_collection_btn').insertAdjacentHTML('beforeend', `<button doorCollectionId = "${e.doorCollectionId}" > ${e.doorCollectionName} </button>`);
                      });
 
                     
-                     append_door_sub_collection();
+                     $('#door_collection_btn button').click(function(){
+                        
+                        $(this).siblings().removeClass('selected');
+                        $(this).addClass('selected');
+                        modelindex = null;
+        
+                        doorCollectionId = $(this).attr('doorCollectionId');
+        
+                        appendDoorcollectionfamily(doorCollectionId);
+             
+                    $('#collection_for_quatation').text($(this).text() +" collection");
+                    $('#family_for_quatation').text('');
+        
+        
+                    });
                       page_loader.hide();
                 },
                 error: function(xhr, status, error) {
@@ -398,74 +291,65 @@ size_button.click(function(){
                     page_loader.hide();
                 }
             });
-        } ;
+        }
  
 
+// this is for append door collection family
+    function appendDoorcollectionfamily(doorCollectionId){
 
-    // this is for DoorSubCollection append raised panel and click on timeless
-    function append_door_sub_collection(){
-            $('#door_collection_btn button').click(function(){
-                page_loader.show();
-        
-                $(this).siblings().removeClass('selected');
-                $(this).addClass('selected');
+        $.ajax({
+            url: `${path_of_site}DoorSubCollection/GetDoorCollectionListById?DoorCollectionId=${doorCollectionId}`,
+            type: 'GET',
+            headers: {
+                'Authorization':'Bearer ' + token,
+            },
+            success: function(data) {
 
-                const doorCollectionId = $(this).attr('doorCollectionId');
-     
-             $.ajax({
-                 url: `${path_of_site}DoorSubCollection/GetDoorCollectionListById?DoorCollectionId=${doorCollectionId}`,
-                 type: 'GET',
-                 headers: {
-                     'Authorization':'Bearer ' + token,
-                 },
-                 success: function(data) {
-    
-                      JSON.stringify(data);
-                    
-                      $('#door_collection_family').empty();
-                      $('#panel_type').empty();
-                      $('#model_number_row').empty();
+                 JSON.stringify(data);
+               
+                 $('#door_collection_family').empty();
+                 $('#panel_type').empty();
+                 $('#model_number_row').empty();
 
-                      clearDataFromModel();
+                 clearDataFromModel();
 
 
-                      data.payload.forEach(e=>{
-                        document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="door_family p-2" doorSubCollectionId="${e.doorSubCollectionId}"f>
-                            <div class="img d-table mx-auto mb-2">
-                                <img src="${e.filePath}" alt="${e.doorSubCollectionName}">
-                            </div>
-                            <p class="mb-0 ">${e.doorSubCollectionName}</p>
-                        </div>
-                    </div>`);
-                      });
-                    DoorCategory_event();
-                    page_loader.hide();
-                 },
-                 error: function(xhr, status, error) {
-                    document.querySelector('#door_collection_family').innerHTML = null;
+                 data.payload.forEach(e=>{
+                   document.querySelector("#door_collection_family").insertAdjacentHTML('beforeend', `<div class="door_collection_family_col">
+                   <div class="door_family p-1 p-md-2" doorSubCollectionId="${e.doorSubCollectionId}"f>
+                       <div class="family_img">
+                           <img src="${e.filePath}" alt="${e.doorSubCollectionName}">
+                       </div>
+                       <p class="mb-0 ">${e.doorSubCollectionName}</p>
+                   </div>
+               </div>`);
+                 });
+               DoorCategory_event();
+               page_loader.hide();
+            },
+            error: function(xhr, status, error) {
+               document.querySelector('#door_collection_family').innerHTML = null;
 
-                     document.querySelector('#door_collection_family').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
-            
-                    page_loader.hide();
-    
-                 }
+                document.querySelector('#door_collection_family').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+       
+               page_loader.hide();
 
-             });
+            }
 
-             $('#family_for_quatation').text($(this).text() + " collection");
-
-            
-            });
+        });
     }
+
 
     //DoorCategory this is for click on raised panel and append short long panel
     function DoorCategory_event(){
         $('#door_collection_family .door_family').click(function(){
             
+            modelindex = null;
+ 
             $('#door_collection_family .door_family').removeClass('selected');
             $(this).addClass('selected');
             SubSubCollectionId = $(this).attr('doorSubcollectionid');
+            $('#family_for_quatation').text(', '+$(this).text() + "family");
 
             
 
@@ -497,7 +381,6 @@ function apiForPanelType(SubSubCollectionId){
         success: function(data) {
 
              JSON.stringify(data);
-             console.log(data.payload);
 
               $('#panel_type').empty();
               $('#model_number_row').empty();
@@ -506,7 +389,7 @@ function apiForPanelType(SubSubCollectionId){
 
              data.payload.forEach(e=>{
                document.querySelector("#panel_type").insertAdjacentHTML('beforeend', 
-               `<div class="col-lg-3 col-md-4 col-sm-6 ">
+               `<div class="door_collection_family_col">
                <div class="door_catogary  bg-light rounded " doorPanelId="${e.doorPanelId}" repeatfilePath='${e.repeatfilePath}'>
                    <div class="img">
                        <img src="${e.filePath}" alt="">
@@ -534,11 +417,6 @@ function apiForPanelType(SubSubCollectionId){
 
 
 
-
-
-
-
-
 // this is for append model number and click on panel type 
 let doorPanelId;
 let repeatedFile;
@@ -546,7 +424,6 @@ let doorModelId;
 
 function to_append_model_number(){
     $("#panel_type .door_catogary").click(function(){
-        page_loader.show();
 
         $('#window_quantity_for_quatation').text(`Window Quantity:0`);
          $('#windowQ').text("0");
@@ -557,13 +434,11 @@ function to_append_model_number(){
         $("#panel_type .door_catogary").removeClass('selected');
         $(this).addClass('selected');
 
-        $('#panel_type_for_quatation').text(' ,'+ $(this).text());
+        $('#panel_type_for_quatation').text(', '+ $(this).text());
 
-        //-============================-==========================
         toAppendModel(doorPanelId);
-        //======================
-
         forOtherData();
+        
     });
 }
 
@@ -581,10 +456,12 @@ function clearDataFromModel(){
     $('#select_color ul').empty();
 }
 
+let colorMainArr = [];
+let childArr = []
+
 function toAppendModel(doorPanelId){
+    
     clearDataFromModel();
-
-
     if(dataForPostObj.doorHeight == null || dataForPostObj.doorWidth == null ||  dataForPostObj.doorTypeId == null || doorPanelId == null){
 
     alert('Please select Door Size');
@@ -609,27 +486,27 @@ function toAppendModel(doorPanelId){
         success: function(data) {
 
              JSON.stringify(data);
+
              document.querySelector("#model_number_row").innerHTML = null;
              $("#model_number_row").siblings('.error').text('');
 
-             let colorMainArr = [];
             if(data.payload.length < 1 || data.payload == undefined){
                 $("#model_number_row").siblings('.error').text('data not found');
             }
             else{
                  data.payload.forEach((e, index)=>{
                    document.querySelector("#model_number_row").insertAdjacentHTML('beforeend', 
-                       `<div class="model_number_col p-2 bg-light" data-index="${index}" doorModelId="${e.doorModelId}" doorSalePrice="${e.doorSalePrice}" doorModelPath="${e.doorModelPath}" doorModelDesc='${e.doorModelDesc}' noOfSection="${e.noOfSection}" widthSection='${e.widthSection}'>
-                       <div class="model_number_col_inr text-center h-100 d-flex">
-                           <p class="mb-1 fs-6 model_num">${e.doorModelName}</p>
+                       `<div class="model_number_col p-2 bg-light" data-index="${index}" doorModelId="${e.doorModelId}" doorModelPath="${e.doorModelPath}" doorModelDesc='${e.doorModelDesc}' noOfSection="${e.sectionSize}" widthSection='${e.widthSection}'>
+                       <div class="model_number_col_inr text-center h-100">
+                           <p class="mb-1 model_num">${e.doorModelName}</p>
                            <span class="quality_of_model px-2 py-1 text-bg-secondary text-white text-capitalize fw-semibold">Best</span>
-                           <p class="mb-1 fs-6"> R-17-19</p>
+                           <p class="mb-1"> R-17-19</p>
                        </div>
                    </div>`);
 
-                   e.lstDoorColor.forEach((a)=>{
-                    colorMainArr.push(a);
-                   })
+                
+                    let newObjArray = [e.lstDoorColor];
+                    colorMainArr.push(newObjArray);
 
                  });
 
@@ -651,21 +528,21 @@ function toAppendModel(doorPanelId){
 
         $('.model_number_col').click(function(){
 
+            modelindex = $(this).attr('data-index');
+
             $('.model_number_col').removeClass('selected');
             $(this).addClass('selected');
             $('.modelDesc').text($(this).attr("doorModelDesc"));
             $('#model_number_img img').attr("src", $(this).attr("doorModelPath"));
     
-            $('#model_number_for_quatation').text($(this).find(".model_num").text());
+            $('#model_number_for_quatation').text(', '+ $(this).find(".model_num").text());
     
             
-            // need to handle error handle on this 
-
+            let clickColorArr =  colorMainArr[$(this).attr('data-index')][0];
              numberOfColumn = $(this).attr('widthSection');
              clickedThis = $(this);
-             colorArr = [];
 
-             createImageRowColumn(clickedThis, numberOfColumn, repeatedFile);
+             createImageRowColumn(clickedThis, numberOfColumn, repeatedFile, clickColorArr);
         
         });
      
@@ -703,50 +580,6 @@ function toAppendModel(doorPanelId){
 
 
 
-
-    // for testing of API
-    // setTimeout(for_test, 5000);
-       function  for_test(){
-            page_loader.show();
-        
-            // door color 
-            // http://doorportal-001-site1.etempurl.com/v1/DoorColor
-
-            // http://doorportal-001-site1.etempurl.com/v1/SpringCategory/2
-            // strut catogary 
-
-            $.ajax({
-                url: `http://doorportal-001-site1.etempurl.com/v1/SturtCategory/GetSturtCategoryTypeId?SturtCategoryTypeId=1`,
-                type: 'GET',
-                headers: {
-                    'Authorization':'Bearer ' + token,
-                },
-                success: function(data) {
-   
-                     JSON.stringify(data);
-                    //  document.querySelector("#panel_type").innerHTML = null;
-                    //  data.payload.forEach(e=>{
-                      
-                    //  });
-                    // console.log(data.payload)
-                   page_loader.hide();
-   
-                     
-                },
-                error: function(xhr, status, error) {
-                    document.querySelector('#panel_type').innerHTML = null;
-                    document.querySelector('#panel_type').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
-
-                   page_loader.hide();
-   
-                }
-            });
-        };
-
-
-
-
-
         // click on window glass 
 
         $("#window_glass ul li").click(function(){
@@ -755,12 +588,12 @@ function toAppendModel(doorPanelId){
             
            $('#window_type').show();
         
-           if(doorPanelId == 1 || doorPanelId == 27 || doorPanelId == 18){
+           if(doorPanelId == 1 || doorPanelId == 27 || doorPanelId == 18 || doorPanelId == 24){
             $('#long_panel').hide();
             $('#short_panel').show();
         
            }
-           else if(doorPanelId == 2 || doorPanelId == 28 || doorPanelId == 19){
+           else if(doorPanelId == 2 || doorPanelId == 28 || doorPanelId == 19 || doorPanelId == 24){
             $('#short_panel').hide();
             $('#long_panel').show();
         

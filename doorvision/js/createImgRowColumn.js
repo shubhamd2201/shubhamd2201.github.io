@@ -1,10 +1,9 @@
-// need to pass colorArr in last for dynamic color 
 
-function createImageRowColumn(clickedThis, numberOfColumn, repeatedFile){
+
+function createImageRowColumn(clickedThis, numberOfColumn, repeatedFile, clickColorArr ){
 
 
 let heightData = clickedThis.attr('noOfSection').split(','); 
-// let dataIndexForWindow = clickedThis.attr('data-index');
 
 $('#create_img').empty();
 $('.append_grid_for_selection').empty();
@@ -19,28 +18,51 @@ $('.left_btns').show();
 
 let selected_panel = $('#panel_type .door_catogary.selected').attr('doorpanelid');
 let bgImg = 'white_img_for_bg.png';
+let selectedFamily = $('#door_collection_family .door_family.selected').attr('doorsubcollectionid');
 
-if( selected_panel == 27 || selected_panel == 28){
+if(selectedFamily == 3 || selectedFamily == 13 || selectedFamily == 14){
     bgImg = 'bg_light_white.jpeg';
 }
+else if( selectedFamily == 3){
+    bgImg = 'pure_white_img.jpg';
+
+}
+
 document.querySelector('.bg_img_main').insertAdjacentHTML('beforeend',
  `<img src="./images/${bgImg}" /> <canvas class="bg_img_main_canvas"></canvas>`);
 
+ let panel_type;
 
 //  repeat image static 
-
 if(selected_panel == 1){
     repeatedFile = './images/window_img.png';
+    panel_type = "short";
 }
 else if(selected_panel == 2){
     repeatedFile = './images/Long_Panel_Repete_Image.png';
+    panel_type = "long";
+
 }
 else if(selected_panel == 27){
     repeatedFile = './images/skyline_short.png';
+    panel_type = "short";
+
 }
 
 else if(selected_panel == 28){
     repeatedFile = './images/skyline_long.png';
+    panel_type = "long";
+
+}
+else if(selected_panel == 24){
+    repeatedFile = './images/plank_short.png'
+    panel_type = "short";
+
+}
+else if(selected_panel == 25){
+    repeatedFile = './images/plank_long.png'
+    panel_type = "long";
+
 }
 
 
@@ -61,14 +83,7 @@ document.querySelector('.for_grid_height ul').insertAdjacentHTML('beforeend',`<l
 
 }
 
-let repeat_img_path;
 
-// if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 1){
-// repeat_img_path = './images/window_img.png'
-// }
-// else if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 2){
-// repeat_img_path = './images/Long_Panel_Repete_Image.png'
-// }
 for(let j = 0; j < numberOfColumn; j++){
 
 // ${repeatedFile} for dynamic img src
@@ -80,7 +95,7 @@ for(let j = 0; j < numberOfColumn; j++){
             `<li listindex = ${j}>
                 <div class="createImageimg">
                     <img class="" src="${repeatedFile}">
-                    <canvas class="myCanvas"><canvas>
+                    <canvas class="myCanvas">
                 </div>
                 <div class="window_img"> </div>
             </li>`);
@@ -202,53 +217,26 @@ a.addEventListener("click", function(){
 });
 // end 
 
-
 $('#create_img ').removeClass();
-let panel_type;
-if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 1){
-panel_type = "short";
-}
-else if($('#panel_type .door_catogary.selected').attr('doorpanelid') == 2) {
-panel_type = "long";
-}
-
 $('#create_img ').addClass(panel_type+'_'+selected_width_ft+'_'+selected_height_ft);
 
-
-        // for color 
-        let colorArr = ['#ebeeee', '#d6cdbe','#a09387', '#4b3933','#231f20'];
-
-        let colorName = ['White', 'Almond','Sandstone', 'Brown', 'Black', 'Gray', 'Desert Tan']
-
         document.querySelector('#select_color ul').innerHTML = "";
-        colorArr.forEach((e, i)=>{
+        clickColorArr.forEach((e)=>{
+            if(e.colorCode.length < 6){
             document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-            <li data-color="${e}">
-                <span style="background:${e};"></span>
-                <p>${colorName[i]}</p>
+            <li data-color="${e.filePath}" doorColorId='${e.doorColorId}' dsp="${e.doorSalePrice}">
+                <span style='background:url("${e.filePath}") center no-repeat;'></span>
+                <p>${e.doorColorName}</p>
             </li>`);
+            }
+            else{
+                document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
+            <li data-color="${e.colorCode}" doorColorId='${e.doorColorId}' dsp="${e.doorSalePrice}">
+                <span style="background:${e.colorCode};"></span>
+                <p>${e.doorColorName}</p>
+            </li>`);
+            }
         });
-
-
-        // this is dynamic 
-
-        //document.querySelector('#select_color ul').innerHTML = "";
-        // colorArr.forEach((e)=>{
-        //     if(e.colorCode.length < 6){
-        //     document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-        //     <li data-color="${e.filePath}" doorSalePrice=${e.doorSalePrice}>
-        //         <span style='background:url("${e.filePath}") center no-repeat;'></span>
-        //         <p>${e.doorColorName}</p>
-        //     </li>`);
-        //     }
-        //     else{
-        //         document.querySelector('#select_color ul').insertAdjacentHTML('beforeend', `
-        //     <li data-color="${e.colorCode}" doorSalePrice=${e.doorSalePrice}>
-        //         <span style="background:${e.colorCode};"></span>
-        //         <p>${e.doorColorName}</p>
-        //     </li>`);
-        //     }
-        // });
 
         $('#select_color ul li').eq(0).addClass('selected');
         $("#color_for_quatation").text(` ,${$('#select_color ul li.selected').text()}`);
@@ -258,9 +246,7 @@ $('#create_img ').addClass(panel_type+'_'+selected_width_ft+'_'+selected_height_
           // click on color 
           var my_color = null;
 
-        $('#select_color ul li').on('click', function(){
-
-
+        $('#select_color ul li').not('img').on('click', function(){
             my_color = $(this).attr('data-color');
 
             $(this).siblings().removeClass('selected');
@@ -271,18 +257,12 @@ $('#create_img ').addClass(panel_type+'_'+selected_width_ft+'_'+selected_height_
             applyColorOverlay_multiple(my_color);
             applyColorOverlay(my_color);
 
-            
-           let borderColor =  adjustColor(my_color)
-            $('#create_img > ul').css("border-color",borderColor)
-            
+           let borderColor =  adjustColor(my_color);
 
-
-            // if($("#create_img ul li").find(".window_img").length > 0){
-            //     // applyColorOverlaywindow(my_color);
-            // }
-
+           document.querySelector(':root').style.setProperty('--stripepartition', borderColor);
             setWindow();
             setGlass();
+
 
         });
         // click on color end

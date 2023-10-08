@@ -153,6 +153,19 @@ function hexToRgba(hex, opacity) {
 
 
 
+    // swipe event in jquery 
+    $('body').on('swiperight',function(){
+        
+        $('.image_append_section').addClass('mobileswipped');
+        $('body').css('overflow',"hidden");
+    });
+        
+    $('body').on('swipeleft',function(){
+        $('.image_append_section').removeClass('mobileswipped');
+        $('body').css('overflow',"inherit");
+
+    });
+
 
 
 
