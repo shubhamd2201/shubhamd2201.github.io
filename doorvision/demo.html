@@ -32,9 +32,89 @@
         .window_img canvas{position: absolute; z-index: 1; left: -1px; right: -1px; top: -1px; bottom: -1px; width: calc(100% + 2px); height: calc(100% + 2px);}
 
         .image_grid_parent.append_grid{display: block !important;}
+
+
+
+
+
+
+ .input-container { 
+  height: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.ic1 {
+  margin-top: 40px;
+}
+
+.cut {
+  background-color: #fff;
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  transform: translateY(0);
+  transition: transform 200ms;
+  width: 76px;
+}
+
+
+
+.input {
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+}
+
+
+
+.iLabel {
+  color: #65657b;
+  font-family: sans-serif;
+  left: 20px;
+  line-height: 14px;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input:focus ~ .cut {
+  transform: translateY(8px);
+}
+
+.input:focus ~ .iLabel {
+  transform: translateY(-30px) translateX(10px) scale(0.75);
+}
+
+.input:not(:focus) ~ .iLabel {
+  color: #808097;
+}
+
+.input:focus ~ .iLabel {
+  color: #dc2f55;
+}
+
     </style>
 </head>
 <body>
+
+
+    <div class="input-container ic1">
+        <input placeholder="" type="text" class="input" id="firstname">
+        <div class="cut"></div>
+        <label class="iLabel" for="firstname">First name</label>
+    </div>
 
 
     <header class="shadow">

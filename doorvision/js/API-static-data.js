@@ -1,3 +1,18 @@
+function clearStaticAPIData(){
+
+    document.querySelector('#door_lock ul').innerHTML = null;
+    document.querySelector('#sealData ul').innerHTML = null;
+    document.querySelector('#spring_data ul').innerHTML = null;
+    document.querySelector('#strutData ul').innerHTML = null;
+   document.querySelector('#strut_quantity').innerHTML = null;
+    document.querySelector('#extrastrutData ul').innerHTML = null;
+    document.querySelector('#strut_quantity').innerHTML = null;
+    document.querySelector('#doorOperator').innerHTML = null;
+    $('#doorOperator .door_operator_select_box select').empty();
+    $('#spriingCyclage').empty();
+}
+
+let doorOperatorThis;
 
 
 function forOtherData(){
@@ -33,7 +48,7 @@ $.ajax({
 
     },
     error: function(xhr, status, error) {
-        document.querySelector('#door_lock').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+        errorCame(error);
         page_loader.hide();
     }
 
@@ -64,7 +79,7 @@ $.ajax({
 
     },
     error: function(xhr, status, error) {
-        document.querySelector('#spring_data').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+        errorCame(error);
         page_loader.hide();
     }
 
@@ -108,7 +123,7 @@ $.ajax({
 
     },
     error: function(xhr, status, error) {
-        document.querySelector('#sealData').insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+        errorCame(error);
         page_loader.hide();
     }
 
@@ -150,7 +165,7 @@ $.ajax({
 
     },
     error: function(xhr, status, error) {
-        $('#strutData .error').text("Error:"+error);
+        errorCame(error);
         page_loader.hide();
     }
 
@@ -199,7 +214,7 @@ function clickStrut(){
                         document.querySelector('#strut_quantity').insertAdjacentHTML('beforeend', 
                         `<p>Extra Strut Quantity</p>
                         <div>
-                            <input type="number" class="w-100 py-2 px-3 rounder-theme">
+                            <input type="number" val="1" min="1" max="9" maxlength="1" class="w-100 py-2 px-3 rounder-theme">
                         </div>`
                         );
                     }
@@ -219,21 +234,11 @@ function clickStrut(){
         
             },
             error: function(xhr, status, error) {
-                $('#extrastrutData .error').text("Error:"+error);
+                errorCame(error);
                 page_loader.hide();
             }
         
         });
-
-
-
-
-
-
-
-
-
-
 
         
     });
@@ -261,7 +266,7 @@ $.ajax({
         else{
             document.querySelector('#doorOperator').innerHTML = null;
             data.payload.forEach((e, index)=>{
-             document.querySelector('#doorOperator').insertAdjacentHTML('beforeend', `<div class="col-lg-4 col-md-6 col-sm-12 ">
+             document.querySelector('#doorOperator').insertAdjacentHTML('beforeend', `<div class="col-lg-4 col-sm-6 col-12 ">
                 <div class="door_operator_col_inr border_2px" data-index="${index}" companyOperatorTypeId="${e.companyOperatorTypeId}" companyOperatorTypeName=${e.companyOperatorTypeName} >
                     <div class="door_operator_logo"> <img src="${e.filePath}" alt="${e.companyOperatorTypeName}"></div>
                     <div class="door_operator_select_box">
@@ -280,7 +285,7 @@ $.ajax({
 
     },
     error: function(xhr, status, error) {
-        $('#doorOperator').siblings(".error").text("Error:"+error);
+        errorCame(error);
         page_loader.hide();
     }
 
@@ -314,6 +319,9 @@ page_loader.show();
             }
             else{
                 document.querySelectorAll('#doorOperator .door_operator_select_box select')[i].innerHTML = null;
+                document.querySelectorAll('#doorOperator .door_operator_select_box select')[i].insertAdjacentHTML('beforeend', 
+                 `<option>Select Operator</option>`);
+
                 data.payload.forEach(e=>{
                  document.querySelectorAll('#doorOperator .door_operator_select_box select')[i].insertAdjacentHTML('beforeend', 
                  `<option company_Operator_Id=${e.company_Operator_Id} value="${e.company_Operator_Name}" salePrice="${e.company_Operator_Sale_Price}">${e.company_Operator_Name}</option>`);
@@ -324,12 +332,13 @@ page_loader.show();
     
         },
         error: function(xhr, status, error) {
-            $('#doorOperator .door_operator_select_box select').siblings(".error").text("Error:"+error);
+            errorCame(error);
             page_loader.hide();
         }
     
     });
 }
+
 
 
 $('#doorOperator .door_operator_select_box select').on('change', function(){
@@ -338,15 +347,11 @@ $('#doorOperator .door_operator_select_box select').on('change', function(){
     $('.door_operator_col_inr').removeClass('selected');
     $(this).closest('.door_operator_col_inr').addClass('selected');
 
+    doorOperatorThis = $(this);
 });
 
 
-
-
-
 }
-
-
 
 
 // setTimeout(forOtherData,5000);
@@ -374,30 +379,30 @@ function springTypeClick(){
         
                 JSON.stringify(data);
 
-                $('#spriingCyclage').html("");
+                $('#spriingCyclage').empty();
                 $('#spriingCyclage').siblings(".error").text('');
                 if(data.payload == null){
                     
                     $('#spriingCyclage').siblings(".error").text("Error: data does not exist");
                 }
                 else{
-                    document.querySelector('#spriingCyclage').insertAdjacentHTML('beforeend', ` <option>Select Cyclage</option>`
-                );
                  data.payload.forEach(e=>{
                 document.querySelector('#spriingCyclage').insertAdjacentHTML('beforeend', ` <option springCategoryName="${e.springCategoryName}" value="${e.springCategoryId}" springCategoryId="${e.springCategoryId}">${e.springCategoryName}</option>`
                 );
                  });
+
+                 $("#cyclage_for_quatation").text($('#spriingCyclage option').eq(0).attr('springCategoryName'));
                 }
                 page_loader.hide();
                 
                 $("#spriingCyclage").change(function(){
                     
-                    $("#cyclage_for_quatation").text($('option:selected', this).attr('springCategoryName'));
+                    $("#cyclage_for_quatation").text($('#spriingCyclage option:selected', this).attr('springCategoryName'));
                 });
         
             },
             error: function(xhr, status, error) {
-                document.querySelector('#spriingCyclage').parentElement().insertAdjacentHTML('beforeend', `<span class="text-danger" > 'Error: ' ${error} </span>`);
+                errorCame(error);
                 page_loader.hide();
             }
         

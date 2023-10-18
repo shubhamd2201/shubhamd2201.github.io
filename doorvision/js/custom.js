@@ -9,8 +9,6 @@ $('.accordian_heading').click(function(){
 function setWindow(){
     
     let window_typeand_color = './images/window/'+$("#select_color ul li.selected p").text()+'_'+$('#window_type ul li.selected').attr('data-window')+'.png';
-    
-
     $(".window_img").find("img").attr('src',window_typeand_color);
 
     $('#window_type_for_quatation').text(", Window Insert: "+$('#window_type ul li.selected').text());
@@ -114,7 +112,7 @@ $("#window_type ul li").click(function(){
 
     setWindow();
     setGlass()
-})
+});
 
 
 
@@ -166,7 +164,41 @@ function hexToRgba(hex, opacity) {
 
     });
 
+    $('.popup_close_btn').click(popupGone);
+    
+    function popupGone(){
+        $(".succes_n_error").removeClass("show_popup");
+        $(".succes_n_error p").empty();
+        setTimeout(()=>{
+            $('.succes_n_error').hide();
+        },300);
+    }
 
+    function errorCame(notified_txt){
+        $('.succes_n_error').removeClass('success');
+        $('.succes_n_error').addClass('error');
+        $(".succes_n_error p").text(notified_txt);
+        $('.succes_n_error').show();
+        setTimeout(()=>{
+        $(".succes_n_error").addClass("show_popup");
+        },300);
+        setTimeout(() => {
+            popupGone();
+        }, 5000);
+    }
+
+    function successCame(notified_txt){
+        $('.succes_n_error').removeClass('error');
+        $('.succes_n_error').addClass('success');
+        $(".succes_n_error p").text(notified_txt);
+        $('.succes_n_error').show();
+        setTimeout(()=>{
+        $(".succes_n_error").addClass("show_popup");
+        },300);
+        setTimeout(() => {
+            popupGone();
+        }, 5000);
+    }
 
 
 

@@ -18,21 +18,34 @@
             <img src="./images/DM logo White mock.svg" alt="">
         </div>
     </div>
+    <div class="succes_n_error error">
+        <div class="succes_n_error_inr">
+            <div class="popup_close_btn">&times;</div>
+            <div class="mark"> </div>
+            <h2 class="success_heading">Success !</h2>
+            <h2 class="error_heading">Error !</h2>
+            <p>.</p>
+        </div>
+    </div>
+
     <header class="shadow">
-        <div class="header_logo">
-            <a href="index.html">
-                <img src="./images/DoorMaster-Logo-CMYK.png" alt="">
-            </a>
+        <div class="header_inr">
+            <div class="header_logo">
+                <a href="index.html">
+                    <img src="./images/DoorMaster-Logo-CMYK.png" alt="">
+                </a>
+            </div>
+            <span class="mobile_visual_notice">slide left to right to see visualization</span>
         </div>
     </header>
     <main class="mx-md-auto m-0 px-0 px-md-1">
         <div class="product_main">
-            <div class="left_section_col shadow-lg bg-white mx-2">
-                <div class="left_section_inr p-3 scroll-css ">
+            <div class="left_section_col shadow-lg bg-white mx-0 mx-md-2">
+                <div class="left_section_inr scroll-css ">
                     <div class="favorite">
                         <ul class="ps-0 ">
                             <li class="d-inline-block me-4 text-uppercase"><i class="bi bi-heart"></i> <span>favorite</span></li>
-                            <li class="d-inline-block me-4 text-uppercase "><span class="text-primary">delete</span> <i class="bi bi-question-circle-fill"></i></li>
+                            <li class="d-inline-block me-4 text-uppercase "><span class="text-primary">delete</span> <i class="bi bi-question-circle-fill bg_icon_black"></i></li>
                         </ul>
                     </div>
                     <div class="heading mb-4 mt-3">
@@ -40,61 +53,68 @@
                     </div>
                     <div class="user_detail d-flex flex-wrap justify-content-between mb-2">
                         <p class=" mb-0">created by user name</p>
-                        <div><button class=" btn btn-primary text-uppercase px-4 me-2 rounder-theme-1"  type="button" data-toggle="tooltip" data-placement="bottom" title="Add to cart"><i class="bi bi-plus " ></i> add to cart</button><i class="bi bi-question-circle-fill"></i></div>
+                        <div><div class="button-borders me-2">
+                            <button class="custom_button"  type="button" data-toggle="tooltip" data-placement="bottom" title="Add to cart"><i class="bi bi-plus " ></i> add to cart</button>
+                        </div><i class="bi bi-question-circle-fill bg_icon_black"></i></div>
                     </div>
                     <div>
-                        <h6 class="py-2 text-capitalize ">customer details</h6>
-                        <p class="py-2 text-uppercase text-primary">select customer</p>
+                        <h6 class="py-md-2 py-1 text-capitalize ">customer details</h6>
+                        <p class="py-md-2 py-1 text-uppercase text-primary">select customer</p>
                    </div>
-                    <div class="image_append_section">
-                        <div class="image_div " id="image_download_section" crossorigin="anonymous">
-                            <div class="image_div_inr image_first_layer position-relative my-3">
-                                
-                                <div class="your_door_design mx-auto mt-3 p-3 text-primary rounder-theme text-capitalize">
-                                    <p class="mb-0">Your door design a few clicks away !</p>
-                                </div>
-                                <div class="image_grid_parent append_grid">
-                                    <div class="createGrid create_img " id="create_img">
-            
+                     <div class="image_append_section">
+                        <div class="bgoverlay">
+                            <div class="image_div " id="image_download_section" crossorigin="anonymous">
+                                <div class="image_div_inr image_first_layer position-relative my-3">
+                                    
+                                    <div class="your_door_design mx-auto mt-3 p-3 text-primary rounder-theme text-capitalize">
+                                        <p class="mb-0">Your door design a few clicks away !</p>
                                     </div>
-                                     <!-- this div for bgimg and canvas  -->
-                                    <div class="bg_img_main">
-                                        
+                                    <div class="image_grid_parent append_grid">
+                                        <div class="createGrid create_img " id="create_img">
+                
+                                        </div>
+                                         <!-- this div for bgimg and canvas  -->
+                                        <div class="bg_img_main">
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mobileImgshowbtn">
-                            <span></span>
+                            <div class="mobileImgshowbtn">
+                                <span></span>
+                            </div>
                         </div>
                     </div>
                     <div class="image_download my-3 left_btns clearfix" >
-                        <button class="btn btn-primary py-2 px-4"  id="downloadButton"> Submit</button>
-                        <!-- <button id="flipbtn" class="btn btn-primary py-2 px-4">Back Door</button> -->
-                        <a id="generateQuotation" class="float-end a_btn" target="_black" href="./quotation.html" >Generate quotation</a>
+                        <div class="button-borders me-2">
+                            <button class="custom_button"  id="quotationsubmit_btn">Submit</button>
+                        </div>
+                        <div class="button-borders m-auto">
+                            <a id="generateQuotation" class=" custom_button" target="_black" href="./quotation.html" >Generate quotation</a>
+                        </div>
                     </div>
                     <div class="note my-3">
-                        <p> <span><i class="bi bi-info-circle-fill"></i></span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat voluptatem autem blanditiis dolorum nobis quae ratione rem iusto. Voluptatum explicabo dolorum magni facilis.</p>
+                        <p> <span><i class="bi bi-info-circle-fill bg_icon_black"></i></span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat voluptatem autem blanditiis dolorum nobis quae ratione rem iusto. Voluptatum explicabo dolorum magni facilis.</p>
                     </div>
                     <div class="mb-2">
                         <div class="price_details mb-2 d-flex justify-content-between align-items-center">
                             <p class="text-capitalize text-primary"><i class="bi bi-card-list"></i> price details</p>
-                            <h3 ><sup class="text-danger pe-1">$</sup><span id="total_amount_show">0</span></h3>
+                            <h3 ><sup class="text-danger pe-1 fs-6 fs-md-5">$</sup><span id="total_amount_show" class="fs-3 fs-md-2">0</span></h3>
                         </div>
-                        <div class="input_box_row row mb-4">
-                            <div class="input_box_col w-50 col-lg-6 col-sm-12">
+                        <div class="input_box_row row mb-2 mb-md-4">
+                            <div class="input_box_col col-lg-6 col-8">
                                 <label for="job_name" class="mb-2">PO/ Job Name</label>
                                 <div class="input_div">
-                                    <input type="text" id="job_name" class="rounder-theme-2 border-1 px-3 py-2 w-100" value="DV00001">
+                                    <input type="text" id="job_name" class="rounder-theme-2 border-1 px-3 py-2 w-100" value="DMI00001">
                                 </div>
                             </div>
                         </div>
-                        <div class="shipping_detail row pb-3 border-bottom">
-                            <div class="col-8">
+                        <div class="shipping_detail row pb-1 pb-md-3 border-bottom">
+                            <div class="col-md-8 col-10">
                                 <h6 class="text-capitalize mb-2">shipping address</h6>
                             <p class="text-uppercase">500 libnar Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, facere.</p>
                             </div>
-                            <div class="edit_adress  col-4">
+                            <div class="edit_adress  col-2 col-md-4">
                                 <span class="fs-4 d-inline-block cursor-pointer"><i class="bi bi-pencil-square"></i></span>
                             </div>
                         </div>
@@ -128,7 +148,7 @@
                         </div>
                         <div class="border-bottom py-2 mb-2">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-12">
                                     <h6>window details</h6>
                                     <span id="window_quantity_for_quatation"></span>
                                     <span id="window_glass_type_for_quatation"></span>
@@ -165,7 +185,7 @@
                                     </div>
                                 </div>
                             </div>    
-                            <div class="row" id="moreinfoquotation">
+                            <div class="row gy-3 mt-0" id="moreinfoquotation">
                                 <div class="col-lg-4 col-6">
                                     <h6>Seals</h6>
                                     <span id="seal_type_for_quatation"></span>
@@ -194,8 +214,8 @@
                                     <span id="jamb_material_for_quatation"></span>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12">
+                            <div class="row mt-3">
+                                <div class="col-12">
                                     <h6>Door Operator</h6>
                                     <p id="door_operator_info_quo">
                                         <span id="doorOperator_companyName"></span>
@@ -213,70 +233,94 @@
             </div>
             <div class="right_section_col shadow-lg bg-white">
                 <div class="right_section_inr scroll-css">
-                    <div class="d-flex flex-wrap gap-3">
+                    <div class="custom_row">
                         <p class="py-2 text-uppercase text-primary">prefrences</p>
                         <p class="py-2 text-uppercase text-primary">add customization</p>
-                        <div><button class=" btn btn-primary text-uppercase px-4 me-2 rounder-theme-1"  type="button" data-toggle="tooltip" data-placement="bottom" title="Add to cart"><i class="bi bi-plus " ></i> add to cart</button><i class="bi bi-question-circle-fill"></i></div>
+                        <div ><div class="button-borders me-2">
+                            <button class="custom_button"type="button" data-toggle="tooltip" data-placement="bottom" title="Add to cart"> <i class="bi bi-plus" ></i> add to cart</button>
+                        </div>
+                        <span class="tool-tip add_cart_tool">
+                        <i class="bi bi-question-circle-fill bg_icon_black "></i>
+                        </span></div>
                     </div>
-                    <div class="heading my-3 m-md-2 border-bottom pb-3">
+                    <div class="heading my-1 m-md-2 border-bottom pb-1 pb-md-2">
                         <h2 class="text-primary text-capitalize">Door designer</h2>
                     </div>
-                    <div class="type_of_doors d-flex flex-wrap mb-3">
-                        <div class="select_box">
-                            <p class="text-capitalize mb-2">types of doors</p>
-                            <select name="type_of_doors" id="type_of_doors" class="border">
-                                <!-- door type option  -->
-                            </select>
-                            <span class="error"></span>
+                    <div class="option_wrap">
+                        
                         </div>
-                        <div>
-                            <p class="text-capitalize mb-2">quantity <i class="bi bi-question-circle-fill"></i></p>
-                            <input id="quantity_of_door" type="number" class="border d-block" value="1" min="1" max="20">
+                        <div class="door_company custom_row mb-3 mt-2">
+                            <div class="select_box">
+                                <p class="text-capitalize mb-md-2">Door Company</p>
+                                <select name="door_company" id="door_company" class="border">
+                                    <!-- door company option  -->
+                                </select>
+                                <span class="error"></span>
+                            </div>
+                            <div class="type_of_doors custom_row  mb-md-3">
+                                <div class="select_box">
+                                    <p class="text-capitalize mb-md-2">types of doors</p>
+                                    <select name="type_of_doors" id="type_of_doors" class="border">
+                                        <!-- door type option  -->
+                                    </select>
+                                    <span class="error"></span>
+                                </div>
+                                <div>
+                                    <p class="text-capitalize mb-md-2">quantity <i class="bi bi-question-circle-fill bg_icon_black"></i></p>
+                                    <input id="quantity_of_door" type="number" class="border d-block" value="1" min="1" max="20">
+                                </div>
                         </div>
                     </div>
-                    <div class="door_company d-flex flex-wrap mb-3">
-                        <div class="select_box">
-                            <p class="text-capitalize mb-2">Door Company</p>
-                            <select name="door_company" id="door_company" class="border">
-                                <!-- door company option  -->
-                            </select>
-                            <span class="error"></span>
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <p><b class="fs-3 fw-semibold"> Or </b>, Configure your exact garage door with door designer</p>
-                    </div>
-                    <div class="collection_section border mb-4">
+                    <div class="collection_section border mb-1 mb-md-3 mb-lg-4">
                         <h5 class="main_heading accordian_heading">door size</h5>
                         <div class="accordian_data">
-                            <p class="mb-3"> Select a Standard garage door size <b class="fs-5 fw-semibold"> Or </b> enter your exact garage door size</p>
+                            <p class="mb-1 mb-md-3"> Select a Standard garage door size <b class="fs-6 fs-sm-6 fw-semibold"> Or </b> enter your exact garage door size</p>
                             
-                            <div class="select_size_btn buttons mb-3 d-flex flex-wrap gap_10" id="size_button">
-                                <button tab-index="0">8'x7'</button>
-                                <button tab-index="1" >9'x7'</button>
-                                <button tab-index="2" >9'x8'</button>
-                                <button tab-index="3" >10'x8'</button>
-                                <button tab-index="4" >16'x7'</button>
-                                <button tab-index="5" >16'x8'</button>
-                                <button tab-index="6" >18'x7'</button>
+                            <div class="select_size_btn buttons mb-1 mb-md-3 custom_row" id="size_button">
+                               <!-- size button will append here  -->
                             </div>
                             <div id="customSize" class="custom_size">
                                 <p>Select Door Width</p>
-                                <div class="row mb-2">
+                                <div class="row mb-1 mb-md-2">
                                     <div class="col-lg-4 col-6">
-                                        <input required maxlength="2" type="text" id="custom_width_ft" min="1" max="99"  ><span>ft</span>
+                                        <div class="custom_size_input_div">
+                                            <button  class="minus-btn minus" type="button" name="button">-</button>
+                                            <input required maxlength="2" type="text" id="custom_width_ft" min="1" max="99" class="qty">
+                                            <button class="plus-btn plus" value="+" type="button" name="button">+</button>
+                                            
+                                        </div>
+                                        <span class="ftinch">ft</span>
                                     </div>
                                     <div class="col-lg-4 col-6">
-                                        <input required type="text" id="custom_width_inch" min="0" max="11"  maxlength="2" value="0"><span>in</span>
+                                        <div class="custom_size_input_div">
+                                            
+                                            <button  class="minus-btn minus" type="button" name="button">-</button>
+                                            <input required type="text" id="custom_width_inch" min="0" max="11"  maxlength="2" value="0" class="qty">
+                                            <button class="plus-btn plus" value="+" type="button" name="button">+</button>
+                                            
+                                        </div>
+                                        <span  class="ftinch">in</span>
                                     </div>
                                 </div>
                                 <p>Select Door Height</p>
                                 <div class="row">
                                     <div class="col-lg-4 col-6">
-                                        <input required type="text" id="custom_height_ft" min="1" max="99"  maxlength="2"><span>ft</span>
+                                        <div class="custom_size_input_div">
+                                                <button  class="minus-btn minus" type="button" name="button">-</button>
+                                            <input required type="text" id="custom_height_ft" min="1" max="99"  maxlength="2" class="qty">
+                                                <button class="plus-btn plus" value="+" type="button" name="button">+</button>
+                                            
+                                        </div>
+                                        <span class="ftinch">ft</span>
                                     </div>
                                     <div class="col-lg-4 col-6">
-                                        <input required type="text" id="custom_height_inch" min="0" max="11" maxlength="2" value="0"><span>in</span>
+                                        <div class="custom_size_input_div">
+                                            <button  class="minus-btn minus" type="button" name="button">-</button>
+                                            <input required type="text" id="custom_height_inch" min="0" max="11" maxlength="2" value="0" class="qty">
+                                            <button class="plus-btn plus" value="+" type="button" name="button">+</button>
+                                            
+                                        </div>
+                                        <span  class="ftinch">in</span>
                                     </div>
                                 </div>
                             </div>
@@ -285,7 +329,7 @@
                     <div class="collection_section border mb-4">
                         <h5 class="main_heading accordian_heading">Collection & Family</h5>
                         <div class="accordian_data">
-                            <div class="tabbing collection_btn mb-2 mb-md-3 border-bottom" id="door_collection_btn">
+                            <div class="tabbing collection_btn custom_row mb-2 mb-md-3" id="door_collection_btn">
                                 <!-- door collection  -->
                             </div>
 
@@ -305,7 +349,7 @@
                         <div class="accordian_data">
                             
 
-                            <div class="mb-3 long_short_type">
+                            <div class="mb-2 mb-md-3 long_short_type">
                                 <div class="custom_row" id="panel_type">
                                     <!-- panel type wil append here  -->
                                 </div>
@@ -322,7 +366,7 @@
                                     <div class="col-lg-4 col-sm-6 col-12">
                                         <div class="model_number_img_col_inr">
                                             <span class="modelDesc"></span>
-                                            <div id="model_number_img" class="model_number_img p-2 bg-white">
+                                            <div id="model_number_img" class="model_number_img p-2">
                                                 <img src="" alt="">
                                             </div>
                                         </div>
@@ -332,6 +376,7 @@
                         </div>
                     </div>
 
+                <div class="assosiated_from_model">
                     <div class=" border mb-2 mb-md-3 mb-lg-4">
                         <h5 class="main_heading accordian_heading">color</h5>
                         <div class="accordian_data">
@@ -346,17 +391,17 @@
                     <div class="collection_section border mb-2 mb-md-3 mb-lg-4" id="grid_submit">
                         <h5 class="main_heading accordian_heading">Windows</h5>
                         <div class="accordian_data">
-                            <p class="text-primary">IMPORTANT: Window placements should be entered inside looking out</p>
-
                             <!-- grid layout will append here  -->
-                            <div class="d-flex align-items-center justify-content-center grid_main_row">
+                            <div class="custom_row align-items-center justify-content-center grid_main_row">
                                 <div class="for_all_grid grid_buttons">
                                     <ul>
         
                                     </ul>
                                 </div>
-                                <div class="createGrid append_grid_for_selection">
+                                <div class="gridoverflow_wrap">
+                                    <div class="createGrid append_grid_for_selection">
                                     
+                                    </div>
                                 </div>
                                 <div class="for_grid_height grid_buttons">
                                     <ul>
@@ -377,7 +422,7 @@
                     <div class=" border mb-4">
                         <h5 class="main_heading accordian_heading">window glass</h5>
                         <div class="accordian_data">
-                            <div id="window_glass_type" class="window_glass_tabbing button_type_li mb-3 custom_row">
+                            <div id="window_glass_type" class="window_glass_tabbing button_type_li mb-1 mb-md-3 custom_row">
                                 <ul class="p-0">
                                     <li data-tab="tempered_glass">1/8" Uninsulated</li>
                                     <li data-tab="insulated_glass">Insulated</li>
@@ -511,7 +556,7 @@
                         <h5 class="main_heading accordian_heading">Spring</h5>
                         <div class="accordian_data">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-12 col-md-6">
                                     <h6>spring</h6>
                                     
                                     <div id="spring_data" class="button_type_li click_function for_spring_quatation">
@@ -520,9 +565,9 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-md-6">
                                     <h6>Cyclage</h6>
-                                    <select name="" id="spriingCyclage" class="border py-2 px-3 w-100 Cyclage">
+                                    <select name="" id="spriingCyclage" class="border w-100 Cyclage">
                                         <!-- spring type child will append here  -->
                                     </select>
                                     <span class="error"></span>
@@ -545,7 +590,7 @@
                         <h5 class="main_heading accordian_heading">door lock</h5>
                         <div class="accordian_data">
                             <div id="door_lock" class="button_type_li lock_bar">
-                                <ul>
+                                <ul class="custom_row">
                                     <!-- door lock will append here  -->
                                     <!-- <li>
                                         <div>
@@ -561,7 +606,7 @@
                         <h5 class="main_heading accordian_heading">door operator</h5>
                         <div class="accordian_data">
                             <div class="door_operator">
-                                <div id="doorOperator" class="row g-2">
+                                <div id="doorOperator" class="row g-sm-2 gx-md-3 gx-0 gy-2">
                                     <!-- door operator col will append here  -->
                                 </div>
                                 <span class="error"></span>
@@ -733,6 +778,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                     
                 </div>
             </div>
@@ -748,9 +794,8 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js" integrity="sha512-fHY2UiQlipUq0dEabSM4s+phmn+bcxSYzXP4vAXItBvBHU7zAM/mkhCZjtBEIJexhOMzZbgFlPLuErlJF2b+0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     
     <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-touch-events/2.0.0/jquery.mobile-events.min.js"> </script>
-
+    <script src="./js/html2canvas.min.js"></script>
+    <script src="./js/jquery.mobile-events.min.js"> </script>
     <script src="js/api.js" type="text/javascript"></script>
     <script src="js/createImgRowColumn.js" type="text/javascript"></script>
     <script src="js/custom.js" type="text/javascript"></script>
