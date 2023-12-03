@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul{list-style-type: none; display: flex; gap: 10px; margin: 10px;}
+        li{width: 50px;height: 50px; border: 1px solid #d1d1d1;}
+        main{display: flex; gap: 20px;}
+        li.selected{border-color: green; background-color: #d1d1d1;}
+        #id_btn ul{flex-direction: column;}
+        button{border: none; outline: none; padding: 8px 20px; border-radius: 5px; background-color: green; color: #fff; text-transform: uppercase;cursor: pointer;} 
+        .edit{color: red; width: 20px; height: 20px; background-color: #fff; margin: 10px; display: inline-block; text-align: center;cursor: pointer; }
+        .green{background-color: green !important;}
+
+        .gif_section{position: relative; overflow: hidden; display: table; text-align: center;}
+        .animate_logo_section{position: absolute; content: ""; width: 80%; height: 90%; left: 50%; transform: translateX(-50%); top: 0; display: flex; justify-content: center; align-items: center; overflow: hidden; animation: gifanimate 5s linear 0s infinite alternate ; margin:100px auto 0px;}
+        .animate_logo_section img{max-width: 100px;}
+
+        @keyframes gifanimate {
+            0%{height: 90%;}
+            10%{height: 70%;}
+            20%{height: 68%;}
+            30%{height: 50%;}
+            40%{height: 45%;}
+            50%{height: 30%;}
+            60%{height: 25%;}
+            70%{height: 10%;}
+            80%{height: 5%;}
+            100%{height: 0%;}
+        }
+
+
+
+
+ .cube-loader {
+  position: relative;
+/* u can choose any size */
+  width: 60px;
+  height: 60px;
+  transform-style: preserve-3d;
+  transform: rotateX(-30deg);
+  animation: animate 3s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotateX(-30deg) rotateY(0);
+  }
+
+  100% {
+    transform: rotateX(-30deg) rotateY(360deg);
+  }
+}
+
+.cube-loader .cube-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* top: 0;
+  left: 0; */
+  transform-style: preserve-3d;
+}
+
+.cube-loader .cube-wrapper .cube-span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* top: 0;
+  left: 0; */
+                                     /* width 75px / 2 = 30px */
+  transform: rotateY(calc(90deg * var(--i))) translateZ(30px);
+  background: hsla(0, 100%, 95%, 1);
+  background: linear-gradient(to bottom, #0d6efd 1%,#fff 99%);
+  
+  
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#ffe3e3", endColorstr="#ffd5b2", GradientType=1 );
+}
+
+.cube-top {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(to bottom, #0d6efd 1%,#fff 99%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#ffe3e3", endColorstr="#ffd5b2", GradientType=1 );
+                      /* width 75px / 2 = 30px */
+  transform: rotateX(90deg) translateZ(30px);
+  transform-style: preserve-3d;
+}
+
+.cube-top::before {
+  content: '';
+  position: absolute;
+/* u can choose any size */
+  width: 60px;
+  height: 60px;
+  background: hsla(0, 100%, 95%, 1);
+  background: linear-gradient(to bottom, #0d6efd 1%,#fff 99%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#ffe3e3", endColorstr="#ffd5b2", GradientType=1 );
+  background: linear-gradient(to bottom, #0d6efd 1%,#fff 99%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#ffe3e3", endColorstr="#ffd5b2", GradientType=1 );
+  transform: translateZ(-90px);
+  filter: blur(10px);
+  box-shadow: 0 0 10px #323232,
+              0 0 20px hsl(176.61, 42.28%, 40.7%) 19.6%,
+              0 0 30px #323232,
+              0 0 40px hsl(176.61, 42.28%, 40.7%) 19.6%;
+}
+.cube-loader img{max-width: 40px;}
+.taco-container{display: flex; justify-content: center; align-items: center; height:100%;}  
+
+.loader{display: table; margin: 100px auto;}
+    </style>
+</head>
+<body>
+
+   <main>
+    <div id="id_btn">
+        <ul></ul>
+    </div>
+    <div id="root">
+
+    </div>
+    <div id="result">
+
+    </div>
+   </main>
+<ul id="color">
+    <li data-color="#f00"></li>
+    <li data-color="#000"></li>
+    <li data-color="#fff"></li>
+    <li data-color="#ddd"></li>
+
+</ul>
+<div class="gif_section">
+    <div class="animate_logo_section">
+        <img src="./images/favicon.png" alt="">
+    </div>
+    <img src="./images/sectional-garage-door-800p.gif" alt="">
+</div>
+
+<div class="loader">
+    <div class="cube-loader">
+        <div class="cube-top"></div>
+        <div class="cube-wrapper">
+          <span class="cube-span" style="--i:0">
+            <div class="taco-container"><img src="./images/favicon.png" alt=""></div>
+          </span>
+          <span class="cube-span" style="--i:1">
+            <div class="taco-container"><img src="./images/favicon.png" alt=""></div>
+          </span>
+          <span class="cube-span" style="--i:2">
+            <div class="taco-container"><img src="./images/favicon.png" alt=""></div>
+          </span>
+          <span class="cube-span" style="--i:3">
+            <div class="taco-container"><img src="./images/favicon.png" alt=""></div>
+          </span>
+        </div>
+      </div>
+</div>
+  
+
+<script>
+
+    let row_number = 6;
+    let column_number = 6;
+    for(let i = 0; i < row_number; i++){
+        document.querySelector('#root').insertAdjacentHTML('beforeend' , `<ul data-index="${i}"></ul>` );
+        document.querySelector('#result').insertAdjacentHTML('beforeend' , `<ul data-index="${i}"></ul>` );
+        document.querySelector('#id_btn ul').insertAdjacentHTML('beforeend' , `<li  li-index='${i}'></li>` );
+    }
+
+    for(let j = 0; j < column_number; j++){
+        document.querySelectorAll('#root ul, #result ul').forEach(e=>{
+        e.insertAdjacentHTML('beforeend', `<li  li-index='${j}'></li>`);
+    });}
+
+
+    document.querySelectorAll('#root ul li').forEach(e=>{
+        e.addEventListener('click' , function(){
+            this.classList.toggle('selected');
+            let allSelected = Array.from(this.parentElement.childNodes).every((c)=> c.classList.contains("selected"));
+            let thisAllbtn = document.querySelector(`#id_btn ul li[li-index="${this.parentElement.getAttribute('data-index')}"]`)
+            if(allSelected){
+                thisAllbtn.classList.add('selected');
+            }
+            else{
+                thisAllbtn.classList.remove('selected');
+            }
+
+            show_result();
+        });
+    });
+
+    
+
+    // all btn 
+    document.querySelectorAll('#id_btn ul li').forEach(e=>{
+        e.addEventListener('click' , function(){
+            let this_index = this.getAttribute('li-index');
+            if(isSelected(this_index)){
+                this.classList.remove('selected');
+                document.querySelectorAll(`#root ul[data-index="${this_index}"] li`).forEach((a)=>{
+                    a.classList.remove('selected');
+                });
+            }
+            else{
+                this.classList.add('selected');
+                document.querySelectorAll(`#root ul[data-index="${this_index}"] li`).forEach((a)=>{
+                    a.classList.add('selected');
+                });
+            }
+
+            show_result();
+        });
+    });
+
+
+    function isSelected(index){
+        let isSelected;
+        document.querySelectorAll(`#root ul[data-index="${index}"] li`).forEach(b=>{
+            isSelected = b.classList.contains("selected");
+        });
+        return (isSelected);
+    }
+
+
+
+    function show_result(){
+        document.querySelectorAll('#root ul li').forEach((e, i)=>{
+            e.innerHTML = "";
+            document.querySelectorAll('#result ul li')[i].classList.remove('selected');
+            if(e.classList.contains('selected')){
+                document.querySelectorAll('#result ul')[e.parentElement.getAttribute('data-index')].querySelectorAll('li')[e.getAttribute('li-index')].classList.add('selected');
+            }
+        });
+        document.querySelectorAll('#root ul li.selected').forEach(d=>{
+            d.insertAdjacentHTML('beforeend', `<span class='edit'>e</span>`);
+        });
+        editEvent();
+
+      
+    }
+
+    let a,x;
+    function editEvent (){
+        document.querySelectorAll('#root ul li.selected .edit').forEach( (e, i)=>{
+            e.addEventListener('click', function(b){
+                b.stopPropagation();
+                
+                 a = this.parentElement.parentElement.getAttribute('data-index');
+                 x = this.parentElement.getAttribute('li-index');
+
+
+                
+            });
+    });
+    }
+
+    document.querySelectorAll('#color li').forEach(y=>{
+        y.addEventListener('click', function(){
+
+            if(!a && !x){
+
+            }else{
+                document.querySelectorAll('#result ul')[a].querySelectorAll('li')[x].style.background = this.getAttribute('data-color');
+            }
+        });
+    });
+
+        document.querySelectorAll('#color li').forEach(e=>{
+        e.style.background = e.getAttribute('data-color');
+    });
+
+
+   
+
+    
+</script>
+</body>
+</html>

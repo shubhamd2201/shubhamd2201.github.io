@@ -3,6 +3,13 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <link rel="stylesheet" href="styles.css?v=1.0">
+    <script src="script.js?v=1.0"></script>
+
+
     <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
     <title>Door Master Quotation</title>
     <style>
@@ -20,7 +27,7 @@
         body {
             position: relative;
             width: 700px;
-            height: 1050px;
+            /* height: 1050px;  */
             margin: 0 auto;
             color: #001028;
             background: #FFFFFF;
@@ -262,8 +269,9 @@
             border-top: 1px solid #C1CED9;
             padding: 8px 0;
             text-align: center;
-            position: absolute;
-            bottom: 0;
+            margin-top: 20px;
+            /* position: absolute;
+            bottom: 0; */
             width: 100%;
         }
 
@@ -402,8 +410,8 @@
                     <td class="desc" >
                         <p id="product_second_desc"></p>
                         <p id="doorsize"></p>
-                        <p id="springandCyclage"></p>
-                        <p id="moreinfoquotation"></p>
+                        <!-- <p id="springandCyclage"></p> -->
+                        <!-- <p id="moreinfoquotation"></p> -->
 
                     </td>
                     <td class="qty  " >1</td>
@@ -414,13 +422,16 @@
                 <tr>
                     <td id="windowGlass"></td>
                     <td id="window_glass_type_for_quatation"></td>
-                    <td id="window_quantity"></td>
-                    <td id="window_price"></td>
-                    <td class="total  " id="window_total_amount"></td>
+                    <td class="window_quantity"></td>
+                    <td id="window_glazing"></td>
+                    <td class="total  " id="window_glazing_amount"></td>
                 </tr>
                 <tr>
                     <td id="windowinsert" class="text-left"></td>
-                    <td id="window_details" colspan="4" class="text-left"></td>
+                    <td id="window_details"  class="text-left"></td>
+                    <td class="window_quantity"></td>
+                    <td id="window_insert" class="text-right"></td>
+                    <td class="total  " id="window_insert_amount"></td>
                 </tr>
                 <tr>
                     <td  id="door_operator_Name"></td>
@@ -428,6 +439,42 @@
                     <td id="door_operator_quantity"></td>
                     <td id="door_operator_price"></td>
                     <td class="total  " id="door_operator_total"></td>
+                </tr>
+                <tr>
+                    <td  id="doorlock"></td>
+                    <td  id="doorlock_details"></td>
+                    <td id="doorlock-quantity"></td>
+                    <td id="doorlock_price"></td>
+                    <td class="total  " id="doorlock_total_price"></td>
+                </tr>
+                <tr>
+                    <td  id="spring_name"></td>
+                    <td class="text-left"><p  id="cyclage_desc"></p>
+                    <p id="cyclage_info"></p></td>
+                    <td id="spring_quantity_number"></td>
+                    <td id="spring_price"></td>
+                    <td class="total" id="spring_price_total"></td>
+                </tr>
+                <tr>
+                    <td  id="seal_name"></td>
+                    <td  id="seal_desc" class="text-left"></td>
+                    <td id="seal_qty"></td>
+                    <td id="seal_price"></td>
+                    <td class="total" id="seal_price_total"></td>
+                </tr>
+                <tr>
+                    <td  id="struttitle"></td>
+                    <td  id="extrastrut" class="text-left" ></td>
+                    <td id="extrastrut_quantity"></td>
+                    <td id="strutprice"></td>
+                    <td class="total" id="struttotalprice"></td>
+                </tr>
+                <tr>
+                    <td  id="tracktitle"></td>
+                    <td  id="trackdesc" class="text-left" ></td>
+                    <td></td>
+                    <td id="trackprice"></td>
+                    <td class="total" id="track_price_total"></td>
                 </tr>
                 <tr>
                     <td colspan="4" class="bold text-right">TOTAL</td>
@@ -461,13 +508,17 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" type="text/javascript"></script>
 
-    <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <!-- <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script> -->
 
 
     <script>
 
 $(document).ready(function() {
+
+
+
 
 const date = new Date();
 
@@ -488,16 +539,72 @@ var parsedData = JSON.parse(storedData);
  var doorheight_info = parsedData.doorheight_info;
  var door_operator_name = parsedData.door_operator_name;
  var door_operator_model = parsedData.door_operator_model;
+ var door_operator_quantity = parsedData.door_operator_quantity;
  var imageDataURL = parsedData.imageDataURL;
  var doorBackImg = parsedData.doorBackImg;
  var window_qty = parsedData.window_qty;
  var doorOperatorPrice = parsedData.doorOperatorPrice;
  var perWindowPrice = parsedData.perWindowPrice;
+ var perGlassPrice = parsedData.perGlassPrice;
  var modelPrice = parsedData.modelPrice;
 var doorMaininfo = parsedData.doorMaininfo;
-var springandCyclage = parsedData.springandCyclage;
-var moreinfoquotation = parsedData.moreinfoquotation;
 var window_glass_type_for_quatation = parsedData.window_glass_type_for_quatation;
+var quantity_of_door = parsedData.quantity_of_door;
+var spring_price = parsedData.spring_price;
+var cyclage = parsedData.cyclage;
+var sealPrice = parsedData.sealPrice;
+var persealprice = parsedData.persealprice;
+var sealdesc = parsedData.sealdesc;
+var spring_data = parsedData.spring_data;
+var sealData = parsedData.sealData;
+var trackPrice = parsedData.trackPrice;
+var trackDesc = parsedData.trackDesc;
+var tracktitle = parsedData.tracktitle;
+var mainstrut = parsedData.mainstrut;
+var extrastrut = parsedData.extrastrut;
+var extrastrutquantity = parsedData.extrastrutquantity;
+var doorlock = parsedData.doorlock;
+var cyclage_info = parsedData.cyclage_info;
+var spring_quantity_number = parsedData.spring_quantity_number;
+var seal_qty = parsedData.seal_qty;
+var doorLockPrice = parsedData.doorLockPrice;
+var extrastruttotalPrice = parsedData.extrastruttotalPrice;
+var sturtSalesPrice = parsedData.sturtSalesPrice;
+
+
+
+$('#spring_quantity_number').text(spring_quantity_number);
+if(mainstrut != undefined){
+    $('#doorlock').text('Door Lock');
+    $('#doorlock_details').text(doorlock);
+    $('#doorlock-quantity').text(1);
+    $('#doorlock_price').text("$"+doorLockPrice);
+    $('#doorlock_total_price').text("$"+doorLockPrice);
+}
+
+
+
+$('#tracktitle').text(tracktitle);
+$('#trackdesc').text(trackDesc);
+
+
+$('#cyclage_desc').text(cyclage);
+$('#cyclage_info').text('('+ cyclage_info + ')');
+
+$('#spring_price').text('$'+spring_price);
+$('#spring_price_total').text('$'+spring_price);
+$('#spring_name').text(spring_data);
+
+$('#seal_desc').text(sealdesc);
+$('#seal_price').text('$'+persealprice);
+$('#seal_price_total').text('$'+sealPrice);
+$('#seal_name').text(sealData);
+
+$('#struttitle').text(mainstrut);
+$('#extrastrut').text(extrastrut);
+$('#extrastrut_quantity').text(extrastrutquantity);
+$('#strutprice').text(`$${sturtSalesPrice}`);
+$('#struttotalprice').text(`$${extrastruttotalPrice}`);
 
 
 
@@ -505,15 +612,13 @@ $('#product_main_detail').text(product_main_detail);
 $('#product_second_desc').text(doorMaininfo);
 
 $('#doorsize').text(doorWidth_info+'x'+doorheight_info);
-$('#springandCyclage').text(springandCyclage);
-$('#moreinfoquotation').text(moreinfoquotation);
+$('#seal_qty').text('');
+$('#seal_qty').text("Linear ft "+seal_qty);
 
 
 $('#door_back_img img').attr('src', doorBackImg);
 
-if(door_operator_name != undefined && door_operator_name != null){
-    $('#door_operator_quantity').text(1);
-}
+
 
 if(modelPrice != NaN && modelPrice != undefined){
     $('#model_quantity_price').text('$'+modelPrice);
@@ -522,33 +627,56 @@ if(modelPrice != NaN && modelPrice != undefined){
 $('#window_details').text(window_info);
 $('#door_operator_Name').text(door_operator_name);
 $('#door_operator_details').text(door_operator_model);
+if(door_operator_name != undefined && door_operator_name != null){
+    $('#door_operator_quantity').text(door_operator_quantity);
+}
 
 if(window_qty != NaN && window_qty != undefined && perWindowPrice != NaN && perWindowPrice != undefined){
 
 $('#window_glass_type_for_quatation').text(window_glass_type_for_quatation);
 $('#windowGlass').text('Window Glass:');
 $('#windowinsert').text('Window Insert:');
-$('#window_quantity').text(window_qty);
-$('#window_total_amount').text('$'+ window_qty * perWindowPrice);
-$('#window_price').text('$'+perWindowPrice);
-}
+$('.window_quantity').text(window_qty);
+$('#window_insert_amount').text('$'+ window_qty * perWindowPrice);
+$('#window_glazing_amount').text('$'+ window_qty * perGlassPrice);
 
-if(doorOperatorPrice != NaN && doorOperatorPrice != undefined){
-    
-$('#door_operator_price').text('$'+doorOperatorPrice);
-$('#door_operator_total').text('$'+doorOperatorPrice * 1);
+$('#window_insert').text('$'+perWindowPrice);
+$('#window_glazing').text('$'+perGlassPrice);
+
+
+}
+var totaldooroperatorPrice = doorOperatorPrice.reduce(function (accumulator, currentValue) {
+  return accumulator + currentValue;
+}, 0);
+if(totaldooroperatorPrice != NaN && totaldooroperatorPrice != undefined){
+
+    doorOperatorPrice.forEach(e=>{
+
+        document.querySelector('#door_operator_price').insertAdjacentHTML("beforeend", `<span> ($${e}), </span>`);
+    });
+
+$('#door_operator_total').text('$'+totaldooroperatorPrice * 1);
 }
 
 ((modelPrice == NaN)||(modelPrice == undefined))? modelPrice = 0:'';
 ((window_qty == NaN)||(window_qty == undefined))? window_qty = 0:'';
-((doorOperatorPrice == NaN)||(doorOperatorPrice == undefined))? doorOperatorPrice = 0:'';
+((totaldooroperatorPrice == NaN)||(totaldooroperatorPrice == undefined))? totaldooroperatorPrice = 0:'';
+((trackPrice == NaN)||(trackPrice == undefined))? trackPrice = 0:'';
+((extrastruttotalPrice == NaN)||(extrastruttotalPrice == undefined))? extrastruttotalPrice = 0:'';
 
 
-var total_amount =(Number(modelPrice) + (window_qty * perWindowPrice)+ Number(doorOperatorPrice)).toFixed(2);
+
+$('#trackprice').text(`$${trackPrice}`);
+$('#track_price_total').text(`$${trackPrice}`);
+
+
+
+var total_amount = (Number(modelPrice) + Number(trackPrice) + Number(extrastruttotalPrice) + Number(doorLockPrice)+ Number(window_qty * perWindowPrice) + Number(window_qty * perGlassPrice) + Number(totaldooroperatorPrice)).toFixed(2) * Number(quantity_of_door);
 $('#subtotal_amount').text('$'+total_amount);
 var taxable_amount = (total_amount * 8/100).toFixed(2);
 $('#taxable_amount').text('$'+ taxable_amount);
 $("#grand_total_amount").text('$'+(Number(total_amount) + Number(taxable_amount)).toFixed(2));
+
 
 
 if (imageDataURL) {
